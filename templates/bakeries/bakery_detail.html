@@ -1,1 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+<!-- 성심당에 실제 데이터가 들어가야됨 -->
+{% block title %}
+성심당
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'bakeries/css/bakery_detail.css' %}">
+{% endblock css %}
+
+
+
+{% block content %}
 1-4)가게상세
+{% endblock content %}

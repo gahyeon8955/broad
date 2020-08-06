@@ -1,1 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+게시글
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'posts/css/post_detail.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">빵 커뮤니티</span>
+    </div>
+    <div class="header__rightbox">
+        <img class="search_icon" src="{% static  'core/img/search.png' %}" alt="search icon">
+        <img class="post_icon" src="{% static  'core/img/post.png' %}" alt="post icon">
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
 2-2)게시글 상세페이지
+{% endblock content %}

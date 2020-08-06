@@ -1,1 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+빵집 지도
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'map/css/map.css' %}">
+{% endblock css %}
+
+
+
+{% block content %}
 1-1_메인지도 + 1-2)지역선택
+{% endblock content %}

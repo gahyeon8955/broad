@@ -1,1 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+빵집 리스트
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'bakeries/css/bakery_list.css' %}">
+{% endblock css %}
+
+
+
+{% block content %}
 1-3)빵집리스트
+{% endblock content %}
