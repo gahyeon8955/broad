@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 목차 페이지</title>
+    <style>
+        .title {
+            font-size: 45px;
+        }
+
+        li {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration-line: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">URL 목차 페이지(누르면 해당 작업페이지로 이동)</h1>
+    <ul>
+        <li><a href="{% url 'map:main_map' %}">1-1~2)지도</a></li>
+        <hr>
+        <li><a href="{% url 'bakeries:list' %}">1-3)빵집 리스트</a></li>
+        <hr>
+        <li><a href="{% url 'bakeries:detail' %}">1-4)가게상세</a></li>
+        <hr>
+        <li><a href="{% url 'posts:list' %}">2-1)게시판(게시글 리스트)</a></li>
+        <hr>
+        <li><a href="{% url 'posts:detail' %}">2-2)게시글 상세페이지</a></li>
+        <hr>
+        <li><a href="{% url 'bakeries:rank' %}">3)빵집 랭킹</a></li>
+        <hr>
+        <li><a href="{% url 'users:profile' %}">4-1)프로필창</a></li>
+        <hr>
+        <li><a href="{% url 'users:profile_update' %}">4-2)프로필 수정</a></li>
+        <hr>
+        <li><a href="{% url 'users:login' %}">5-1)로그인</a></li>
+        <hr>
+        <li><a href="{% url 'users:signup' %}">5-2)회원가입</a></li>
+        <hr>
+        <li><a href="{% url 'bakeries:like_list' %}">6)좋아요빵집 리스트</a></li>
+        <hr>
+    </ul>
+</body>
+
+</html>
