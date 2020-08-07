@@ -23,3 +23,5 @@ urlpatterns = [
     path("post/", include("posts.urls", namespace="posts")),
     path("", include("users.urls", namespace="users")),
 ]
+
+
