@@ -1,0 +1,48 @@
+.bakery_bread_image_box{
+    width: 100%;
+    height: 120px;
+    left: 0px;
+    top: 81px;
+    background-color: aqua;
+}
+
+.bakery_bread_image{
+    width: 33.33%;
+    height: 120px;
+    background-color: azure;
+}
+
+.bakery_information_box{
+    width: 100%;
+    height: 100px;
+    background-color: bisque;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bakery_name_box{
+    display: flex;
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+}
+
+.bakery_trademark{
+    width: 25%;
+}
+
+.bakery_trademark_detail{
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    margin
+
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.bakery_name{
+    width: 60%;
+}
+
+.bakery_like{
+    width: 15%;
+}
