@@ -13,28 +13,30 @@
 <body>
     <div class="login__midbox">
         <img class="login_logo" src="{% static 'core/img/login_logo.png' %}" alt="logo img">
-        <input class="login_id_button" type="text" name="user_id" id="user_id" placeholder="아이디">
-        <input class="login_password_button" type="text" name="user_password" id="user_password" placeholder="비밀번호">
-        <div class="login_two_link_box">
-            <span class="password_change">비밀번호 변경</span>
-            <span class="guest_login">게스트 로그인</span>
-        </div>
-        <input class="login_button" type="button" value="로그인">
+        <form action="" method="post">
+            <input class="login_id_button" type="text" name="user_id" id="user_id" placeholder="아이디">
+            <input class="login_password_button" type="text" name="user_password" id="user_password" placeholder="비밀번호">
+            <div class="login_two_link_box">
+                <a href="#"><span class="password_change">비밀번호 변경</span></a>
+                <a href="#"><span class="guest_login">게스트 로그인</span></a>
+            </div>
+            <input class="login_button" type="button" value="로그인">
+        </form>
         <div class="login_or_line">
             <hr>
             <span>또는</span>
             <hr>
         </div>
-        <div class="social_login_button">
+        <a href="#" class="social_login_button">
             <div class="social_login_left">
                 <img class="kakao_logo" src="{% static 'users/img/kakao_logo.png' %}" alt="kakao logo">
             </div>
             <div class="social_login_mid">카카오 계정 로그인</div>
             <div class="social_login_right"></div>
-        </div>
+        </a>
         <div class="signup_box">
             <span>계정이 없으신가요?</span>
-            <span class="signup_link">회원가입</span>
+            <a href="#"><span class="signup_link">회원가입</span></a>
         </div>
     </div>
 </body>
