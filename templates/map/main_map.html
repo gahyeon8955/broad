@@ -13,7 +13,18 @@
 {% endblock css %}
 
 
+{% block head_script %}
+<!-- 기본 카카오맵 API -->
+<script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08a8e8a0fde8d36ad5c30df67d5d41f6&libraries=services,clusterer,drawing"></script>
+{% endblock head_script %}
+
 
 {% block content %}
-1-1_메인지도 + 1-2)지역선택
+<div id="map"></div>
 {% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'map/js/main_map.js' %}"></script>
+{% endblock script %}
