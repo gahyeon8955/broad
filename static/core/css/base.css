@@ -6,6 +6,11 @@ body {
   font-family: "NanumSquare", sans-serif;
 }
 
+input:focus,
+button:focus {
+  outline: none;
+}
+
 header {
   position: fixed;
   display: flex;
