@@ -15,6 +15,7 @@ const jsonAsync = async (region) => {
     });
     const v1 = await setPath(jinjuPolygon);
     const v2 = await setPolygonAndAdd();
+    const v3 = await setMouseInOut();
   } catch (error) {
   } finally {
   }
@@ -75,9 +76,9 @@ const setPolygonAndAdd = () => {
   // 지도에 표시할 다각형을 생성합니다
   polygon = new kakao.maps.Polygon({
     path: polygonPath, // 그려질 다각형의 좌표 배열입니다
-    strokeWeight: 2, // 선의 두께입니다
+    strokeWeight: 1, // 선의 두께입니다
     strokeColor: "#5D2C1D", // 선의 색깔입니다
-    strokeOpacity: 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: "solid", // 선의 스타일입니다
     fillColor: "#fff6ed", // 채우기 색깔입니다
     fillOpacity: 0.7, // 채우기 불투명도 입니다
@@ -98,7 +99,33 @@ const changePolygon = async (region) => {
     });
     const v1 = await delete polygon;
     const v2 = await setPolygonAndAdd();
+    const v3 = await setMouseInOut();
   } catch {
   } finally {
   }
+};
+
+const setMouseInOut = () => {
+  // 다각형에 마우스오버 이벤트가 발생했을 때 변경할 채우기 옵션입니다
+  var mouseoverOption = {
+    fillColor: "#5D2C1D", // 채우기 색깔입니다
+    fillOpacity: 0.8, // 채우기 불투명도 입니다
+  };
+
+  // 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다
+  var mouseoutOption = {
+    fillColor: "#fff6ed", // 채우기 색깔입니다
+    fillOpacity: 0.7, // 채우기 불투명도 입니다
+  };
+
+  // 다각형에 마우스오버 이벤트를 등록합니다
+  kakao.maps.event.addListener(polygon, "mouseover", function () {
+    // 다각형의 채우기 옵션을 변경합니다
+    polygon.setOptions(mouseoverOption);
+  });
+
+  kakao.maps.event.addListener(polygon, "mouseout", function () {
+    // 다각형의 채우기 옵션을 변경합니다
+    polygon.setOptions(mouseoutOption);
+  });
 };
