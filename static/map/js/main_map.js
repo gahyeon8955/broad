@@ -5,17 +5,17 @@ const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 S
 var map;
 let jinjuPolygon;
 
-const jsonAsync = async () => {
+const jsonAsync = async (region) => {
   try {
     const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
     $.getJSON("/static/map/js/regionPolygon.json", function (data) {
       console.log(data);
       jinjuPolygon = data.features.find((n) => {
-        return n.properties.SIG_KOR_NM == "진주시";
+        return n.properties.SIG_KOR_NM == region;
       }).geometry.coordinates[0];
-      console.log(jinjuPolygon);
     });
     const v1 = await setPath(jinjuPolygon);
+    console.log(polygonPath);
     const v2 = await setPolygonAndAdd();
   } catch (error) {
   } finally {
@@ -34,13 +34,13 @@ const startMap = () => {
   regionSelectBox.classList.replace("set_none", "set_block"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-  jsonAsync();
+  jsonAsync("진주시");
 };
 
 // 지역별 중심좌표를 모아놓은 객체
 const regionCoordinate = {
   진주시: [35.205392, 128.1267993],
-  부산광역시: [35.1593242, 128.9931503],
+  김해시: [35.247945, 128.8513805],
 };
 
 // 중심좌표를 변경하는 함수
@@ -58,30 +58,51 @@ const changeRegion = () => {
     regionCoordinate[regionSelectedValue][0],
     regionCoordinate[regionSelectedValue][1]
   );
+  polygonPath = [];
+  polygon.setMap(null);
+  changePolygon(regionSelectedValue);
 };
 
 // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
-var polygonPath = [];
+let polygonPath = [];
+let polygon = null;
 
 // 다각형 좌표 셋팅하는 함수
 const setPath = (data) => {
   for (let coords of data) {
-    console.log(coords[1], coords[0]);
     polygonPath.push(new kakao.maps.LatLng(coords[1], coords[0]));
   }
 };
 const setPolygonAndAdd = () => {
   // 지도에 표시할 다각형을 생성합니다
-  var polygon = new kakao.maps.Polygon({
+  polygon = new kakao.maps.Polygon({
     path: polygonPath, // 그려질 다각형의 좌표 배열입니다
     strokeWeight: 3, // 선의 두께입니다
     strokeColor: "#39DE2A", // 선의 색깔입니다
     strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: "longdash", // 선의 스타일입니다
+    strokeStyle: "solid", // 선의 스타일입니다
     fillColor: "#A2FF99", // 채우기 색깔입니다
     fillOpacity: 0.7, // 채우기 불투명도 입니다
   });
 
   // 지도에 다각형을 표시합니다
   polygon.setMap(map);
+};
+
+const changePolygon = async (region) => {
+  try {
+    const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
+    $.getJSON("/static/map/js/regionPolygon.json", function (data) {
+      console.log(data);
+      jinjuPolygon = data.features.find((n) => {
+        return n.properties.SIG_KOR_NM == region;
+      }).geometry.coordinates[0];
+      setPath(jinjuPolygon);
+      console.log(polygonPath);
+    });
+    const v1 = await delete polygon;
+    const v2 = await setPolygonAndAdd();
+  } catch {
+  } finally {
+  }
 };
