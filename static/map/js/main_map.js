@@ -9,13 +9,11 @@ const jsonAsync = async (region) => {
   try {
     const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
     $.getJSON("/static/map/js/regionPolygon.json", function (data) {
-      console.log(data);
       jinjuPolygon = data.features.find((n) => {
         return n.properties.SIG_KOR_NM == region;
       }).geometry.coordinates[0];
     });
     const v1 = await setPath(jinjuPolygon);
-    console.log(polygonPath);
     const v2 = await setPolygonAndAdd();
   } catch (error) {
   } finally {
@@ -77,11 +75,11 @@ const setPolygonAndAdd = () => {
   // 지도에 표시할 다각형을 생성합니다
   polygon = new kakao.maps.Polygon({
     path: polygonPath, // 그려질 다각형의 좌표 배열입니다
-    strokeWeight: 3, // 선의 두께입니다
-    strokeColor: "#39DE2A", // 선의 색깔입니다
-    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeWeight: 2, // 선의 두께입니다
+    strokeColor: "#5D2C1D", // 선의 색깔입니다
+    strokeOpacity: 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: "solid", // 선의 스타일입니다
-    fillColor: "#A2FF99", // 채우기 색깔입니다
+    fillColor: "#fff6ed", // 채우기 색깔입니다
     fillOpacity: 0.7, // 채우기 불투명도 입니다
   });
 
@@ -93,12 +91,10 @@ const changePolygon = async (region) => {
   try {
     const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
     $.getJSON("/static/map/js/regionPolygon.json", function (data) {
-      console.log(data);
       jinjuPolygon = data.features.find((n) => {
         return n.properties.SIG_KOR_NM == region;
       }).geometry.coordinates[0];
       setPath(jinjuPolygon);
-      console.log(polygonPath);
     });
     const v1 = await delete polygon;
     const v2 = await setPolygonAndAdd();
