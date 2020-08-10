@@ -21,7 +21,18 @@
 
 
 {% block content %}
+<div class="map_init_box jsMapInit">
+    <div class="init_blank_top header_height"></div>
+    <img class="map_init" src="{% static 'map/img/map_init.JPG' %}" alt="" onclick="startMap()">
+    <div class="init_blank_bottom bottom_height"></div>
+</div>
 <div id="map"></div>
+<div class="region_select_box set_none jsRegionSelectBox">
+    <select class="jsRegionSelect" onchange="changeRegion()" name="" id="">
+        <option value="진주시">진주시</option>
+        <option value="부산광역시">부산광역시</option>
+    </select>
+</div>
 {% endblock content %}
 
 
