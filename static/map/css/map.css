@@ -23,6 +23,9 @@ header {
   width: 100vw;
   height: 100vh;
 }
+.map_init_box:hover {
+  cursor: pointer;
+}
 
 .init_blank_top {
   height: 85px;
@@ -44,7 +47,33 @@ header {
 }
 
 .region_select_box {
+  width: 100%;
   padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.region_back_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  opacity: 0.7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.region_back_box:hover {
+  cursor: pointer;
+}
+
+.region_back_box > img {
+  width: 25px;
 }
 
 .region_select_box > select {
@@ -60,6 +89,14 @@ header {
   outline: none;
 }
 
+..region_select_box > select:hover {
+  cursor: pointer;
+}
+
+.region_right_box {
+  width: 35px;
+}
+
 .bottom_blank,
 footer {
   display: none;
@@ -72,6 +109,10 @@ footer {
 
 .set_block {
   display: block;
+}
+
+.set_flex {
+  display: flex;
 }
 
 .set_z-index_6 {

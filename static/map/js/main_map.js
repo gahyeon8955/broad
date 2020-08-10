@@ -1,7 +1,9 @@
-const container = document.getElementById("map"); //지도를 담을 영역의 DOM
+let container = document.getElementById("map"); //지도를 담을 영역의 DOM
 const mapInit = document.querySelector(".jsMapInit"); //첫 지도이미지 DOM
 const regionSelectBox = document.querySelector(".jsRegionSelectBox"); //지역선택박스 DOM
 const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 Select태그 DOM
+const content = document.querySelector(".content");
+console.log(content);
 var map;
 let jinjuPolygon;
 
@@ -30,7 +32,7 @@ let options = {
 // 제일처음 시작되는 함수로, map_init에서 지역이 클릭되면 카카오맵이 호출됨
 const startMap = () => {
   mapInit.classList.add("set_none"); //첫 지도이미지 display:none 추가
-  regionSelectBox.classList.replace("set_none", "set_block"); //지역선택박스 none -> block으로 변경
+  regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
   jsonAsync("진주시");
@@ -128,4 +130,24 @@ const setMouseInOut = () => {
     // 다각형의 채우기 옵션을 변경합니다
     polygon.setOptions(mouseoutOption);
   });
+};
+
+// 지역선택으로 돌아가는 뒤로가기버튼 눌렀을때 실행됨
+const clickRegionBack = () => {
+  delete map;
+  delete polygon;
+  mapInit.classList.remove("set_none"); //첫 지도이미지 display:none 추가
+  regionSelectBox.classList.replace("set_flex", "set_none"); //지역선택박스 none -> block으로 변경
+  regionSelectBox.classList.remove("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
+  container.remove(); // map셋팅 삭제를 위해 div map element 제거
+  content.insertAdjacentHTML(
+    // div map 새로 element 추가
+    "afterbegin",
+    `
+    <div id="map"></div>
+    `
+  );
+  container = document.getElementById("map"); //새로생긴 div map의 DOM
+  polygonPath = [];
+  polygon.setMap(null);
 };

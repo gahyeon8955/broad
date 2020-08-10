@@ -30,10 +30,14 @@
 </div>
 <div id="map"></div>
 <div class="region_select_box set_none jsRegionSelectBox">
+    <div class="region_back_box" onclick="clickRegionBack()">
+        <img src="{% static 'core/img/left_arrow.png' %}" alt="뒤로가기 이미지">
+    </div>
     <select class="jsRegionSelect" onchange="changeRegion()" name="" id="">
         <option value="진주시">진주시</option>
         <option value="김해시">김해시</option>
     </select>
+    <div class="region_right_box"></div>
 </div>
 {% endblock content %}
 
