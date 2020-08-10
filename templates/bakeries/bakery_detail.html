@@ -18,6 +18,8 @@
 {% block content %}
 <!-- 가게 대표 빵 이미지 사진들 -->
 <div class="bakery_bread_image_box">
+    <div class="bakery_bread_image_next"><img src="{% static 'bakeries/img/next.png' %}"></div>
+    <div class="bakery_bread_image_back"><img src="{% static 'bakeries/img/back.png' %}"></div>
     <img class="bakery_bread_image" src="{% static 'bakeries/img/bread1.png' %}">
     <img class="bakery_bread_image" src="{% static 'bakeries/img/bread2.png' %}">
     <img class="bakery_bread_image" src="{% static 'bakeries/img/bread3.png' %}">
@@ -41,10 +43,10 @@
     </div>
 
     <!-- 가게 위치 박스 -->
-    <div class="bakery_location_box">
+    <!-- <div class="bakery_location_box">
         <img class="bakery_location" src="{% static 'bakeries/img/location.png' %}">
         <div class="bakery_location_address">대전 중구 대종로480번길길 15</div>
-    </div>
+    </div> -->
 
     <!-- 가게 메뉴 박스 -->
     <div class="bakery_menu_box">
@@ -84,7 +86,7 @@
                 <div class="bakery_review_detail_topbox">
                     <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
                     <div class="bakery_review_id_box">
-                        <div class="bakery_review_id">qwerty</div>
+                        <div class="bakery_review_id">닉네임</div>
                         <div class="bakery_review_time">2020.8.9</div>
                     </div>
                     <div class="bakery_review_star">4.0</div>
@@ -95,7 +97,7 @@
                 <div class="bakery_review_detail_topbox">
                     <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
                     <div class="bakery_review_id_box">
-                        <div class="bakery_review_id">qwerty</div>
+                        <div class="bakery_review_id">닉네임</div>
                         <div class="bakery_review_time">2020.8.9</div>
                     </div>
                     <div class="bakery_review_star">4.0</div>
