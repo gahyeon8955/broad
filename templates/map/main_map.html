@@ -13,7 +13,38 @@
 {% endblock css %}
 
 
+{% block head_script %}
+<!-- 기본 카카오맵 API -->
+<script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08a8e8a0fde8d36ad5c30df67d5d41f6&libraries=services,clusterer,drawing"></script>
+<!-- 제이쿼리 -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% endblock head_script %}
+
 
 {% block content %}
-1-1_메인지도 + 1-2)지역선택
+<div class="map_init_box jsMapInit">
+    <div class="init_blank_top header_height"></div>
+    <img class="map_init" src="{% static 'map/img/map_init.JPG' %}" alt="" onclick="startMap()">
+    <div class="init_blank_bottom bottom_height"></div>
+</div>
+<div id="map"></div>
+<div class="region_select_box set_none jsRegionSelectBox">
+    <div class="region_back_box" onclick="clickRegionBack()">
+        <img src="{% static 'core/img/left_arrow.png' %}" alt="뒤로가기 이미지">
+    </div>
+    <select class="jsRegionSelect" onchange="changeRegion()" name="" id="">
+        <option value="진주시">진주시</option>
+        <option value="사천시">사천시</option>
+        <option value="김해시">김해시</option>
+        <option value="밀양시">밀양시</option>
+        <option value="양산시">양산시</option>
+    </select>
+    <div class="region_right_box"></div>
+</div>
 {% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'map/js/main_map.js' %}"></script>
+{% endblock script %}
