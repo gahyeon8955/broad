@@ -1,0 +1,120 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  z-index: 10;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map_init_box {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+}
+.map_init_box:hover {
+  cursor: pointer;
+}
+
+.init_blank_top {
+  height: 85px;
+}
+
+.init_blank_bottom {
+  height: 70px;
+}
+
+.map_init {
+  height: 70%;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.region_select_box {
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.region_back_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  opacity: 0.7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.region_back_box:hover {
+  cursor: pointer;
+}
+
+.region_back_box > img {
+  width: 25px;
+}
+
+.region_select_box > select {
+  width: 160px;
+  height: 45px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border: none;
+  padding-left: 5px;
+}
+
+.region_select_box > select:focus {
+  outline: none;
+}
+
+..region_select_box > select:hover {
+  cursor: pointer;
+}
+
+.region_right_box {
+  width: 35px;
+}
+
+.bottom_blank,
+footer {
+  display: none;
+}
+
+/* JS관련 CSS */
+.set_none {
+  display: none;
+}
+
+.set_block {
+  display: block;
+}
+
+.set_flex {
+  display: flex;
+}
+
+.set_z-index_6 {
+  z-index: 6;
+}
