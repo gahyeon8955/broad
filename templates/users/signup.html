@@ -28,5 +28,28 @@
 
 
 {% block content %}
-5-2)회원가입
+<form action="" method="post">
+    <div class="signup_midbox">
+        <div class="signup_sectionbox">
+            <label for="user_email" class="signup_label">브로드 계정</label>
+            <input class="signup_input" type="email" name="user_email" id="user_email" placeholder="@example.com">
+        </div>
+        <div class="signup_sectionbox">
+            <label for="user_nickname" class="signup_label">닉네임<strong>(선택)</strong></label>
+            <input class="signup_input" type="text" name=" user_nickname" id="user_nickname" placeholder="선택입력">
+        </div>
+        <div class="signup_sectionbox">
+            <label for="user_password" class="signup_label">비밀번호</label>
+            <input class="signup_input" type="password" name="user_password" id="user_password"
+                placeholder="비밀번호(8~32자리)">
+            <input class="signup_input" type="password" name="user_confirm_password" id="user_confirm_password"
+                placeholder="비밀번호 재입력">
+        </div>
+        <input class="signup_button" type="button" value="회원가입">
+    </div>
+</form>
 {% endblock content %}
+
+
+{% block bottom_icons %}
+{% endblock bottom_icons %}
