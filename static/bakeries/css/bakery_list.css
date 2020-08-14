@@ -33,13 +33,17 @@
     width: 40px;
 }
 
+.list {
+    border-top: 1px solid #E9E9E9;
+}
+
 .list_store {
     display: flex;
     justify-content: flex-start;
     height: 80px;
     top: 128px;
     background: #FCFCFC;
-    border: 1px solid #E9E9E9;
+    border-bottom: 1px solid #E9E9E9;
     box-sizing: border-box;
 }
 
@@ -69,6 +73,7 @@
     background-color: red;
     border-radius: 50%;
     text-align: center;
+    padding: 3px;
 }
 
 .detail_explain {
