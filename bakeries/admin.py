@@ -11,3 +11,7 @@ from . import models
 @admin.register(models.Bakery)
 class BakeryAdmin(admin.ModelAdmin):
     pass
+
+
+
+
