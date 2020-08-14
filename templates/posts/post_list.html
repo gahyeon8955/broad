@@ -29,5 +29,73 @@
 
 
 {% block content %}
-2-1)게시판(게시글리스트)
+<div class="post_list_bigbox">
+    <!-- hot 게시물 박스 -->
+    <div class="hot_post_box">
+        <div class="hot_post_box_title">HOT 게시물</div>
+        <div class="hot_post_list">
+            <span class="hot_post_list_title">진주 빵집 추천</span>
+            <span class="hot_post_list_page_view">조회 97</span>
+        </div>
+        <div class="hot_post_list">
+            <span class="hot_post_list_title">빵 맛있게 먹는 법</span>
+            <span class="hot_post_list_page_view">조회 63</span>
+        </div>
+        <div class="hot_post_list">
+            <span class="hot_post_list_title">소보로 맛집</span>
+            <span class="hot_post_list_page_view">조회 40</span>
+        </div>
+    </div>
+    <!-- 인기순/최신순 박스 -->
+    <div class="post_list_popular_latest">
+        <span class="post_list_popular">인기순</span>
+        <span class="post_list_latest">최신순</span>
+    </div>
+    <!-- 게시물 리스트 박스 -->
+    <div class="post_list_box">
+        <div class="user_post_box">
+            <span class="user_post_information">
+                <div class="user_post_title">진주 빵집 추천</div>
+                <div class="user_post_title_underbox">
+                    <span>닉네임</span>
+                    <span>오늘</span>
+                    <span>조회 15</span>
+                </div>
+            </span>
+            <span class="user_post_comment">
+                <img src="{% static 'posts/img/comment.png' %}">
+                <div>7</div>
+            </span>
+        </div>
+        <div class="user_post_box">
+            <span class="user_post_information">
+                <div class="user_post_title">빵집 블랙리스트 모음</div>
+                <div class="user_post_title_underbox">
+                    <span>닉네임</span>
+                    <span>오늘</span>
+                    <span>조회 15</span>
+                </div>
+            </span>
+            <span class="user_post_comment">
+                <img src="{% static 'posts/img/comment.png' %}">
+                <div>12</div>
+            </span>
+        </div>
+        <div class="user_post_box">
+            <span class="user_post_information">
+                <div class="user_post_title">요즘 빵집</div>
+                <div class="user_post_title_underbox">
+                    <span>닉네임</span>
+                    <span>오늘</span>
+                    <span>조회 15</span>
+                </div>
+            </span>
+            <span class="user_post_comment">
+                <img src="{% static 'posts/img/comment.png' %}">
+                <div>11</div>
+            </span>
+        </div>
+        
+    </div>
+</div>
 {% endblock content %}
