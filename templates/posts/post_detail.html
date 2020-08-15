@@ -22,13 +22,91 @@
         <span class="header__title">빵 커뮤니티</span>
     </div>
     <div class="header__rightbox">
-        <img class="search_icon" src="{% static  'core/img/search.png' %}" alt="search icon">
-        <img class="post_icon" src="{% static  'core/img/post.png' %}" alt="post icon">
+        <img class="post_icon" src="{% static  'posts/img/menu.png' %}">
     </div>
 </div>
 {% endblock header %}
 
 
 {% block content %}
-2-2)게시글 상세페이지
+<div class="post_detail_allbox">
+    <!-- 게시물 정보 및 유저 정보 박스 -->
+    <div class="post_user_information">
+        <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
+        <span class="post_user_information_smallbox">
+            <span class="post_user_nickname">닉네임</span>
+            <span class="post_time_pageview">
+                <span class="post_detail_time">2020.08.16 21:23</span>
+                <span class="post_detail_pageview">조회 7</span>
+            </span>
+        </span>
+    </div>
+
+    <!-- 게시물 내용 박스 -->
+    <div class="post_detail_contents_box">
+        <div class="post_detail_title_scrap">
+            <span class="post_detail_title">진주 빵집 순위</span>
+            <span class="post_detail_scrap">
+                <img src="{% static 'posts/img/star.png' %}">
+                <span class="post_detail_scrap_text">스크랩</span>
+            </span>
+        </div>
+        <div class="post_detail_contents">베이커리 925 맛있다</div>
+    </div>
+    
+    <!-- 댓글 상단 박스 -->
+    <div class="post_detail_comment_top_box">
+        <span class="post_detail_comment_top">댓글</span>
+        <span class="post_detail_comment_count">1개</span>
+    </div>
+
+    <!-- 댓글 박스 -->
+    <div class="post_detail_comment_box">
+        <div class="post_detail_comment_smallbox">
+            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
+            <span class="post_detail_comment_information">
+                <div class="post_detail_comment_nickname_time">
+                    <span class="post_detail_comment_nickname">닉네임</span>
+                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
+                </div>
+                <div class="post_detail_comment_contents">맞아요 맛있어요</div>
+            </span>
+        </div>
+        <div class="post_detail_leave_a_comment">답글 쓰기</div>
+    </div>
+    <div class="post_detail_comment_box">
+        <div class="post_detail_comment_smallbox">
+            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
+            <span class="post_detail_comment_information">
+                <div class="post_detail_comment_nickname_time">
+                    <span class="post_detail_comment_nickname">닉네임</span>
+                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
+                    <span class="post_detail_comment_delete"><img src="{% static 'posts/img/trash.png' %}"></span>
+                </div>
+                <div class="post_detail_comment_contents">진짜 맛있어요!</div>
+            </span>
+        </div>
+        <div class="post_detail_leave_a_comment">답글 쓰기</div>
+    </div>
+    <div class="post_detail_comment_box">
+        <div class="post_detail_comment_smallbox">
+            <span class="post_detail_comment_reply_arrow"><img src="{% static 'posts/img/arrow.png' %}"></span>
+            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
+            <span class="post_detail_comment_information">
+                <div class="post_detail_comment_nickname_time">
+                    <span class="post_detail_comment_nickname">닉네임</span>
+                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
+                </div>
+                <div class="post_detail_comment_contents">진짜 맛있어요!</div>
+            </span>
+        </div>
+    </div>
+
+</div>
+
+<!-- 댓글 작성 박스 -->
+<div class="post_detail_comment_input_box">
+    <input class="post_detail_comment_input" type="text" placeholder="댓글을 입력하세요.">
+    <input class="post_detail_comment_submit" type="submit" value="등록">
+</div>
 {% endblock content %}
