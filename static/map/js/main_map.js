@@ -7,6 +7,9 @@ var map;
 let jinjuPolygon;
 let marker;
 let markers = [];
+let overlay;
+let overlayContent;
+let bakeryName = "";
 let positions = {
   진주시: [
     {
@@ -75,6 +78,36 @@ const startMap = () => {
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
   jsonAsync(regionSelect.value);
+  overlayContent = (bakeryName) => {
+    return `
+  <div class="wrap">
+        <div class="info">
+            <div class="title">
+                ${bakeryName}
+                <div class="close" onclick="closeOverlay()" title="닫기"></div>
+            </div>
+            <div class="body">
+                <div class="img">
+                    <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">
+               </div>
+                <div class="desc">
+                    <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>
+                    <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>
+                    <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>
+                </div>
+            </div>
+        </div>
+    </div>";
+    `;
+  };
+
+  // 마커 위에 커스텀오버레이를 표시합니다
+  // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+  overlay = new kakao.maps.CustomOverlay({
+    content: overlayContent(bakeryName),
+    map: map,
+    position: null,
+  });
 
   // 마커 이미지의 이미지 주소입니다
   var imageSrc = "/static/map/img/maker.png";
@@ -95,26 +128,9 @@ const startMap = () => {
     });
     markers.push(marker);
 
-    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    var iwContent = `<div style="padding:5px; ">${
-        positions[regionSelect.value][i].title
-      }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-      iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+    kakao.maps.event.addListener(marker, "click", addClosureOverlay(marker, i));
 
-    // 인포윈도우를 생성합니다
-    infowindow_list.push("");
-
-    infowindow_list[i] = new kakao.maps.InfoWindow({
-      content: iwContent,
-      removable: iwRemoveable,
-    });
-
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(
-      marker,
-      "click",
-      clickListener(map, marker, infowindow_list[i])
-    );
     let mouseoverOption = {
       fillColor: "#5D2C1D", // 채우기 색깔입니다
       fillOpacity: 0.8, // 채우기 불투명도 입니다
@@ -127,21 +143,18 @@ const startMap = () => {
   }
 };
 
-let infowindow_list = [];
-
-// 이전에 띄워져있던 인포윈도우들을 모두 닫는 함수
-const closeAllInfowindow = () => {
-  for (let x = 0; x < infowindow_list.length; x++) {
-    infowindow_list[x].close();
-  }
+// 클릭시 커스텀 오버레이 화면에 표시
+const addClosureOverlay = (marker, i) => {
+  return () => {
+    overlay.setPosition(marker.getPosition());
+    overlay.setContent(overlayContent(positions[regionSelect.value][i].title));
+    overlay.setMap(map);
+  };
 };
 
-// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-function clickListener(map, marker, infowindow) {
-  return function () {
-    closeAllInfowindow();
-    infowindow.open(map, marker);
-  };
+// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+function closeOverlay() {
+  overlay.setMap(null);
 }
 
 // 지역별 중심좌표를 모아놓은 객체
@@ -175,8 +188,8 @@ const changeRegion = () => {
   }
 
   changePolygon(regionSelectedValue);
-  closeAllInfowindow();
-  infowindow_list = [];
+  overlay.setMap(null);
+
   // 마커 이미지의 이미지 주소입니다
   var imageSrc = "/static/map/img/maker.png";
 
@@ -196,26 +209,9 @@ const changeRegion = () => {
     });
     markers.push(marker);
 
-    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    var iwContent = `<div style="padding:5px; ">${
-        positions[regionSelect.value][i].title
-      }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-      iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+    kakao.maps.event.addListener(marker, "click", addClosureOverlay(marker, i));
 
-    // 인포윈도우를 생성합니다
-    infowindow_list.push("");
-
-    infowindow_list[i] = new kakao.maps.InfoWindow({
-      content: iwContent,
-      removable: iwRemoveable,
-    });
-
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(
-      marker,
-      "click",
-      clickListener(map, marker, infowindow_list[i])
-    );
     let mouseoverOption = {
       fillColor: "#5D2C1D", // 채우기 색깔입니다
       fillOpacity: 0.8, // 채우기 불투명도 입니다
@@ -317,7 +313,5 @@ const clickRegionBack = () => {
   container = document.getElementById("map"); //새로생긴 div map의 DOM
   polygonPath = [];
   polygon.setMap(null);
-  closeAllInfowindow();
-  infowindow_list = [];
   regionSelect.value = regionSelect.firstElementChild.innerText;
 };
