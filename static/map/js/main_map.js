@@ -7,6 +7,44 @@ var map;
 let jinjuPolygon;
 let marker;
 let markers = [];
+let positions = {
+  진주시: [
+    {
+      title: "수복빵집",
+      latlng: new kakao.maps.LatLng(35.1966287, 128.01815868),
+    },
+    {
+      title: "베이커리925",
+      latlng: new kakao.maps.LatLng(35.23564072, 128.1033207),
+    },
+    {
+      title: "장동근과자점",
+      latlng: new kakao.maps.LatLng(35.21796814, 128.2341212325),
+    },
+    {
+      title: "양우연케익하우스",
+      latlng: new kakao.maps.LatLng(35.1796763, 128.07333617),
+    },
+    {
+      title: "뚜레쥬르 진주호탄점",
+      latlng: new kakao.maps.LatLng(35.1631501, 128.213512432),
+    },
+    {
+      title: "이용규베커라이",
+      latlng: new kakao.maps.LatLng(35.1692635, 128.2734668392),
+    },
+  ],
+  사천시: [
+    {
+      title: "사천 어딘가 빵집",
+      latlng: new kakao.maps.LatLng(35.0624853, 128.0750658),
+    },
+    {
+      title: "사천 최강빵집",
+      latlng: new kakao.maps.LatLng(35.0306886, 128.0180409),
+    },
+  ],
+};
 
 const jsonAsync = async (region) => {
   try {
@@ -36,38 +74,12 @@ const startMap = () => {
   regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-  jsonAsync("진주시");
-  var positions = [
-    {
-      title: "수복빵집",
-      latlng: new kakao.maps.LatLng(35.1966287, 128.01815868),
-    },
-    {
-      title: "베이커리925",
-      latlng: new kakao.maps.LatLng(35.23564072, 128.1033207),
-    },
-    {
-      title: "장동근과자점",
-      latlng: new kakao.maps.LatLng(35.21796814, 128.2341212325),
-    },
-    {
-      title: "양우연케익하우스",
-      latlng: new kakao.maps.LatLng(35.1796763, 128.07333617),
-    },
-    {
-      title: "뚜레쥬르 진주호탄점",
-      latlng: new kakao.maps.LatLng(35.1631501, 128.213512432),
-    },
-    {
-      title: "이용규베커라이",
-      latlng: new kakao.maps.LatLng(35.1692635, 128.2734668392),
-    },
-  ];
+  jsonAsync(regionSelect.value);
 
   // 마커 이미지의 이미지 주소입니다
   var imageSrc = "/static/map/img/maker.png";
 
-  for (var i = 0; i < positions.length; i++) {
+  for (var i = 0; i < positions[regionSelect.value].length; i++) {
     // 마커 이미지의 이미지 크기 입니다
     var imageSize = new kakao.maps.Size(24, 35);
 
@@ -77,14 +89,16 @@ const startMap = () => {
     // 마커를 생성합니다
     marker = new kakao.maps.Marker({
       map: map, // 마커를 표시할 지도
-      position: positions[i].latlng, // 마커를 표시할 위치
+      position: positions[regionSelect.value][i].latlng, // 마커를 표시할 위치
       image: markerImage, // 마커 이미지
       clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
     });
     markers.push(marker);
 
     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    var iwContent = `<div style="padding:5px; ">${positions[i].title}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    var iwContent = `<div style="padding:5px; ">${
+        positions[regionSelect.value][i].title
+      }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
       iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
     // 인포윈도우를 생성합니다
@@ -161,6 +175,57 @@ const changeRegion = () => {
   }
 
   changePolygon(regionSelectedValue);
+  closeAllInfowindow();
+  infowindow_list = [];
+  // 마커 이미지의 이미지 주소입니다
+  var imageSrc = "/static/map/img/maker.png";
+
+  for (var i = 0; i < positions[regionSelect.value].length; i++) {
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35);
+
+    // 마커 이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+    // 마커를 생성합니다
+    marker = new kakao.maps.Marker({
+      map: map, // 마커를 표시할 지도
+      position: positions[regionSelect.value][i].latlng, // 마커를 표시할 위치
+      image: markerImage, // 마커 이미지
+      clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+    });
+    markers.push(marker);
+
+    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+    var iwContent = `<div style="padding:5px; ">${
+        positions[regionSelect.value][i].title
+      }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+      iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+    // 인포윈도우를 생성합니다
+    infowindow_list.push("");
+
+    infowindow_list[i] = new kakao.maps.InfoWindow({
+      content: iwContent,
+      removable: iwRemoveable,
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(
+      marker,
+      "click",
+      clickListener(map, marker, infowindow_list[i])
+    );
+    let mouseoverOption = {
+      fillColor: "#5D2C1D", // 채우기 색깔입니다
+      fillOpacity: 0.8, // 채우기 불투명도 입니다
+    };
+    // 마커에 마우스오버 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, "mouseover", function () {
+      // 다각형의 채우기 옵션을 변경합니다
+      polygon.setOptions(mouseoverOption);
+    });
+  }
 };
 
 // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
@@ -252,4 +317,7 @@ const clickRegionBack = () => {
   container = document.getElementById("map"); //새로생긴 div map의 DOM
   polygonPath = [];
   polygon.setMap(null);
+  closeAllInfowindow();
+  infowindow_list = [];
+  regionSelect.value = regionSelect.firstElementChild.innerText;
 };
