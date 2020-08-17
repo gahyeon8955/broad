@@ -3,9 +3,10 @@ const mapInit = document.querySelector(".jsMapInit"); //첫 지도이미지 DOM
 const regionSelectBox = document.querySelector(".jsRegionSelectBox"); //지역선택박스 DOM
 const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 Select태그 DOM
 const content = document.querySelector(".content");
-console.log(content);
 var map;
 let jinjuPolygon;
+let marker;
+let markers = [];
 
 const jsonAsync = async (region) => {
   try {
@@ -74,12 +75,13 @@ const startMap = () => {
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    marker = new kakao.maps.Marker({
       map: map, // 마커를 표시할 지도
       position: positions[i].latlng, // 마커를 표시할 위치
       image: markerImage, // 마커 이미지
       clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
     });
+    markers.push(marker);
 
     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
     var iwContent = `<div style="padding:5px; ">${positions[i].title}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
@@ -99,6 +101,15 @@ const startMap = () => {
       "click",
       clickListener(map, marker, infowindow_list[i])
     );
+    let mouseoverOption = {
+      fillColor: "#5D2C1D", // 채우기 색깔입니다
+      fillOpacity: 0.8, // 채우기 불투명도 입니다
+    };
+    // 마커에 마우스오버 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, "mouseover", function () {
+      // 다각형의 채우기 옵션을 변경합니다
+      polygon.setOptions(mouseoverOption);
+    });
   }
 };
 
@@ -145,6 +156,10 @@ const changeRegion = () => {
   );
   polygonPath = [];
   polygon.setMap(null);
+  for (let i in markers) {
+    markers[i].setMap(null);
+  }
+
   changePolygon(regionSelectedValue);
 };
 
@@ -193,13 +208,13 @@ const changePolygon = async (region) => {
 
 const setMouseInOut = () => {
   // 다각형에 마우스오버 이벤트가 발생했을 때 변경할 채우기 옵션입니다
-  var mouseoverOption = {
+  let mouseoverOption = {
     fillColor: "#5D2C1D", // 채우기 색깔입니다
     fillOpacity: 0.8, // 채우기 불투명도 입니다
   };
 
   // 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다
-  var mouseoutOption = {
+  let mouseoutOption = {
     fillColor: "#fff6ed", // 채우기 색깔입니다
     fillOpacity: 0.7, // 채우기 불투명도 입니다
   };
@@ -220,6 +235,9 @@ const setMouseInOut = () => {
 const clickRegionBack = () => {
   delete map;
   delete polygon;
+  for (let i in markers) {
+    markers[i].setMap(null);
+  }
   mapInit.classList.remove("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_flex", "set_none"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.remove("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
