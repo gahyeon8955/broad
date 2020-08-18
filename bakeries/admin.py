@@ -12,6 +12,12 @@ from . import models
 class BakeryAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
 
+@admin.register(models.Menu)
+class MenuAdmin(admin.ModelAdmin):
+    pass
 
 
