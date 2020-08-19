@@ -9,7 +9,8 @@ def bakery_list(request):
 
 
 def bakery_detail(request):
-    return render(request, "bakeries/bakery_detail.html")
+    bakery = bakery_models.Bakery.objects.get(name="가좌빵집")
+    return render(request, "bakeries/bakery_detail.html", {"bakery": bakery})
 
 
 def bakery_rank(request):

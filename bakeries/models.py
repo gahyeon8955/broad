@@ -21,6 +21,10 @@ class Bakery(models.Model):
     def business_hour(self):
         return f"{self.open_time.hour}:{self.open_time.minute} ~ {self.close_time.hour}:{self.close_time.minute}"
 
+    def review_count(self):
+        count = self.reviews.all().count()
+        return count
+
     def total_rating(self):
         all_reviews_rating_list = list(map(lambda x: x.rating, self.reviews.all()))
         rating_sum = sum(all_reviews_rating_list)
