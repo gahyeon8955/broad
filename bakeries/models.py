@@ -22,7 +22,12 @@ class Bakery(models.Model):
         return f"{self.open_time.hour}:{self.open_time.minute} ~ {self.close_time.hour}:{self.close_time.minute}"
 
     def total_rating(self):
-        pass
+        all_reviews_rating_list = list(map(lambda x: x.rating, self.reviews.all()))
+        rating_sum = sum(all_reviews_rating_list)
+        if rating_sum == 0:
+            return 0
+        else:
+            return round(rating_sum / len(all_reviews_rating_list), 1)
 
     def __str__(self):
         return self.name
@@ -88,4 +93,4 @@ class Review(models.Model):
     )  # 작성자
 
     def __str__(self):
-        return f"{self.bakery} | {self.text}"
+        return f"{self.bakery} 리뷰 | {self.body}"

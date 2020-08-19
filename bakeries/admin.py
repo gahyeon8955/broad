@@ -15,11 +15,16 @@ class PhotoInline(admin.TabularInline):
     model = models.Photo
 
 
+class ReviewInline(admin.TabularInline):
+    model = models.Review
+
+
 @admin.register(models.Bakery)
 class BakeryAdmin(admin.ModelAdmin):
     inlines = (
         MenuInline,
         PhotoInline,
+        ReviewInline,
     )
 
 
