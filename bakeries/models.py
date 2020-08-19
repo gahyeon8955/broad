@@ -45,7 +45,7 @@ class Photo(models.Model):
     bakery = models.ForeignKey(
         "Bakery", related_name="photos", on_delete=models.CASCADE
     )
-    file = models.ImageField(upload_to=photo_path)
+    photo = models.ImageField(upload_to=photo_path)
 
 
 class Menu(models.Model):
