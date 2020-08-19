@@ -16,7 +16,95 @@
 
 
 {% block content %}
-{% for menu in bakery.menus.all  %}
-<h1>{{menu}}</h1>
-{% endfor %}
+<!-- 가게 대표 빵 이미지 사진들 -->
+<div class="bakery_bread_image_box">
+    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread1.png' %}">
+    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread2.png' %}">
+    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread3.png' %}">
+</div>
+
+<div class="bakery_information_box">
+    <div class="bakery_box">
+        <!-- 가게 로고 -->
+        <img class="bakery_trademark_detail" src="{% static 'bakeries/img/storelogo.png' %}">
+        <!-- 가게 이름, 정보, 평점 -->
+        <div class="bakery_name_box">
+            <div class="bakery_name_and_star">
+                <div class="bakery_name">성심당</div>
+                <div class="bakery_star">4.0</div>
+            </div>
+            <div class="bakery_number">1588-8069</div>
+            <div class="bakery_business_hours">평일 08:00 - 22:00 월-목주말 08:00 - 23:00</div>
+        </div>
+        <!-- 찜 -->
+        <div class="bakery_like"><img class="bakery_like_img" src="{% static 'bakeries/img/heart.png' %}"></div>
+    </div>
+
+    <!-- 가게 위치 박스 -->
+    <div class="bakery_location_box">
+        <img class="bakery_location" src="{% static 'bakeries/img/location.png' %}">
+        <div class="bakery_location_address">대전 중구 대종로480번길길 15</div>
+    </div>
+
+    <!-- 가게 메뉴 박스 -->
+    <div class="bakery_menu_box">
+        <div class="bakery_menu">대표메뉴</div>
+        <div class="bakery_menu_detail_box">
+            <div class="bakery_menu_detail1">
+                <div class="bakery_menu_name">튀김소보로</div>
+                <div class="bakery_menu_price">1,500원</div>
+
+            </div>
+            <div class="bakery_menu_detail2">
+                <div class="bakery_menu_name">애플파이</div>
+                <div class="bakery_menu_price">2,500원</div>
+            </div>
+            <div class="bakery_menu_detail1">
+                <div class="bakery_menu_name">공주밤식빵</div>
+                <div class="bakery_menu_price">3,500원</div>
+            </div>
+            <div class="bakery_menu_detail2">
+                <div class="bakery_menu_name">야채고로케</div>
+                <div class="bakery_menu_price">1,800원</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 가게 리뷰 박스 -->
+    <div class="bakery_review_bigbox">
+        <div class="review_write_box">
+            <div class="review_left_box">
+                <div class="bakery_review">리뷰</div>
+                <div class="bakery_review_count">210개</div>
+            </div>
+            <div class="bakery_review_write">리뷰 작성하기</div>
+        </div>
+        <div class="bakery_review_smallbox">
+            <div class="bakery_review_detail">
+                <div class="bakery_review_detail_topbox">
+                    <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
+                    <div class="bakery_review_id_box">
+                        <div class="bakery_review_id">빵순이</div>
+                        <div class="bakery_review_time">2020.8.9</div>
+                    </div>
+                    <div class="bakery_review_star">4.0</div>
+                </div>
+                <div class="bakery_review_comment">맛있어요 대전 시내에 있어요</div>
+            </div>
+            <div class="bakery_review_detail">
+                <div class="bakery_review_detail_topbox">
+                    <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
+                    <div class="bakery_review_id_box">
+                        <div class="bakery_review_id">닉네임</div>
+                        <div class="bakery_review_time">2020.8.9</div>
+                    </div>
+                    <div class="bakery_review_star">4.0</div>
+                </div>
+                <div class="bakery_review_comment">맛있어요 대전 시내에 있어요</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 {% endblock content %}

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from . import models as bakery_models
 
 # Create your views here.
 
@@ -9,8 +8,7 @@ def bakery_list(request):
 
 
 def bakery_detail(request):
-    bakery = bakery_models.Bakery.objects.get(name="가좌빵집")
-    return render(request, "bakeries/bakery_detail.html", {"bakery": bakery})
+    return render(request, "bakeries/bakery_detail.html")
 
 
 def bakery_rank(request):
