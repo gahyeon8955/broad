@@ -72,7 +72,7 @@ class Review(models.Model):
     rating = models.IntegerField(choices=RATING, default=5)  # 평점
     created_date = models.DateTimeField(auto_now=True)  # 작성 시간
     bakery = models.ForeignKey(
-        "Bakery", on_delete=models.CASCADE, related_name="comments"
+        "Bakery", on_delete=models.CASCADE, related_name="reviews"
     )  # 해당 빵집 이름(FK)
     writer = models.ForeignKey(
         user_models.User, related_name="reviews", on_delete=models.CASCADE, null=True
