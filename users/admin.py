@@ -8,4 +8,4 @@ from . import models
 
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
-    pass
+    fieldsets = ((None, {"fields": ("avatar",)}),) + UserAdmin.fieldsets

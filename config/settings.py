@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -124,15 +124,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
+"""
+Static 관련 설정
+"""
 # 웹 페이지에서 사용할 정적 파일의 최상위 URL 경로
 STATIC_URL = "/static/"
-
 # 개발단계에서 사용하는 정적파일들이 위치한 경로
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 # collectstatic명령어를 통해 Django 프로젝트에서 사용하는 모든 정적 파일을 한 곳에 모아넣는 경로(배포시 사용하기 위해)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
+"""
+Media 관련 설정
+"""
+# 사용자에 의해 업로드되는 미디어 파일을 저장할 경로
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+# 웹 페이지에서 사용할 미디어 파일의 최상위 URL 경로
+MEDIA_URL = "/media/"
 
 
 # User 모델 커스터마이징
