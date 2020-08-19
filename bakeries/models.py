@@ -15,7 +15,7 @@ class Bakery(models.Model):
     address = models.CharField(max_length=150, default="", null=True, blank=True)  # 주소
     open_time = models.TimeField(default="00:00:00.000000", blank=True)
     close_time = models.TimeField(default="00:00:00.000000", blank=True)
-    phone_number = PhoneNumberField(default="", region="KR")  # 전화번호
+    phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
     # like
 
     def business_hour(self):
@@ -50,10 +50,19 @@ class Photo(models.Model):
 
 class Menu(models.Model):
     name = models.CharField(max_length=80)  # 메뉴 이름
-    price = models.IntegerField(default=0)
+    row_price = models.IntegerField(default=0)
     bakery = models.ForeignKey(
         "Bakery", related_name="menus", on_delete=models.CASCADE, null=True
     )  # 해당 빵집 이름(FK)
+
+    def price(self):
+        string = str(self.row_price)
+        if self.row_price >= 1000000:
+            return f"{string[0]},{string[1:4]},{string[4:7]}"
+        elif self.row_price >= 100000:
+            return f"{string[0:3]},{string[3:6]}"
+        elif self.row_price >= 10000:
+            return f"{string[0:2]},{string[2:5]}"
 
     def __str__(self):
         return f"{self.bakery}의 메뉴 | {self.name}"
