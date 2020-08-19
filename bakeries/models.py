@@ -14,6 +14,7 @@ class Bakery(models.Model):
     def __str__(self):
         return self.name
 
+      
 class Comment(models.Model):
     EVALUATION = (
         (1, '★'),
@@ -31,7 +32,7 @@ class Comment(models.Model):
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.bakery_name)
+        return self.bakery_name
 
 class Menu(models.Model):
     shop_name = models.ForeignKey('Bakery', on_delete=models.CASCADE, null=True) #해당 빵집 이름(FK)
@@ -39,4 +40,4 @@ class Menu(models.Model):
     price = models.IntegerField() #메뉴 가격
 
     def __str__(self):
-        return str(self.shop_name)
+        return self.shop_name

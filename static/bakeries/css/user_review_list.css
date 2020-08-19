@@ -1,0 +1,103 @@
+.content {
+  padding: 15px 30px;
+}
+
+.review_write_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.review_left_box {
+  display: flex;
+  align-items: center;
+}
+
+.bakery_review {
+  font-size: 16.5px;
+  font-weight: bold;
+}
+
+.bakery_review_id {
+  margin-bottom: 4px;
+}
+
+.bakery_review_count {
+  font-size: 13px;
+  margin-left: 5px;
+  color: #ac815a;
+}
+
+.bakery_review_write {
+  font-size: 13px;
+}
+
+.bakery_review_detail {
+  width: 100%;
+  background: #fcfcfc;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin-bottom: 23px;
+  padding-bottom: 20px;
+}
+.bakery_review_detail_topbox {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 11px 9px 11px;
+  align-items: center;
+}
+
+.bakery_review_left {
+  display: flex;
+  align-items: center;
+}
+
+.bakery_review_profileimg {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  text-align: center;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.bakery_review_profileimg img {
+  max-width: 30px;
+  margin: 0px auto;
+}
+.bakery_review_id_box {
+  display: flex;
+  align-items: center;
+}
+.bakery_review_id {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.bakery_review_star {
+  position: relative;
+  bottom: 2px;
+  background-color: #717171;
+  color: white;
+  font-size: 13px;
+  padding: 2px 3px;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.delete_trash_icon {
+  width: 13px;
+}
+
+.bakery_review_time {
+  font-size: 10px;
+}
+.bakery_review_comment {
+  border-top: 1px solid #f1eded;
+  margin: 0px 14px;
+  padding-top: 12px;
+  font-size: 13px;
+  color: #383232;
+  line-height: 1.4;
+}

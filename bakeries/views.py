@@ -17,3 +17,11 @@ def bakery_rank(request):
 
 def bakery_like_list(request):
     return render(request, "bakeries/bakery_like_list.html")
+
+
+def bakery_review_list(request):
+    return render(request, "bakeries/bakery_review_list.html")
+
+
+def user_review_list(request):
+    return render(request, "bakeries/user_review_list.html")
