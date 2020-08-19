@@ -1,16 +1,25 @@
 from django.db import models
+from django.utils import timezone
 from users import models as user_models
+from phonenumber_field.modelfields import PhoneNumberField
+import datetime
 
 # Create your models here.
 
 
 class Bakery(models.Model):
-    name = models.CharField(max_length=20)  # 빵집 이름
-    sub_name = models.CharField(max_length=40)  # 빵집 소제목(설명)
-    lat = models.FloatField()  # 위도
-    lng = models.FloatField()  # 경도
-    address = models.CharField(max_length=150, default="", null=True)  # 주소
-    business_hours = models.CharField(max_length=100, default="", null=True)  # 영업시간
+    name = models.CharField(max_length=20, default="")  # 빵집 이름
+    sub_name = models.CharField(max_length=40, default="")  # 빵집 소제목(설명)
+    lat = models.FloatField(default=0)  # 위도
+    lng = models.FloatField(default=0)  # 경도
+    address = models.CharField(max_length=150, default="", null=True, blank=True)  # 주소
+    open_time = models.TimeField(default="00:00:00.000000", blank=True)
+    close_time = models.TimeField(default="00:00:00.000000", blank=True)
+    phone_number = PhoneNumberField(default="", region="KR")  # 전화번호
+    # like
+
+    def business_hour(self):
+        return f"{self.open_time.hour}:{self.open_time.minute} ~ {self.close_time.hour}:{self.close_time.minute}"
 
     def total_rating(self):
         pass
@@ -41,7 +50,7 @@ class Photo(models.Model):
 
 class Menu(models.Model):
     name = models.CharField(max_length=80)  # 메뉴 이름
-    # price = models.IntegerField()  # 메뉴 가격 =>>> Django third-party app인 Django-money를 통해 money로 변경예정
+    price = models.IntegerField(default=0)
     bakery = models.ForeignKey(
         "Bakery", related_name="menus", on_delete=models.CASCADE, null=True
     )  # 해당 빵집 이름(FK)

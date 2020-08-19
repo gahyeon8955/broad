@@ -47,10 +47,11 @@ PROJECT_APPS = [
 ]
 
 # 외부에서 기능을 미리 만들어놓은 App들
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "phonenumber_field",
+]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

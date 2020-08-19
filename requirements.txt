@@ -4,7 +4,9 @@ attrs==19.3.0
 black==19.10b0
 click==7.1.2
 Django==3.1
+django-phonenumber-field==5.0.0
 pathspec==0.8.0
+phonenumbers==8.12.8
 Pillow==7.2.0
 pytz==2020.1
 regex==2020.7.14
