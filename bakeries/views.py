@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from . import models as bakery_models
 
 # Create your views here.
 

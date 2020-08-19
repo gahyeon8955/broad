@@ -22,7 +22,7 @@ class Post(models.Model):
     body = models.CharField(max_length=500)
     created_date = models.DateTimeField(auto_now=True)
     views = models.IntegerField(default=0)
-    writer = models.ForeignKey(
+    user = models.ForeignKey(
         user_models.User, related_name="posts", on_delete=models.CASCADE
     )
     photo = models.ImageField(upload_to=photo_path, blank=True)
@@ -38,7 +38,7 @@ class Comment(models.Model):
     body = models.CharField(max_length=300)
     created_date = models.DateTimeField(auto_now=True)
     post = models.ForeignKey("Post", related_name="comments", on_delete=models.CASCADE)
-    writer = models.ForeignKey(
+    user = models.ForeignKey(
         user_models.User, related_name="comments", on_delete=models.CASCADE
     )
     target_comment = models.ForeignKey(
