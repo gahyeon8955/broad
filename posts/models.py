@@ -25,7 +25,7 @@ class Post(models.Model):
     writer = models.ForeignKey(
         user_models.User, related_name="posts", on_delete=models.CASCADE
     )
-    image = models.ImageField(upload_to=photo_path, blank=True)
+    photo = models.ImageField(upload_to=photo_path, blank=True)
 
     def comments_count(self):
         pass
