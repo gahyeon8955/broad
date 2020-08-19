@@ -74,7 +74,7 @@ class Review(models.Model):
     bakery = models.ForeignKey(
         "Bakery", on_delete=models.CASCADE, related_name="reviews"
     )  # 해당 빵집 이름(FK)
-    writer = models.ForeignKey(
+    user = models.ForeignKey(
         user_models.User, related_name="reviews", on_delete=models.CASCADE, null=True
     )  # 작성자
 
