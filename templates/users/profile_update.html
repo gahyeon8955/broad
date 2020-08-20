@@ -29,5 +29,27 @@
 
 
 {% block content %}
-4-2)프로필 수정
+<form action="" method="post">
+<div class="profile_update__top">
+    <img class="profile_update__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png">
+    <img class="profile_update__imageupdate" src="https://www.vhv.rs/dpng/d/462-4623656_thumb-image-camera-icon-png-circle-transparent-png.png">
+</div>
+<div class="profile_update_midbox">
+<div class="profile_update_sectionbox">
+    <label for="user_email" class="profile_update_label">이메일</label>
+    <input class="profile_update_input" type="email" name="user_email" id="user_email" placeholder="@example.com">
+</div>
+<div class="profile_update_sectionbox">
+    <label for="user_nickname" class="profile_update_label">닉네임<strong>(선택)</strong></label>
+    <input class="profile_update_input" type="text" name=" user_nickname" id="user_nickname" placeholder="선택입력">
+</div>
+<div class="profile_update_sectionbox">
+    <label for="user_password" class="profile_update_label">비밀번호</label>
+    <input class="profile_update_input" type="password" name="user_password" id="user_password"
+        placeholder="비밀번호(8~32자리)">
+    <input class="profile_update_input" type="password" name="user_confirm_password" id="user_confirm_password"
+        placeholder="비밀번호 재입력">
+</div>
+</div>
+</form>
 {% endblock content %}
