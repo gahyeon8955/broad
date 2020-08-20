@@ -39,7 +39,7 @@
 
 .list_store {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 80px;
   top: 128px;
   background: #fcfcfc;
@@ -90,23 +90,36 @@
   padding-top: 5px;
 }
 
+.store_review {
+  margin-top: 15px;
+}
+
 .review_score {
-  padding-top: 15px;
-  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .score_star {
+  display: flex;
   color: orange;
   width: 20px;
   height: 20px;
 }
 
 .score_number {
+  display: flex;
   width: 45px;
   height: 24px;
   font-size: 18px;
   line-height: 21px;
   font-weight: bold;
+}
+
+.review_number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .review_count {
