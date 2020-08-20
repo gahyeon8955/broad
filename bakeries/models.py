@@ -86,7 +86,7 @@ class Review(models.Model):
         (5, "★★★★★"),
     )
 
-    body = models.CharField(max_length=300)  # 리뷰 내용
+    body = models.TextField()  # 리뷰 내용
     rating = models.IntegerField(choices=RATING, default=5)  # 평점
     created_date = models.DateTimeField(auto_now=True)  # 작성 시간
     bakery = models.ForeignKey(

@@ -30,14 +30,31 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {% for field in form  %}
-    {{field}}
-    {% if field.errors %}
-    {% for error in field.errors  %}
-    {{error}}
-    {% endfor %}
-    {% endif %}
-    {% endfor %}
-    <input type="submit">
+    <!-- 글쓰기 제목 박스 -->
+    <div class="post_write_title_box">
+        <span>별점 : </span>{{form.rating}}
+        {% if form.rating.errors %}
+        {% for error in form.rating.errors  %}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- 글쓰기 내용 박스 -->
+    <div class="post_write_contents_box">
+        {{form.body}}
+        {% if form.body.errors %}
+        {% for error in form.body.errors  %}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- 글쓰기 이미지추가&등록 박스 -->
+    <div class="post_write_submit_img_box">
+        <button class="post_write_submit" type="submit">등록</button>
+    </div>
 </form>
+
+
 {% endblock content %}
