@@ -25,3 +25,7 @@ def bakery_review_list(request):
 
 def user_review_list(request):
     return render(request, "bakeries/user_review_list.html")
+
+
+def review_write(request):
+    return render(request, "bakeries/review_write.html")

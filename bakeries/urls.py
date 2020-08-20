@@ -14,4 +14,5 @@ urlpatterns = [
     # 프론트앤드 작업할때는 "1/reviews/"로 해놨지만, 나중에는 "<int:pk>/reviews/"로 변경예정"
     path("1/reviews/", views.bakery_review_list, name="review_list"),
     path("7/reviews/", views.user_review_list, name="user_review_list"),
+    path("review-write/", views.review_write, name="review_write"),
 ]
