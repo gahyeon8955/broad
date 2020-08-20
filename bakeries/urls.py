@@ -15,4 +15,5 @@ urlpatterns = [
     path("1/reviews/", views.bakery_review_list, name="review_list"),
     path("7/reviews/", views.user_review_list, name="user_review_list"),
     path("review-write/", views.review_write, name="review_write"),
+    path("review-delete/<int:review_id>", views.review_delete, name="review_delete"),
 ]
