@@ -9,17 +9,25 @@
     width: 100%;
     color: #797979;
 }
+.post_write_title{
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
 /* 글쓰기 내용 박스 */
 .post_write_contents_box{
     border-top: solid 1px #EEEEEE;
-    border-bottom: solid 9px #EEEEEE;
+    border-bottom: solid 1px #EEEEEE;
 }
-.post_write_contents_box textarea{
+.post_write_contents_box input{
     border: none;
     font-size: 17px;
     padding: 15px 25px;
     width: 100%;
     color: #797979;
+}
+.post_write_contents{
+    margin-bottom: 10px;
+    padding-left: 10px;
 }
 /* 글쓰기 이미지 추가&등록 박스 */
 .post_write_submit_img_box{
@@ -29,6 +37,7 @@
 }
 .post_write_img_box{
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     margin-right: 12px;
 }
@@ -37,6 +46,18 @@
     margin-right: 5px;
 }
 .post_write_submit{
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 12px;
+    margin-right: 10px;
+}
+
+#id_photo{
+    width: 70%;
+}
+#file-upload-button{
     background-color: black;
     border: none;
     border-radius: 5px;

@@ -27,24 +27,21 @@
 
 
 {% block content %}
-<form method="POST" class="post-form" enctype="multipart/form-data">
-<!-- 글쓰기 제목 박스 -->
-<div class="post_write_title_box">
-    <input type="text" placeholder="제목">
-</div>
-
-<!-- 글쓰기 내용 박스 -->
-<div class="post_write_contents_box">
-    <textarea cols="50" rows="10" placeholder="내용"></textarea>
-</div>
-
+<form method="POST" class="post-form" enctype="multipart/form-data" action="{% url 'posts:write' %}">
+    
+{% csrf_token %}
+<div class="post_write_title">제목</div>
+<div class="post_write_title_box">{{ form.title }}</div>
+<div class="post_write_contents">내용</div>
+<div class="post_write_contents_box">{{ form.body }}</div>
+{{ form.user }}
 <!-- 글쓰기 이미지추가&등록 박스 -->
 <div class="post_write_submit_img_box">
     <span class="post_write_img_box">
-        <img src="{% static 'posts/img/cameraimg.png' %}" class="post_write_camera">
-        <span>이미지 추가</span>
+        {{ form.photo }}
+        <!-- <img src="{% static 'posts/img/cameraimg.png' %}" class="post_write_camera"> -->
     </span>
-    <button class="post_write_submit"type="submit">등록</button>
+    <input class="post_write_submit" type="submit" value="등록">
 </div>
 
 </form>
