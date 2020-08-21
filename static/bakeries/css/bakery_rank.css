@@ -11,7 +11,7 @@
   margin-right: 15px;
 }
 
-.menu > div:hover{
+.menu > div:hover {
   cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .menu_1 {
-margin: 10px;
+  margin: 10px;
 }
 
 .menu_1__photo {
@@ -131,7 +131,7 @@ hr {
   width: 40px;
 }
 
-.sort_hr{
+.sort_hr {
   height: 6px;
   border: none;
   margin-bottom: 0;
@@ -141,8 +141,8 @@ hr {
   border-top: 1px solid #e9e9e9;
 }
 
-.list {
-    border-top: 1px solid #E9E9E9;
+.list > a {
+  text-decoration-line: none;
 }
 
 .list_store {
@@ -156,7 +156,6 @@ hr {
 }
 
 .store_rank {
-  width: 10%
   font-size: 18px;
   display: flex;
   align-items: flex-start;
@@ -172,6 +171,7 @@ hr {
   width: 71px;
   height: 22px;
   font-size: 17px;
+  color: black;
 }
 
 .top_collect {
@@ -201,6 +201,7 @@ hr {
 
 .store_review {
   margin-top: 15px;
+  color: black;
 }
 
 .review_score {

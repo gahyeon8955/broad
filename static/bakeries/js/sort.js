@@ -2,6 +2,7 @@ const listElement = document.querySelector(".list");
 let pickedData;
 
 const listInfoHTML = (
+  pk,
   index,
   name,
   subName,
@@ -10,7 +11,7 @@ const listInfoHTML = (
   reviewCount
 ) => {
   return `
-<div class="list_store">
+<a href="/bakery/${pk}" class="list_store">
   <div class="store_rank">${index}</div>
   <div class="store_detail">
       <div class="detail_top">
@@ -28,7 +29,7 @@ const listInfoHTML = (
           <span class="review_count">리뷰 ${reviewCount}</span>
       </div>
   </div>
-</div>
+</a>
 `;
 };
 
@@ -41,6 +42,7 @@ const addInfo = (JSONData) => {
     listElement.insertAdjacentHTML(
       "beforeend",
       listInfoHTML(
+        JSONData[i].pk,
         parseInt(i) + 1,
         JSONData[i].fields.name,
         JSONData[i].fields.sub_name,
