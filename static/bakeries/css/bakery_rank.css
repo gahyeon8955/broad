@@ -4,6 +4,19 @@
   padding-left: 10px;
 }
 
+.menu > a {
+  display: block;
+  text-decoration-line: none;
+  color: black;
+  margin-right: 15px;
+}
+
+.menu__img {
+  background-position: center;
+  background-repeat: none;
+  background-size: cover;
+}
+
 .menu_1 {
 margin: 10px;
 }
@@ -14,12 +27,9 @@ margin: 10px;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   background-color: white;
   border-radius: 50%;
-  background-image: url(https://lh3.googleusercontent.com/proxy/1_Zz3OTSULZzjRepU6MIYR_jIdwfr4nNsH5OU8zNuD-pDTok9XdjYHMesovW8iivdB7idrHCPLEcm1FHn8F_hUFbLNbJxuTZb63unT9AIOITcnu3SeySYvm-mvZleYS2lyDV5Ic33p4ISD91_UDJN3_aHhoKPLnxWJ_gMaaE7HKcyTa18asiSA);
 }
 
 .menu_1__name {
-  width: 44px;
-  height: 15px;
   font-size: 11px;
   text-align: center;
   padding-top: 10px;
@@ -38,8 +48,6 @@ margin: 10px;
 }
 
 .menu_2__name {
-  width: 44px;
-  height: 15px;
   font-size: 11px;
   text-align: center;
   padding-top: 10px;
@@ -58,8 +66,6 @@ margin: 10px;
 }
 
 .menu_3__name {
-  width: 44px;
-  height: 15px;
   font-size: 11px;
   text-align: center;
   padding-top: 10px;
@@ -78,8 +84,6 @@ margin: 10px;
 }
 
 .menu_4__name {
-  width: 44px;
-  height: 15px;
   font-size: 11px;
   text-align: center;
   padding-top: 10px;
