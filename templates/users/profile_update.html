@@ -22,7 +22,7 @@
         <span class="header__title">내 정보 수정</span>
     </div>
     <div class="header__rightbox">
-        <span class="header__save">저장</span>
+        <a class="header__save" href="{% url 'users:profile' %}"><span>저장</span></a>
     </div>
 </div>
 {% endblock header %}
@@ -31,7 +31,7 @@
 {% block content %}
 <form action="" method="post">
 <div class="profile_update__top">
-    <img class="profile_update__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png">
+    <div style="background-image: url({{user.avatar.url}});" class="profile_update__image"></div>
     <img class="profile_update__imageupdate" src="https://www.vhv.rs/dpng/d/462-4623656_thumb-image-camera-icon-png-circle-transparent-png.png">
 </div>
 <div class="profile_update_midbox">

@@ -9,6 +9,9 @@
     height: 120px;
     border-radius: 50%;
     position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .profile_update__imageupdate{
     width: 40px;

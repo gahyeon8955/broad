@@ -15,6 +15,9 @@ def post_list(request):
     return render(request, "posts/post_list.html", {"all_posts":all_posts, "top3_posts":top3_posts})
 
 
+def post_my(request):
+    return render(request, "posts/my_post_list.html")
+  
 def post_detail(request, post_id):
     post_detail = get_object_or_404(post_models.Post, pk=post_id)
     return render(request, "posts/post_detail.html", {"post_detail":post_detail})

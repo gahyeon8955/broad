@@ -14,8 +14,24 @@
     <div class="login__midbox">
         <img class="login_logo" src="{% static 'core/img/login_logo.png' %}" alt="logo img">
         <form action="" method="post">
-            <input class="login_id_button" type="text" name="user_id" id="user_id" placeholder="아이디">
-            <input class="login_password_button" type="text" name="user_password" id="user_password" placeholder="비밀번호">
+            <!-- <input class="login_id_button" type="text" name="user_id" id="user_id" placeholder="아이디"> -->
+        <div class="login_id_button">  
+            {{form.username}}
+            {% if form.username.errors %}
+            {% for error in form.username.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+        </div> 
+            <!-- <input class="login_password_button" type="text" name="user_password" id="user_password" placeholder="비밀번호"> -->
+        <div class="login_password_button">     
+            {{form.password}}
+            {% if form.password.errors %}
+            {% for error in form.password.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+        </div>
             <div class="login_two_link_box">
                 <a href="#"><span class="password_change">비밀번호 변경</span></a>
                 <a href="#"><span class="guest_login">게스트 로그인</span></a>
@@ -36,9 +52,10 @@
         </a>
         <div class="signup_box">
             <span>계정이 없으신가요?</span>
-            <a href="#"><span class="signup_link">회원가입</span></a>
+            <a href="{% url 'users:signup' %}"><span class="signup_link">회원가입</span></a>
         </div>
     </div>
 </body>
 
 </html>
+

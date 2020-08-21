@@ -14,6 +14,7 @@
 
 
 {% block header %}
+{{user.avatar}}
 <div class="header__wrapper">
     <div class="header__leftbox">
         <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
@@ -30,10 +31,10 @@
 {% block content %}
 <div class="profile__top">
     <div class="myprofile">
-        <div class="profile__image"></div>
-        <div class="profile__nickname">닉네임</div>
+        <div style="background-image: url({{user.avatar.url}});" class="profile__image"></div>
+        <div class="profile__nickname">{{user.nickname}}</div>
     </div>
-    <div class="profile__edit">프로필 수정</div>
+    <a class="profile__edit" href="{% url 'users:profile_update' %}"><span>프로필 수정</span></a>
 </div>
 <div class=line></div>
 <div class="profile__middle">
@@ -41,7 +42,7 @@
     <div class="profile__post">
         <h1>게시판</h1>
         <h2>내가 쓴 글</h2>
-        <h2>댓글 단 댓글</h2>
+        <h2>댓글 단 글</h2>
         <h2>찜한 게시글</h2>
     </div>
 </div>
