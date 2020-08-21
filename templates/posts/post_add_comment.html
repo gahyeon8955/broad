@@ -19,7 +19,7 @@
         <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
     </div>
     <div class="header__midbox">
-        <span class="header__title">글쓰기</span>
+        <span class="header__title">댓글쓰기</span>
     </div>
     <div class="header__rightbox"></div>
 </div>
@@ -27,12 +27,9 @@
 
 
 {% block content %}
-<form method="POST" class="post-form" enctype="multipart/form-data" action="{% url 'posts:write' %}">
+<form method="POST" class="post-form" enctype="multipart/form-data">
     
 {% csrf_token %}
-<div class="post_write_title">제목</div>
-<div class="post_write_title_box">{{ form.title }}</div>
-<div class="post_write_contents">내용</div>
 <div class="post_write_contents_box">{{ form.body }}</div>
 {{ form.user }}
 <!-- 글쓰기 이미지추가&등록 박스 -->

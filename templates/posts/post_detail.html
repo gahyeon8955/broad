@@ -22,7 +22,7 @@
         <span class="header__title">빵 커뮤니티</span>
     </div>
     <div class="header__rightbox">
-        <img class="post_icon" src="{% static  'posts/img/menu.png' %}">
+        <!-- <img class="post_icon" src="{% static  'posts/img/menu.png' %}"> -->
     </div>
 </div>
 {% endblock header %}
@@ -32,12 +32,12 @@
 <div class="post_detail_allbox">
     <!-- 게시물 정보 및 유저 정보 박스 -->
     <div class="post_user_information">
-        <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
+        <div style="background-image:url({{post_detail.user.avatar.url}})" class="post_detail_profile_img"></div>
         <span class="post_user_information_smallbox">
-            <span class="post_user_nickname">닉네임</span>
+            <span class="post_user_nickname">{{post_detail.user}}</span>
             <span class="post_time_pageview">
-                <span class="post_detail_time">2020.08.16 21:23</span>
-                <span class="post_detail_pageview">조회 7</span>
+                <span class="post_detail_time">{{post_detail.created_date|date:"Y.m.d f"}}</span>
+                <span class="post_detail_pageview">조회 {{post_detail.views}}</span>
             </span>
         </span>
     </div>
@@ -45,68 +45,72 @@
     <!-- 게시물 내용 박스 -->
     <div class="post_detail_contents_box">
         <div class="post_detail_title_scrap">
-            <span class="post_detail_title">진주 빵집 순위</span>
+            <span class="post_detail_title">{{post_detail.title}}</span>
             <span class="post_detail_scrap">
                 <img src="{% static 'posts/img/star.png' %}">
                 <span class="post_detail_scrap_text">스크랩</span>
             </span>
         </div>
-        <div class="post_detail_contents">베이커리 925 맛있다</div>
-    </div>
+        <div class="post_detail_contents">{{post_detail.body}}</div>
+        <div classs="post_detail_photo">
+            {% if post_detail.photo %}
+            <img src="{{post_detail.photo.url}}" style="width:280px" alt="detail_img">
+            {% endif %}
+        </div>
+        <!-- 수정삭제 -->
+        <div class="post_detail_ud_box">
+            {% if comment.author == user or request.user.is_staff %}
+            <a href="{% url 'posts:update' post_detail.id %}">
+                <input class="post_detail_update_delete" type="button" value="수정">
+            </a>
+            <a href="{% url 'posts:delete' post_detail.id %}">
+                <input class="post_detail_update_delete" type="button" value="삭제">
+            </a>
+            {% endif %}
+        </div>
+
+
+        <div>
+            <!-- 댓글 상단 박스 -->
+            <div class="post_detail_comment_top_box">
+                <span class="post_detail_comment_top">댓글</span>
+                <span class="post_detail_comment_count">{{post.comments_count}}</span>
+                <span class="post_detail_add_comment">
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-default" href="{% url 'posts:add_comment_to_post' post_detail.id %}">댓글 작성하기</a>
+                    {% else %}
+                    <p>로그인 후에 리뷰작성이 가능합니다.</p>
+                    {% endif %}
+                </span>
+            </div>
     
-    <!-- 댓글 상단 박스 -->
-    <div class="post_detail_comment_top_box">
-        <span class="post_detail_comment_top">댓글</span>
-        <span class="post_detail_comment_count">1개</span>
-    </div>
-
-    <!-- 댓글 박스 -->
-    <div class="post_detail_comment_box">
-        <div class="post_detail_comment_smallbox">
-            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
-            <span class="post_detail_comment_information">
-                <div class="post_detail_comment_nickname_time">
-                    <span class="post_detail_comment_nickname">닉네임</span>
-                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
+            <!-- 댓글 박스 -->
+            {% for comment in post_detail.comments.all %}
+            <div class="post_detail_comment_box">
+                <div class="post_detail_comment_smallbox">
+                    <span style="background-image:url({{post_detail.user.avatar.url}})"
+                        class="post_detail_profile_img"></span>
+                    <span class="post_detail_comment_information">
+                        <div class="post_detail_comment_nickname_time">
+                            <span class="post_detail_comment_nickname">{{comment.user}}</span>
+                            <span class="post_detail_comment_time">{{comment.created_date|date:"Y.m.d f"}}</span>
+                            {% if comment.author == user or request.user.is_staff %}
+                            <a class="post_detail_comment_delete"
+                                href="{% url 'posts:comment_delete' post_detail.id comment.id %}"><img
+                                    src="{% static 'posts/img/trash.png' %}"></a>
+                            {% endif %}
+                        </div>
+                        <div class="post_detail_comment_contents">{{comment.body}}</div>
+                    </span>
                 </div>
-                <div class="post_detail_comment_contents">맞아요 맛있어요</div>
-            </span>
-        </div>
-        <div class="post_detail_leave_a_comment">답글 쓰기</div>
-    </div>
-    <div class="post_detail_comment_box">
-        <div class="post_detail_comment_smallbox">
-            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
-            <span class="post_detail_comment_information">
-                <div class="post_detail_comment_nickname_time">
-                    <span class="post_detail_comment_nickname">닉네임</span>
-                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
-                    <span class="post_detail_comment_delete"><img src="{% static 'posts/img/trash.png' %}"></span>
-                </div>
-                <div class="post_detail_comment_contents">진짜 맛있어요!</div>
-            </span>
-        </div>
-        <div class="post_detail_leave_a_comment">답글 쓰기</div>
-    </div>
-    <div class="post_detail_comment_box">
-        <div class="post_detail_comment_smallbox">
-            <span class="post_detail_comment_reply_arrow"><img src="{% static 'posts/img/arrow.png' %}"></span>
-            <span class="post_detail_profile_img"><img src="{% static 'posts/img/user.png' %}"></span>
-            <span class="post_detail_comment_information">
-                <div class="post_detail_comment_nickname_time">
-                    <span class="post_detail_comment_nickname">닉네임</span>
-                    <span class="post_detail_comment_time">2020.08.16 1:40</span>
-                </div>
-                <div class="post_detail_comment_contents">진짜 맛있어요!</div>
-            </span>
+                <div class="post_detail_leave_a_comment">답글 쓰기</div>
+            </div>
+            {% empty %}
+            <p> </p>
+            {% endfor %}
         </div>
     </div>
 
-</div>
-
-<!-- 댓글 작성 박스 -->
-<div class="post_detail_comment_input_box">
-    <input class="post_detail_comment_input" type="text" placeholder="댓글을 입력하세요.">
-    <input class="post_detail_comment_submit" type="submit" value="등록">
+    
 </div>
 {% endblock content %}
