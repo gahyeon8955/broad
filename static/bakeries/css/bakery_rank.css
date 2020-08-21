@@ -19,6 +19,11 @@
   background-position: center;
   background-repeat: none;
   background-size: cover;
+  opacity: 0.3;
+}
+
+.opacity_1 {
+  opacity: 1;
 }
 
 .menu_1 {

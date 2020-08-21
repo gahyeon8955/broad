@@ -3,6 +3,8 @@ from django.utils import timezone
 from users import models as user_models
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
+import os
+import random
 
 # Create your models here.
 

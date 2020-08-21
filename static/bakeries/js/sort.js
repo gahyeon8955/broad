@@ -1,4 +1,8 @@
 const listElement = document.querySelector(".list");
+const soboro = document.querySelector(".jsSoboro");
+const rollcake = document.querySelector(".jsRollcake");
+const makarong = document.querySelector(".jsMakarong");
+const cookie = document.querySelector(".jsCookie");
 let pickedData;
 
 const listInfoHTML = (
@@ -60,12 +64,40 @@ const clickCategory = async (bread) => {
   let eng_bread;
   if (bread === "소보로빵") {
     eng_bread = "soboro";
+    if (soboro.classList.contains("opacity_1")) {
+    } else {
+      rollcake.classList.remove("opacity_1");
+      makarong.classList.remove("opacity_1");
+      cookie.classList.remove("opacity_1");
+      soboro.classList.add("opacity_1");
+    }
   } else if (bread === "롤케이크") {
     eng_bread = "rollcake";
+    if (rollcake.classList.contains("opacity_1")) {
+    } else {
+      soboro.classList.remove("opacity_1");
+      makarong.classList.remove("opacity_1");
+      cookie.classList.remove("opacity_1");
+      rollcake.classList.add("opacity_1");
+    }
   } else if (bread === "마카롱") {
     eng_bread = "makarong";
+    if (makarong.classList.contains("opacity_1")) {
+    } else {
+      rollcake.classList.remove("opacity_1");
+      soboro.classList.remove("opacity_1");
+      cookie.classList.remove("opacity_1");
+      makarong.classList.add("opacity_1");
+    }
   } else if (bread === "쿠키") {
     eng_bread = "cookie";
+    if (cookie.classList.contains("opacity_1")) {
+    } else {
+      rollcake.classList.remove("opacity_1");
+      makarong.classList.remove("opacity_1");
+      soboro.classList.remove("opacity_1");
+      cookie.classList.add("opacity_1");
+    }
   }
 
   try {
