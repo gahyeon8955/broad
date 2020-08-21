@@ -31,36 +31,24 @@
 <div class="review_write_box">
     <div class="review_left_box">
         <div class="bakery_review">리뷰</div>
-        <div class="bakery_review_count">210개</div>
+        <div class="bakery_review_count">{{bakery.review_count}}</div>
     </div>
     <div class="bakery_review_write">리뷰 작성하기</div>
 </div>
+{% for review in bakery.reviews.all %}
 <div class="bakery_review_detail">
     <div class="bakery_review_detail_topbox">
         <div class="bakery_review_left">
             <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
             <div class="bakery_review_id_box">
-                <div class="bakery_review_id">빵순이</div>
-                <div class="bakery_review_time">2020.8.9</div>
+                <div class="bakery_review_id">{{review.user}}</div>
+                <div class="bakery_review_time">{{review.created_date|date:"y.m.d"}}</div>
             </div>
-            <div class="bakery_review_star">4.0</div>
+            <div class="bakery_review_star">{{review.rating}}</div>
         </div>
         <img class="delete_trash_icon" src="{% static 'bakeries/img/trash.png' %}" alt="쓰레기통 아이콘">
     </div>
-    <div class="bakery_review_comment">맛있어요 대전 시내에 있어요</div>
+    <div class="bakery_review_comment">{{review.body}}</div>
 </div>
-<div class="bakery_review_detail">
-    <div class="bakery_review_detail_topbox">
-        <div class="bakery_review_left">
-            <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
-            <div class="bakery_review_id_box">
-                <div class="bakery_review_id">bakerylike123</div>
-                <div class="bakery_review_time">2020.8.9</div>
-            </div>
-            <div class="bakery_review_star">4.0</div>
-        </div>
-    </div>
-    <div class="bakery_review_comment">최고다</div>
-</div>
-
+{% endfor %}
 {% endblock content %}

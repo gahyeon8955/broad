@@ -3,6 +3,8 @@ from django.utils import timezone
 from users import models as user_models
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
+import os
+import random
 
 # Create your models here.
 
@@ -95,6 +97,8 @@ class Review(models.Model):
     user = models.ForeignKey(
         user_models.User, related_name="reviews", on_delete=models.CASCADE, null=True
     )  # 작성자
+
+
 
     def __str__(self):
         return f"{self.bakery} 리뷰 | {self.body}"
