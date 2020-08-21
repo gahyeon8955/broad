@@ -64,6 +64,11 @@
   padding: 10px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .top_name {
   width: 71px;
   height: 22px;
