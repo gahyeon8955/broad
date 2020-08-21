@@ -1,5 +1,7 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
+from django.core import serializers
+from django.http import Http404, HttpResponse
 from .forms import WriteReviewForm
 from . import models as bakery_models
 
@@ -13,6 +15,45 @@ def bakery_list(request):
 
 def bakery_detail(request):
     return render(request, "bakeries/bakery_detail.html")
+
+
+def get_sorted_data(bread):
+    soboro_object = bakery_models.Menu.objects.filter(name=bread)
+    # soboro_bakery = list(
+    #     map(lambda x: (x.bakery, x.bakery.total_rating()), soboro_object)
+    # )
+    soboro_bakery = []
+    for x in soboro_object:
+        x.bakery.temp_review_count = x.bakery.review_count()
+        x.bakery.temp_total_rating = x.bakery.total_rating()
+        x.bakery.save()
+        soboro_bakery.append((x.bakery, x.bakery.total_rating()))
+    soboro_bakery = sorted(soboro_bakery, key=lambda x: x[1], reverse=True)
+    return [i[0] for i in soboro_bakery]
+
+
+def soboro_sort_data(request):
+    data = serializers.serialize("json", get_sorted_data("소보로빵"))
+    response = HttpResponse(content=data)
+    return response
+
+
+def rollcake_sort_data(request):
+    data = serializers.serialize("json", get_sorted_data("롤케이크"))
+    response = HttpResponse(content=data)
+    return response
+
+
+def makarong_sort_data(request):
+    data = serializers.serialize("json", get_sorted_data("마카롱"))
+    response = HttpResponse(content=data)
+    return response
+
+
+def cookie_sort_data(request):
+    data = serializers.serialize("json", get_sorted_data("쿠키"))
+    response = HttpResponse(content=data)
+    return response
 
 
 def bakery_rank(request):

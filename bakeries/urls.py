@@ -8,6 +8,10 @@ urlpatterns = [
     path("list/", views.bakery_list, name="list"),
     # 프론트앤드 작업할때는 "1/"로 해놨지만, 나중에는 "<int:pk>/"로 변경예정"
     path("1/", views.bakery_detail, name="detail"),
+    path("soboro-data/", views.soboro_sort_data),
+    path("rollcake-data/", views.rollcake_sort_data),
+    path("makarong-data/", views.makarong_sort_data),
+    path("cookie-data/", views.cookie_sort_data),
     path("rank/", views.bakery_rank, name="rank"),
     # 나중에 데이터 갖고 작업할시에, <int:pk> 붙여서 유저별 좋아요리스트 구분해주자
     path("like/", views.bakery_like_list, name="like_list"),

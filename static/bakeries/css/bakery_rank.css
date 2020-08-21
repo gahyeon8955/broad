@@ -4,11 +4,15 @@
   padding-left: 10px;
 }
 
-.menu > a {
+.menu > div {
   display: block;
-  text-decoration-line: none;
-  color: black;
+  /* text-decoration-line: none; */
+  /* color: black; */
   margin-right: 15px;
+}
+
+.menu > div:hover{
+  cursor: pointer;
 }
 
 .menu__img {

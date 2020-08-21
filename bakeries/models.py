@@ -16,6 +16,8 @@ class Bakery(models.Model):
     open_time = models.TimeField(default="00:00:00.000000", blank=True)
     close_time = models.TimeField(default="00:00:00.000000", blank=True)
     phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
+    temp_review_count = models.IntegerField(default=0, null=True, blank=True)
+    temp_total_rating = models.IntegerField(default=0, null=True, blank=True)
     # like
 
     def business_hour(self):

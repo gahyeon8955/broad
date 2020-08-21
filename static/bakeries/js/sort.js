@@ -1,0 +1,82 @@
+const listElement = document.querySelector(".list");
+let pickedData;
+
+const listInfoHTML = (
+  index,
+  name,
+  subName,
+  address,
+  totalRating,
+  reviewCount
+) => {
+  return `
+<div class="list_store">
+  <div class="store_rank">${index}</div>
+  <div class="store_detail">
+      <div class="detail_top">
+          <span class="top_name">${name}</span>
+      </div>
+      <div class="detail_explain">${subName}</div>
+      <div class="detail_address">${address}</div>
+  </div>
+  <div class="store_review">
+      <div class="review_score">
+          <span class="score_star">★</span>
+          <span class="score_number">${totalRating}</span>
+      </div>
+      <div class="review_number">
+          <span class="review_count">리뷰 ${reviewCount}</span>
+      </div>
+  </div>
+</div>
+`;
+};
+
+const addInfo = (JSONData) => {
+  const listStoreElement = document.querySelectorAll(".list_store");
+  for (const i of listStoreElement) {
+    i.remove();
+  }
+  for (let i in JSONData) {
+    listElement.insertAdjacentHTML(
+      "beforeend",
+      listInfoHTML(
+        parseInt(i) + 1,
+        JSONData[i].fields.name,
+        JSONData[i].fields.sub_name,
+        JSONData[i].fields.address,
+        JSONData[i].fields.temp_total_rating,
+        JSONData[i].fields.temp_review_count
+      )
+    );
+  }
+};
+
+const clickCategory = async (bread) => {
+  let eng_bread;
+  if (bread === "소보로빵") {
+    eng_bread = "soboro";
+  } else if (bread === "롤케이크") {
+    eng_bread = "rollcake";
+  } else if (bread === "마카롱") {
+    eng_bread = "makarong";
+  } else if (bread === "쿠키") {
+    eng_bread = "cookie";
+  }
+
+  try {
+    const get = await $.getJSON(
+      `http://127.0.0.1:8000/bakery/${eng_bread}-data/`,
+      (data) => {
+        pickedData = data;
+      }
+    );
+    const setting = await addInfo(pickedData);
+  } catch {
+  } finally {
+  }
+};
+
+$.getJSON(`http://127.0.0.1:8000/bakery/soboro-data/`, (data) => {
+  addInfo(data);
+});
