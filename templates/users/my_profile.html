@@ -34,7 +34,7 @@
         <div style="background-image: url({{user.avatar.url}});" class="profile__image"></div>
         <div class="profile__nickname">{{user.nickname}}</div>
     </div>
-    <div class="profile__edit">프로필 수정</div>
+    <a class="profile__edit" href="{% url 'users:profile_update' %}"><span>프로필 수정</span></a>
 </div>
 <div class=line></div>
 <div class="profile__middle">

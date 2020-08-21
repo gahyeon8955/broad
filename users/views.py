@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import User
+from .forms import UpdateProfileForm
 
 # Create your views here.
 
@@ -20,4 +22,12 @@ def profile_view(request):
 
 
 def profile_update(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save()
+            return redirect('users:profile_update')
+    else:
+        form = UpdateProfileForm(instance=user)
     return render(request, "users/profile_update.html")
