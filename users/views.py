@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import User
 from .forms import UpdateProfileForm
+from django.contrib.auth import authenticate, login as auth_login,logout as auth_logout
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -10,7 +12,18 @@ def index(request):
 
 
 def login(request):
-    return render(request, "users/login.html")
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            auth_user = authenticate(request,username=username,password=password)
+            if auth_user is not None:
+                auth_login(request,auth_user)
+                return redirect('users/login.html')
+    else:
+        form = LoginForm()
+    return render(request, "users/login.html",{"form":form})
 
 
 def signup(request):
