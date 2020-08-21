@@ -104,15 +104,7 @@
   display: flex;
   justify-content: space-between;
 }
-.bakery_menu_detail2 {
-  width: 50%;
-  color: #383232;
-  font-size: 13px;
-  padding-left: 7px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
+
 .bakery_menu_name {
   min-width: 60px;
 }

@@ -1,8 +1,7 @@
 from django.db import models
 from users import models as user_models
 from bakeries import models as bakery_models
-import os
-import random
+import datetime, os, random
 
 # Post모델의 image필드(게시글에 들어갈 사진)의 경로설정 함수
 def photo_path(instance, filename):
@@ -39,7 +38,7 @@ class Comment(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     post = models.ForeignKey("Post", related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(
-        user_models.User, related_name="comments", on_delete=models.CASCADE
+        user_models.User, related_name="comments", on_delete=models.CASCADE,
     )
     target_comment = models.ForeignKey(
         "self",

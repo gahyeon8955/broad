@@ -22,7 +22,17 @@
     </div>
     <div class="header__rightbox">
         <img class="search_icon" src="{% static  'core/img/search.png' %}" alt="search icon">
-        <img class="post_icon" src="{% static  'core/img/post.png' %}" alt="post icon">
+        {% if user.is_authenticated %}
+        <a href="{% url 'posts:write' %}"><img class="post_icon" src="{% static  'core/img/post.png' %}"
+                alt="post icon"></a>
+        {% else %}
+        <img class="post_icon" src="{% static  'core/img/post.png' %}" alt="post icon" onclick="button1_click();">
+        <script>
+            function button1_click() {
+                alert("로그인이 필요합니다.");
+            }
+        </script>
+        {% endif %}
     </div>
 </div>
 {% endblock header %}
@@ -33,18 +43,13 @@
     <!-- hot 게시물 박스 -->
     <div class="hot_post_box">
         <div class="hot_post_box_title">HOT 게시물</div>
-        <div class="hot_post_list">
-            <span class="hot_post_list_title">진주 빵집 추천</span>
-            <span class="hot_post_list_page_view">조회 97</span>
-        </div>
-        <div class="hot_post_list">
-            <span class="hot_post_list_title">빵 맛있게 먹는 법</span>
-            <span class="hot_post_list_page_view">조회 63</span>
-        </div>
-        <div class="hot_post_list">
-            <span class="hot_post_list_title">소보로 맛집</span>
-            <span class="hot_post_list_page_view">조회 40</span>
-        </div>
+            {% for top_post in top3_posts %}
+            <div class="hot_post_list">
+                <span class="hot_post_list_title">{{top_post.title}}</span>
+                <span class="hot_post_list_page_view">조회 {{top_post.views}}</span>
+            </div>
+            {% endfor %}
+
     </div>
     <!-- 인기순/최신순 박스 -->
     <div class="post_list_popular_latest">
@@ -53,49 +58,25 @@
     </div>
     <!-- 게시물 리스트 박스 -->
     <div class="post_list_box">
-        <div class="user_post_box">
-            <span class="user_post_information">
-                <div class="user_post_title">진주 빵집 추천</div>
-                <div class="user_post_title_underbox">
-                    <span>닉네임</span>
-                    <span>오늘</span>
-                    <span>조회 15</span>
-                </div>
-            </span>
-            <span class="user_post_comment">
-                <img src="{% static 'posts/img/comment.png' %}">
-                <div>7</div>
-            </span>
-        </div>
-        <div class="user_post_box">
-            <span class="user_post_information">
-                <div class="user_post_title">빵집 블랙리스트 모음</div>
-                <div class="user_post_title_underbox">
-                    <span>닉네임</span>
-                    <span>오늘</span>
-                    <span>조회 15</span>
-                </div>
-            </span>
-            <span class="user_post_comment">
-                <img src="{% static 'posts/img/comment.png' %}">
-                <div>12</div>
-            </span>
-        </div>
-        <div class="user_post_box">
-            <span class="user_post_information">
-                <div class="user_post_title">요즘 빵집</div>
-                <div class="user_post_title_underbox">
-                    <span>닉네임</span>
-                    <span>오늘</span>
-                    <span>조회 15</span>
-                </div>
-            </span>
-            <span class="user_post_comment">
-                <img src="{% static 'posts/img/comment.png' %}">
-                <div>11</div>
-            </span>
-        </div>
-        
+        {% for post in all_posts %}
+        <a href="{% url 'posts:detail' post.id %}">
+            <div class="user_post_box">
+                <span class="user_post_information">
+                    <div class="user_post_title">{{post.title}}</div>
+                    <div class="user_post_title_underbox">
+                        <span>{{post.user}}</span>
+                        <span>{{post.created_date|date:"Y.m.d f"}}</span>
+                        <span>{{post.views}}</span>
+                    </div>
+                </span>
+                <span class="user_post_comment">
+                    <img src="{% static 'posts/img/comment.png' %}">
+                    <div>{{post.comments.count}}</div>
+                </span>
+            </div>
+        </a>
+        {% endfor %}
+
     </div>
 </div>
 {% endblock content %}
