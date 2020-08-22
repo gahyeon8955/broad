@@ -18,6 +18,8 @@ class Bakery(models.Model):
     open_time = models.TimeField(default="00:00:00.000000", blank=True)
     close_time = models.TimeField(default="00:00:00.000000", blank=True)
     phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
+    temp_review_count = models.IntegerField(default=0, null=True, blank=True)
+    temp_total_rating = models.IntegerField(default=0, null=True, blank=True)
     # like
 
     def business_hour(self):
@@ -88,7 +90,7 @@ class Review(models.Model):
         (5, "★★★★★"),
     )
 
-    body = models.CharField(max_length=300)  # 리뷰 내용
+    body = models.TextField()  # 리뷰 내용
     rating = models.IntegerField(choices=RATING, default=5)  # 평점
     created_date = models.DateTimeField(auto_now=True)  # 작성 시간
     bakery = models.ForeignKey(
