@@ -31,12 +31,12 @@ def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
+            username = email
+            nickname = form.cleaned_data.get("nickname")
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(
-                username=username, email=email, password=password
+                username=username, nickname=nickname, email=email, password=password
             )
             auth_user = authenticate(request, username=username, password=password)
             if auth_user is not None:

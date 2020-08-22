@@ -34,51 +34,44 @@
         <div class="signup_sectionbox">
             <label for="user_email" class="signup_label">브로드 계정</label>
             <!-- <input class="signup_input" type="email" name="user_email" id="user_email" placeholder="@example.com"> -->
-            <div class="signup_input">
-                {{form.email}}
-                {% if form.email.errors %}
-                {% for error in form.email.errors  %}
-                {{error}}
-                {% endfor %}
-                {% endif %}
-            </div>
+            {{form.email}}
+            {% if form.email.errors %}
+            {% for error in form.email.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="signup_sectionbox">
             <label for="user_nickname" class="signup_label">닉네임<strong>(선택)</strong></label>
             <!-- <input class="signup_input" type="text" name="user_nickname" id="user_nickname" placeholder="선택입력"> -->
-            <div class="signup_input">
-                {{form.username}}
-                {% if form.username.errors %}
-                {% for error in form.username.errors  %}
-                {{error}}
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="signup_sectionbox">
-                <label for="user_password" class="signup_label">비밀번호</label>
-                <!-- <input class="signup_input" type="password" name="user_password" id="user_password"
-                placeholder="비밀번호(8~32자리)"> -->
-                <div class="signup_input">
-                    {{form.password}}
-                    {% if form.password.errors %}
-                    {% for error in form.password.errors  %}
-                    {{error}}
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <!-- <input class="signup_input" type="password" name="user_confirm_password" id="user_confirm_password"
-                placeholder="비밀번호 재입력"> -->
-                <div class="signup_input">
-                    {{form.confirm_password}}
-                    {% if form.confirm_password.errors %}
-                    {% for error in form.confirm_password.errors  %}
-                    {{error}}
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-            <input class="signup_button" type="submit" value="회원가입">
+            {{form.nickname}}
+            {% if form.nickname.errors %}
+            {% for error in form.nickname.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
         </div>
+        <div class="signup_sectionbox">
+            <label for="user_password" class="signup_label">비밀번호</label>
+            <!-- <input class="signup_input" type="password" name="user_password" id="user_password"
+                placeholder="비밀번호(8~32자리)"> -->
+            {{form.password}}
+            {% if form.password.errors %}
+            {% for error in form.password.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+            <!-- <input class="signup_input" type="password" name="user_confirm_password" id="user_confirm_password"
+                placeholder="비밀번호 재입력"> -->
+            {{form.confirm_password}}
+            {% if form.confirm_password.errors %}
+            {% for error in form.confirm_password.errors  %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <input class="signup_button" type="submit" value="회원가입">
+    </div>
 </form>
 {% endblock content %}
 

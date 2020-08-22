@@ -10,8 +10,16 @@ class UpdateProfileForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput(attrs={}))
+    username = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={"class": "login_id_button", "placeholder": "이메일"}
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "login_password_button", "placeholder": "비밀번호"}
+        )
+    )
 
     def clean(self):
         username = self.cleaned_data.get("username")
@@ -29,11 +37,27 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ["username", "email"]
+        fields = ["email", "nickname"]
+        widgets = {
+            "email": forms.EmailInput(
+                attrs={"class": "signup_input", "placeholder": "@example.com"}
+            ),
+            "nickname": forms.TextInput(
+                attrs={"class": "signup_input", "placeholder": "선택입력"}
+            ),
+        }
 
-    password = forms.CharField(widget=forms.PasswordInput(attrs={}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "signup_input", "placeholder": "비밀번호"}
+        )
+    )
 
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={}))
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "signup_input", "placeholder": "비밀번호 재입력"}
+        )
+    )
 
     def clean_confirm_password(self):
         password = self.cleaned_data.get("password")
