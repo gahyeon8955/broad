@@ -23,11 +23,11 @@
 </div>
 <div class="list">
     {% for bakery in all_bakeries %}
-    <div class="list_store">
+    <a href="{% url 'bakeries:detail' bakery.id %}" class="list_store">
         <div class="store_rank">{{forloop.counter}} </div>
         <div class="store_detail">
             <div class="detail_top">
-                <a href="{% url 'bakeries:detail' bakery.id %}"><span class="top_name">{{bakery.name}}</span></a>
+                <span class="top_name">{{bakery.name}}</span>
                 <span class="top_collect">찜 100+</span>
             </div>
             <div class="detail_explain">{{bakery.sub_name}}</div>
@@ -42,8 +42,8 @@
                 <span class="review_count">리뷰 {{bakery.review_count}}</span>
             </div>
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
-        
+
 {% endblock content %}

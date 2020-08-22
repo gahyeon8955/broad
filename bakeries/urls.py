@@ -12,6 +12,6 @@ urlpatterns = [
     # 나중에 데이터 갖고 작업할시에, <int:pk> 붙여서 유저별 좋아요리스트 구분해주자
     path("like/", views.bakery_like_list, name="like_list"),
     # 프론트앤드 작업할때는 "1/reviews/"로 해놨지만, 나중에는 "<int:pk>/reviews/"로 변경예정"
-    path("1/reviews/", views.bakery_review_list, name="review_list"),
-    path("7/reviews/", views.user_review_list, name="user_review_list"),
+    path("<int:bakery_id>/reviews/", views.bakery_review_list, name="review_list"),
+    path("my/reviews/", views.user_review_list, name="user_review_list"),
 ]

@@ -43,12 +43,12 @@
     <!-- hot 게시물 박스 -->
     <div class="hot_post_box">
         <div class="hot_post_box_title">HOT 게시물</div>
-            {% for top_post in top3_posts %}
-            <div class="hot_post_list">
-                <span class="hot_post_list_title">{{top_post.title}}</span>
-                <span class="hot_post_list_page_view">조회 {{top_post.views}}</span>
-            </div>
-            {% endfor %}
+        {% for top_post in top3_posts %}
+        <a href="{% url 'posts:detail' top_post.id %}" class="hot_post_list">
+            <span class="hot_post_list_title">{{top_post.title}}</span>
+            <span class="hot_post_list_page_view">조회 {{top_post.views}}</span>
+        </a>
+        {% endfor %}
 
     </div>
     <!-- 인기순/최신순 박스 -->

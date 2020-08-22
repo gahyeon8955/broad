@@ -14,7 +14,6 @@
 
 
 {% block header %}
-{{user.avatar}}
 <div class="header__wrapper">
     <div class="header__leftbox">
         <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
@@ -38,12 +37,13 @@
 </div>
 <div class=line></div>
 <div class="profile__middle">
-    <div class="profile__review">작성한 리뷰</div>
+    <a href="{% url 'bakeries:user_review_list' %}" class="profile__review"><img
+            src="{% static 'users/img/write.png' %}">작성한 리뷰</a>
     <div class="profile__post">
         <h1>게시판</h1>
-        <h2>내가 쓴 글</h2>
-        <h2>댓글 단 글</h2>
-        <h2>찜한 게시글</h2>
+        <h2><a href="{% url 'posts:my' %}">내가 쓴 글</a></h2>
+        <h2><a href="#">댓글 단 글</a></h2>
+        <h2><a href="#">찜한 게시글</a></h2>
     </div>
 </div>
 <div class="profile__bottom">
