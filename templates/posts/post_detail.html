@@ -34,7 +34,7 @@
     <div class="post_user_information">
         <div style="background-image:url({{post_detail.user.avatar.url}})" class="post_detail_profile_img"></div>
         <span class="post_user_information_smallbox">
-            <span class="post_user_nickname">{{post_detail.user}}</span>
+            <span class="post_user_nickname">{{post_detail.user.nickname}}</span>
             <span class="post_time_pageview">
                 <span class="post_detail_time">{{post_detail.created_date|date:"Y.m.d f"}}</span>
                 <span class="post_detail_pageview">조회 {{post_detail.views}}</span>
@@ -83,7 +83,7 @@
                     {% endif %}
                 </span>
             </div>
-    
+
             <!-- 댓글 박스 -->
             {% for comment in post_detail.comments.all %}
             <div class="post_detail_comment_box">
@@ -111,6 +111,6 @@
         </div>
     </div>
 
-    
+
 </div>
 {% endblock content %}

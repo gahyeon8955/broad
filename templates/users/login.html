@@ -32,7 +32,7 @@
             {% endif %}
             <div class="login_two_link_box">
                 <a href="#"><span class="password_change">비밀번호 변경</span></a>
-                <a href="#"><span class="guest_login">게스트 로그인</span></a>
+                <a href="{% url 'map:main_map' %}"><span class="guest_login">게스트 로그인</span></a>
             </div>
             <input class="login_button" type="submit" value="로그인">
         </form>

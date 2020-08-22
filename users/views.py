@@ -13,6 +13,8 @@ def index(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect("map:main_map")
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -39,6 +41,8 @@ def signup(request):
             email = form.cleaned_data.get("email")
             username = email
             nickname = form.cleaned_data.get("nickname")
+            if nickname is None:
+                nickname = email.split("@")[0]
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(
                 username=username, nickname=nickname, email=email, password=password
@@ -66,6 +70,8 @@ def profile_update(request):
             username = request.user.username
             user = form.save(commit=False)
             user.nickname = form.cleaned_data.get("nickname")
+            if form.cleaned_data.get("nickname") is None:
+                user.nickname = request.user.email.split("@")[0]
             user.set_password(form.cleaned_data.get("password"))
             user.save()
             auth_user = authenticate(

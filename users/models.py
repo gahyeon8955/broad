@@ -20,7 +20,7 @@ def photo_path(instance, filename):
 
 
 class User(AbstractUser):
-    nickname = models.CharField(max_length=10,default='')
+    nickname = models.CharField(max_length=10, default="", null=True, blank=True)
     avatar = models.ImageField(
         upload_to=photo_path, default="user/avatar/avatar_default.png"
     )
