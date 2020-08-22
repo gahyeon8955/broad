@@ -115,5 +115,8 @@ a {
 }
 .profile__logout {
   text-align: center;
+}
+
+.profile__logout > a {
   color: red;
 }

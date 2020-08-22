@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .models import User
 from .forms import UpdateProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
@@ -27,6 +27,11 @@ def login(request):
     return render(request, "users/login.html", {"form": form})
 
 
+def logout(request):
+    auth_logout(request)
+    return redirect("users:login")
+
+
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -48,6 +53,8 @@ def signup(request):
 
 
 def profile_view(request):
+    if request.user.is_anonymous:
+        return redirect("users:login")
     return render(request, "users/my_profile.html")
 
 
@@ -56,8 +63,16 @@ def profile_update(request):
     if request.method == "POST":
         form = UpdateProfileForm(request.POST, instance=user)
         if form.is_valid():
-            user = form.save()
-            return redirect("users:profile")
+            username = request.user.username
+            user = form.save(commit=False)
+            user.nickname = form.cleaned_data.get("nickname")
+            user.set_password(form.cleaned_data.get("password"))
+            user.save()
+            auth_user = authenticate(
+                request, username=username, password=form.cleaned_data.get("password")
+            )
+            auth_login(request, auth_user)
+            return redirect(reverse("users:profile"))
     else:
         form = UpdateProfileForm(instance=user)
     return render(request, "users/profile_update.html", {"form": form})

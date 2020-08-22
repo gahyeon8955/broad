@@ -47,7 +47,7 @@
     </div>
 </div>
 <div class="profile__bottom">
-    <hr style="width:80%; color:gray">
-    <div class="profile__logout">로그아웃</div>
+    <hr style="width:80%; height: 1px; border:none;border-top: 1px solid #cfcfcf;">
+    <div class="profile__logout"><a href="{% url 'users:logout' %}">로그아웃</a></div>
 </div>
 {% endblock content %}

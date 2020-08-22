@@ -11,5 +11,6 @@ urlpatterns = [
     path("user/profile-update/", views.profile_update, name="profile_update"),
     # 현재는 "login/"이지만, 나중에 배포할때는 ""로 해서 가장 첫화면을 로그인화면으로 사용할것임
     path("login/", views.login, name="login"),
+    path("logout/", views.logout, name="logout"),
     path("signup/", views.signup, name="signup"),
 ]

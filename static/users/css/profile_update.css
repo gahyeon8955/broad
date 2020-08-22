@@ -65,10 +65,32 @@
   font-size: 12px;
 }
 
+div.profile_update_input {
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+}
+
 .profile_update_input::placeholder {
   color: #c0c0c0;
 }
 
 .profile_update_input:focus {
   outline: none;
+}
+
+.signup_button {
+  width: 280px;
+  height: 55px;
+  border-radius: 8px;
+  border: none;
+  background-color: #727272;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: "NanumSquare", sans-serif;
+}
+
+.signup_button:hover {
+  cursor: pointer;
 }

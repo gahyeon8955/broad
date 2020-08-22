@@ -6,7 +6,32 @@ from django.contrib.auth import get_user_model
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ["email", "username", "password"]
+        fields = ["nickname"]
+        widgets = {
+            "nickname": forms.TextInput(
+                attrs={"class": "profile_update_input", "placeholder": "선택입력"}
+            ),
+        }
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "profile_update_input", "placeholder": "비밀번호"}
+        )
+    )
+
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class": "profile_update_input", "placeholder": "비밀번호 재입력"}
+        )
+    )
+
+    def clean_confirm_password(self):
+        password = self.cleaned_data.get("password")
+        confirm_password = self.cleaned_data.get("confirm_password")
+        if password != confirm_password:
+            raise forms.ValidationError("비밀번호가 일치하지 않습니다")
+        else:
+            return password
 
 
 class LoginForm(forms.Form):
