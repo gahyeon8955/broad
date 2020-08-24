@@ -2,6 +2,7 @@
 import urllib.request
 import time
 import os
+import random
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -146,13 +147,19 @@ def add_data(local):
                     )
                     urls.append(real_link.get_attribute("src"))
                 time.sleep(3)
+                chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                random_names = []
+                for name in range(len(urls)):
+                    random_names.append(
+                        "".join((random.choice(chars)) for x in range(10))
+                    )
                 for index, url in enumerate(urls):
                     # urlretrieve는 다운로드 함수
                     urllib.request.urlretrieve(
                         url,
                         os.path.join(
                             BASE_DIR,
-                            f"uploads/bakery/bread_imgs/{name_text}{index}.jpg",
+                            f"uploads/bakery/bread_imgs/{random_names[index]}.jpg",
                         ),
                     )
             except:
@@ -215,10 +222,11 @@ def add_data(local):
             for index, url in enumerate(urls):
                 img = models.Photo()
                 img.bakery = models.Bakery.objects.get(name=name_text)
-                img.photo = f"bakery/bread_imgs/{name_text}{index}.jpg"
+                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
                 img.save()
 
             urls = []
+            random_names = []
             driver.close()
             driver.switch_to_window(driver.window_handles[0])
         except NoSuchElementException:
@@ -347,13 +355,19 @@ def add_data(local):
                     )
                     urls.append(real_link.get_attribute("src"))
                 time.sleep(3)
+                chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                random_names = []
+                for name in range(len(urls)):
+                    random_names.append(
+                        "".join((random.choice(chars)) for x in range(10))
+                    )
                 for index, url in enumerate(urls):
                     # urlretrieve는 다운로드 함수
                     urllib.request.urlretrieve(
                         url,
                         os.path.join(
                             BASE_DIR,
-                            f"uploads/bakery/bread_imgs/{name_text}{index}.jpg",
+                            f"uploads/bakery/bread_imgs/{random_names[index]}.jpg",
                         ),
                     )
             except:
@@ -413,7 +427,14 @@ def add_data(local):
                 phone_number=phone_text,
                 business_hour=business_hours_text,
             )
+            for index, url in enumerate(urls):
+                img = models.Photo()
+                img.bakery = models.Bakery.objects.get(name=name_text)
+                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
+                img.save()
+
             urls = []
+            random_names = []
             driver.close()
             driver.switch_to_window(driver.window_handles[0])
         except NoSuchElementException:
@@ -542,13 +563,19 @@ def add_data(local):
                     )
                     urls.append(real_link.get_attribute("src"))
                 time.sleep(3)
+                chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                random_names = []
+                for name in range(len(urls)):
+                    random_names.append(
+                        "".join((random.choice(chars)) for x in range(10))
+                    )
                 for index, url in enumerate(urls):
                     # urlretrieve는 다운로드 함수
                     urllib.request.urlretrieve(
                         url,
                         os.path.join(
                             BASE_DIR,
-                            f"uploads/bakery/bread_imgs/{name_text}{index}.jpg",
+                            f"uploads/bakery/bread_imgs/{random_names[index]}.jpg",
                         ),
                     )
             except:
@@ -608,8 +635,14 @@ def add_data(local):
                 phone_number=phone_text,
                 business_hour=business_hours_text,
             )
+            for index, url in enumerate(urls):
+                img = models.Photo()
+                img.bakery = models.Bakery.objects.get(name=name_text)
+                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
+                img.save()
 
             urls = []
+            random_names = []
             driver.close()
             driver.switch_to_window(driver.window_handles[0])
         except NoSuchElementException:

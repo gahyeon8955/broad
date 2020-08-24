@@ -38,6 +38,8 @@ class Bakery(models.Model):
         upload_to="logo_photo_path", default="bakery/image/logo_default.png"
     )
     # like
+    # 지역(서울/부산/경남/경북/충남 등)
+    # 도시(진주/울산/전주/의정부 등)
 
     def review_count(self):
         count = self.reviews.all().count()
