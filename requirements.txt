@@ -1,7 +1,9 @@
 appdirs==1.4.4
 asgiref==3.2.10
 attrs==19.3.0
+beautifulsoup4==4.9.1
 black==19.10b0
+bs4==0.0.1
 click==7.1.2
 Django==3.1
 django-phonenumber-field==5.0.0
@@ -10,6 +12,9 @@ phonenumbers==8.12.8
 Pillow==7.2.0
 pytz==2020.1
 regex==2020.7.14
+selenium==3.141.0
+soupsieve==2.0.1
 sqlparse==0.3.1
 toml==0.10.1
 typed-ast==1.4.1
+urllib3==1.25.10

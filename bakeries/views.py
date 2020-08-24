@@ -4,7 +4,7 @@ from django.core import serializers
 from django.http import Http404, HttpResponse
 from .forms import WriteReviewForm
 from . import models as bakery_models
-
+from .crawling import add_data
 
 # Create your views here.
 
