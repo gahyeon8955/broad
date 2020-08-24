@@ -92,7 +92,7 @@
                         class="post_detail_profile_img"></span>
                     <span class="post_detail_comment_information">
                         <div class="post_detail_comment_nickname_time">
-                            <span class="post_detail_comment_nickname">{{comment.user}}</span>
+                            <span class="post_detail_comment_nickname">{{comment.user.nickname}}</span>
                             <span class="post_detail_comment_time">{{comment.created_date|date:"Y.m.d f"}}</span>
                             {% if comment.author == user or request.user.is_staff %}
                             <a class="post_detail_comment_delete"

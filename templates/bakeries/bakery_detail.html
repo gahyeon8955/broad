@@ -74,7 +74,7 @@
                 <div class="bakery_review_detail_topbox">
                     <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
                     <div class="bakery_review_id_box">
-                        <div class="bakery_review_id">{{review.user}}</div>
+                        <div class="bakery_review_id">{{review.user.nickname}}</div>
                         <div class="bakery_review_time">{{review.created_date|date:"y.m.d"}}</div>
                     </div>
                     <div class="bakery_review_star">{{review.rating}}</div>
