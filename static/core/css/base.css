@@ -59,6 +59,10 @@ header {
   padding: 0 15px;
 }
 
+.left_arrow:hover {
+  cursor: pointer;
+}
+
 .header_blank {
   height: 85px;
 }

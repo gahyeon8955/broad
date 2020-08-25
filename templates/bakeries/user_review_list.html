@@ -16,7 +16,8 @@
 {% block header %}
 <div class="header__wrapper">
     <div class="header__leftbox">
-        <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
+        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+            alt="left_arrow icon">
     </div>
     <div class="header__midbox">
         <span class="header__title">작성한 리뷰</span>

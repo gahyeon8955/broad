@@ -179,3 +179,4 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # User 모델 커스터마이징
 AUTH_USER_MODEL = "users.User"
+

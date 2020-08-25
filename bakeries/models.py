@@ -30,7 +30,7 @@ class Bakery(models.Model):
     lat = models.FloatField(default=0, blank=True)  # 위도
     lng = models.FloatField(default=0, blank=True)  # 경도
     address = models.CharField(max_length=150, default="", blank=True)  # 주소
-    phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
+    phone_number = models.CharField(max_length=30, default="", blank=True)  # 전화번호
     business_hour = models.CharField(max_length=100, default="", blank=True)
     temp_review_count = models.IntegerField(default=0, blank=True)
     temp_total_rating = models.IntegerField(default=0, blank=True)

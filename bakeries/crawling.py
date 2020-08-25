@@ -63,7 +63,7 @@ def add_data(local):
                 phone = driver.find_element_by_css_selector(
                     "#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default.placeinfo_contact > div > div > span > span.txt_contact"
                 )
-                phone_text = phone.text.replace("-", "")
+                phone_text = phone.text
             except:
                 phone_text = ""
 
@@ -271,7 +271,7 @@ def add_data(local):
                 phone = driver.find_element_by_css_selector(
                     "#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default.placeinfo_contact > div > div > span > span.txt_contact"
                 )
-                phone_text = phone.text.replace("-", "")
+                phone_text = phone.text
             except:
                 phone_text = ""
 
@@ -479,7 +479,7 @@ def add_data(local):
                 phone = driver.find_element_by_css_selector(
                     "#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default.placeinfo_contact > div > div > span > span.txt_contact"
                 )
-                phone_text = phone.text.replace("-", "")
+                phone_text = phone.text
             except:
                 phone_text = ""
 
