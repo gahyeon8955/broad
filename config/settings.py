@@ -90,26 +90,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 """
 장고 기본 DB셋팅
 """
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 """
 AWS RDS 셋팅
 """
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": "realbroaddb.cmahcmtbzlbw.ap-northeast-2.rds.amazonaws.com",
-        "PORT": "5432",
-        "NAME": "broad",
-        "USER": "eunchae",
-        "PASSWORD": "ajttk8rl",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": "realbroaddb.cmahcmtbzlbw.ap-northeast-2.rds.amazonaws.com",
+#         "PORT": "5432",
+#         "NAME": "broad",
+#         "USER": "eunchae",
+#         "PASSWORD": "ajttk8rl",
+#     }
+# }
 
 
 # Password validation
