@@ -44,7 +44,7 @@ class Bakery(models.Model):
     # 도시(진주/울산/전주/의정부 등)
 
     def review_count(self):
-        return count
+        return self.reviews.all().count()
 
     def total_rating(self):
         all_reviews_rating_list = list(map(lambda x: x.rating, self.reviews.all()))
