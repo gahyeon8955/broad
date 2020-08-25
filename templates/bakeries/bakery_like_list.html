@@ -10,6 +10,7 @@
 <!-- 개별적인 css/link태그 추가 -->
 {% block css %}
 <link rel="stylesheet" href="{% static 'bakeries/css/bakery_like_list.css' %}">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 {% endblock css %}
 
 
@@ -27,93 +28,46 @@
 
 
 {% block content %}
+
+{% if user.like.all %}
 <div class="list">
-    <div class="list_store">
-        <img class="like_list_heart" src="{% static 'bakeries/img/heart.png' %}">
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">수복빵집</span>
-                <span class="top_collect">찜 100+</span>
+    {% for bakery in user.like.all %}
+    <div class="list_store" id={{bakery.id}}>
+        <div class="list__left">
+            <div class="heart_box">
+                <img onclick="clickLike(event)" class="like_list_heart jsLike"
+                    src="{% static 'bakeries/img/heart.png' %}">
             </div>
-            <div class="detail_explain">같은 단팥소스를 뿌려먹는 진주 명물 찐빵</div>
-            <div class="detail_address">경남 진주시 촉석로 201번길 12-1</div>
+            <a href="{% url 'bakeries:detail' bakery.id %}" class="store_detail">
+                <div class="detail_top">
+                    <span class="top_name">{{bakery.name}}</span>
+                </div>
+                <div class="detail_explain">{{bakery.sub_name}}</div>
+                <div class="detail_address">{{bakery.address}}</div>
+            </a>
         </div>
         <div class="store_review">
             <div class="review_score">
                 <span class="score_star">★</span>
-                <span class="score_number">4.5</span>
+                <span class="score_number">{{bakery.total_rating}}</span>
             </div>
-            <div class="review_count">리뷰 138</div>
+            <div class="review_count">리뷰 {{bakery.review_count}}</div>
         </div>
     </div>
-    <div class="list_store">
-        <img class="like_list_heart" src="{% static 'bakeries/img/heart.png' %}">
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">통영 오미사꿀빵</span>
-            </div>
-            <div class="detail_explain">통영에서 유명한 꿀빵</div>
-            <div class="detail_address">경남 통영시 오남로 110</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.49</span>
-            </div>
-            <div class="review_count">리뷰 346</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <img class="like_list_heart" src="{% static 'bakeries/img/heart.png' %}">
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">카페 헤이브</span>
-            </div>
-            <div class="detail_explain">갬성사진 찍기 좋은 내동 루프탑 카페</div>
-            <div class="detail_address">경남 김해시 내외로 77번길 12 경보스포렉스 17, 18층</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.27</span>
-            </div>
-            <div class="review_count">리뷰 210</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <img class="like_list_heart" src="{% static 'bakeries/img/heart.png' %}">
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">커피홀베이커리 삼천포점</span>
-            </div>
-            <div class="detail_explain">천국의 계단 있는 사진 명소 카페</div>
-            <div class="detail_address">경남 사천시 남양광포1길 16</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.3</span>
-            </div>
-            <div class="review_count">리뷰 103</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <img class="like_list_heart" src="{% static 'bakeries/img/heart.png' %}">
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">그린하우스제과</span>
-            </div>
-            <div class="detail_explain">창원 도계동 아주미들 사이 핫한 빵집</div>
-            <div class="detail_address">경남 창원시 의창구 원이대로 81번길 10</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.43</span>
-            </div>
-            <div class="review_count">리뷰 798</div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+{% else %}
+<div class="no_exist">
+    <span>찜한 가게가 없습니다!</span>
+</div>
+{% endif %}
+
 
 {% endblock content %}
+{% block script %}
+<script>
+    const csrf = "{{ csrf_token }}";
+    const ajaxLikeUrl = "{% url 'bakeries:ajax_like' %}";
+</script>
+<script src="{% static 'bakeries/js/like_list.js' %}"></script>
+{% endblock script %}

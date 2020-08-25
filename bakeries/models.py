@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.utils.html import mark_safe
 from users import models as user_models
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
@@ -48,7 +49,7 @@ class Bakery(models.Model):
         all_reviews_rating_list = list(map(lambda x: x.rating, self.reviews.all()))
         rating_sum = sum(all_reviews_rating_list)
         if rating_sum == 0:
-            return 0
+            return mark_safe("&nbsp;&nbsp;-")
         else:
             return round(rating_sum / len(all_reviews_rating_list), 1)
 
