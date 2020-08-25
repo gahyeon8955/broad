@@ -1,4 +1,5 @@
 import requests
+import random
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.conf import settings
@@ -119,12 +120,16 @@ def kakao_callback(request):
         properties = profile_json.get("properties")
         nickname = properties.get("nickname")
         email = f"{nickname}@KakaoLogin.com"
-        username = email
-        user = User.objects.create(
-            email=email, username=email, nickname=nickname, is_social_login=True
-        )
-        user.set_unusable_password()
-        user.save()
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+        username = "".join((random.choice(chars)) for x in range(10))
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            user = User.objects.create(
+                email=email, username=username, nickname=nickname, is_social_login=True
+            )
+            user.set_unusable_password()
+            user.save()
         # messages.success(request, f"환영합니다, {user.nickname}님!")
         auth_login(request, user)
         return redirect(reverse("map:main_map"))
