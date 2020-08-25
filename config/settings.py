@@ -87,10 +87,27 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+"""
+장고 기본 DB셋팅
+"""
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+"""
+AWS RDS 셋팅
+"""
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": "realbroaddb.cmahcmtbzlbw.ap-northeast-2.rds.amazonaws.com",
+        "PORT": "5432",
+        "NAME": "broad",
+        "USER": "eunchae",
+        "PASSWORD": "ajttk8rl",
     }
 }
 
