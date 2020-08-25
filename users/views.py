@@ -67,6 +67,13 @@ def profile_update(request):
     user = User.objects.get(id=request.user.id)
     if request.method == "POST":
         form = UpdateProfileForm(request.POST, instance=user)
+        if user.is_social_login:
+            if request.POST.get("nickname") == "":
+                pass
+            else:
+                user.nickname = request.POST.get("nickname")
+                user.save()
+            return redirect(reverse("users:profile"))
         if form.is_valid():
             username = request.user.username
             user = form.save(commit=False)
@@ -75,10 +82,7 @@ def profile_update(request):
                 user.nickname = request.user.email.split("@")[0]
             user.set_password(form.cleaned_data.get("password"))
             user.save()
-            auth_user = authenticate(
-                request, username=username, password=form.cleaned_data.get("password")
-            )
-            auth_login(request, auth_user)
+            auth_login(request, user)
             return redirect(reverse("users:profile"))
     else:
         form = UpdateProfileForm(instance=user)
@@ -121,7 +125,7 @@ def kakao_callback(request):
         nickname = properties.get("nickname")
         email = f"{nickname}@KakaoLogin.com"
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
-        username = "".join((random.choice(chars)) for x in range(10))
+        username = "".join((random.choice(chars)) for x in range(8)) + "@kakaologin.com"
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
