@@ -23,15 +23,15 @@ def logo_photo_path(instance, filename):
 
 
 class Bakery(models.Model):
-    name = models.CharField(max_length=20)  # 빵집 이름
+    name = models.CharField(max_length=100)  # 빵집 이름
     sub_name = models.CharField(
-        max_length=40, default="", null=True, blank=True
+        max_length=100, default="", null=True, blank=True
     )  # 빵집 소제목(설명)
     lat = models.FloatField(default=0, null=True, blank=True)  # 위도
     lng = models.FloatField(default=0, null=True, blank=True)  # 경도
     address = models.CharField(max_length=150, default="", null=True, blank=True)  # 주소
     phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
-    business_hour = models.CharField(max_length=30, default=True, blank=True)
+    business_hour = models.CharField(max_length=100, default=True, blank=True)
     temp_review_count = models.IntegerField(default=0, null=True, blank=True)
     temp_total_rating = models.IntegerField(default=0, null=True, blank=True)
     logo = models.ImageField(
@@ -42,7 +42,6 @@ class Bakery(models.Model):
     # 도시(진주/울산/전주/의정부 등)
 
     def review_count(self):
-        count = self.reviews.all().count()
         return count
 
     def total_rating(self):
