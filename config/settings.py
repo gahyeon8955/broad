@@ -49,6 +49,7 @@ PROJECT_APPS = [
 # 외부에서 기능을 미리 만들어놓은 App들
 THIRD_PARTY_APPS = [
     "phonenumber_field",
+    "storages",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -90,26 +91,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 """
 장고 기본 DB셋팅
 """
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 """
 AWS RDS 셋팅
 """
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "HOST": "realbroaddb.cmahcmtbzlbw.ap-northeast-2.rds.amazonaws.com",
-#         "PORT": "5432",
-#         "NAME": "broad",
-#         "USER": "eunchae",
-#         "PASSWORD": "ajttk8rl",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": "realbroaddb.cmahcmtbzlbw.ap-northeast-2.rds.amazonaws.com",
+        "PORT": "5432",
+        "NAME": "broad",
+        "USER": "eunchae",
+        "PASSWORD": "ajttk8rl",
+    }
+}
 
 
 # Password validation
@@ -142,9 +143,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-"""
-Static 관련 설정
-"""
+# """
+# Static 관련 설정
+# """
 # 웹 페이지에서 사용할 정적 파일의 최상위 URL 경로
 STATIC_URL = "/static/"
 # 개발단계에서 사용하는 정적파일들이 위치한 경로
@@ -153,14 +154,28 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
-"""
-Media 관련 설정
-"""
-# 사용자에 의해 업로드되는 미디어 파일을 저장할 경로
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-# 웹 페이지에서 사용할 미디어 파일의 최상위 URL 경로
-MEDIA_URL = "/media/"
+# """
+# Media 관련 설정
+# """
+# # 사용자에 의해 업로드되는 미디어 파일을 저장할 경로
+# MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+# # 웹 페이지에서 사용할 미디어 파일의 최상위 URL 경로
+# MEDIA_URL = "/media/"
+AWS_REGION = "ap-northeast-2"
+AWS_STORAGE_BUCKET_NAME = "broadbucket"
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_HOST = "s3.%s.amazonaws.com" % AWS_REGION
+AWS_ACCESS_KEY_ID = "AKIARCO3S5EAYX2D6BCS"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
 
+# # Static Setting
+# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# STATICFILES_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# Media Setting
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # User 모델 커스터마이징
 AUTH_USER_MODEL = "users.User"

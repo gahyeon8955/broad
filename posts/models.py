@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from users import models as user_models
 from bakeries import models as bakery_models
 import datetime, os, random
@@ -31,6 +33,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# Post 객체 삭제시, photo필드의 사진파일도 같이 삭제됨
+@receiver(post_delete, sender=Post)
+def submission_delete(sender, instance, **kwargs):
+    instance.photo.delete(False)
 
 
 class Comment(models.Model):

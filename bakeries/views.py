@@ -61,6 +61,7 @@ def cookie_sort_data(request):
 
 
 def bakery_rank(request):
+    add_data("서울")
     return render(request, "bakeries/bakery_rank.html")
 
 

@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from users import models as user_models
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
@@ -56,11 +58,23 @@ class Bakery(models.Model):
         return self.name
 
 
+# Bakery 객체 삭제시, logo필드의 사진파일도 같이 삭제됨
+@receiver(post_delete, sender=Bakery)
+def submission_delete(sender, instance, **kwargs):
+    instance.logo.delete(False)
+
+
 class Photo(models.Model):
     bakery = models.ForeignKey(
         "Bakery", related_name="photos", on_delete=models.CASCADE
     )
     photo = models.ImageField(upload_to="bakery/bread_imgs")
+
+
+# Photo 객체 삭제시, 사진파일도 같이 삭제됨
+@receiver(post_delete, sender=Photo)
+def submission_delete(sender, instance, **kwargs):
+    instance.photo.delete(False)
 
 
 class Menu(models.Model):
