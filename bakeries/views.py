@@ -2,10 +2,16 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django.http import Http404, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import WriteReviewForm
 from . import models as bakery_models
 from .crawling import add_data
 
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 # Create your views here.
 
 
@@ -16,9 +22,30 @@ def bakery_list(request):
 
 def bakery_detail(request, bakery_id):
     bakery_detail = bakery_models.Bakery.objects.get(pk=bakery_id)
+    try:
+        is_liked = request.user.like.filter(pk=bakery_id).exists()
+    except:
+        is_liked = ""
     return render(
-        request, "bakeries/bakery_detail.html", {"bakery_detail": bakery_detail}
+        request,
+        "bakeries/bakery_detail.html",
+        {"bakery_detail": bakery_detail, "is_liked": is_liked},
     )
+
+
+@login_required
+@require_POST
+def ajax_like(request):
+    if request.method == "POST":
+        user = request.user
+        pk = request.POST.get("pk", None)
+        bakery = bakery_models.Bakery.objects.get(pk=pk)
+        if user.like.filter(pk=pk).exists():
+            bakery.like.remove(user)
+        else:
+            bakery.like.add(user)
+    context = {}
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 def get_sorted_data(bread):

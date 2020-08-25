@@ -7,6 +7,7 @@ urlpatterns = [
     # 현재는 1-3)빵집리스트를 url로 나눠놨지만, html,css 작업이 끝나면 map에서 자바스크립트를 통해 페이지 새로고침 없이 보이게 할것임
     path("list/", views.bakery_list, name="list"),
     path("<int:bakery_id>/", views.bakery_detail, name="detail"),
+    path("ajax_like/", views.ajax_like, name="ajax_like"),
     path("soboro-data/", views.soboro_sort_data),
     path("rollcake-data/", views.rollcake_sort_data),
     path("makarong-data/", views.makarong_sort_data),

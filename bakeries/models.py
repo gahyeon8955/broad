@@ -37,7 +37,7 @@ class Bakery(models.Model):
     logo = models.ImageField(
         upload_to="logo_photo_path", default="bakery/image/logo_default.png"
     )
-    # like
+    like = models.ManyToManyField(user_models.User, blank=True, related_name="like")
     # 지역(서울/부산/경남/경북/충남 등)
     # 도시(진주/울산/전주/의정부 등)
 

@@ -70,6 +70,9 @@ a {
 .bakery_like_img {
   width: 26px;
 }
+.bakery_like_img:hover {
+  cursor: pointer;
+}
 /* 가게 위치 박스 */
 .bakery_location_box {
   margin-bottom: 17px;
