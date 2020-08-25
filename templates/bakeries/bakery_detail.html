@@ -18,15 +18,15 @@
 {% block content %}
 <!-- 가게 대표 빵 이미지 사진들 -->
 <div class="bakery_bread_image_box">
-    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread1.png' %}">
-    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread2.png' %}">
-    <img class="bakery_bread_image" src="{% static 'bakeries/img/bread3.png' %}">
+    {% for photo in bakery_detail.photos.all %}
+    <img class="bakery_bread_image" src="{{photo.photo.url}}">
+    {% endfor %}
 </div>
 
 <div class="bakery_information_box">
     <div class="bakery_box">
         <!-- 가게 로고 -->
-        <img class="bakery_trademark_detail" src="{% static 'bakeries/img/storelogo.png' %}">
+        <img class="bakery_trademark_detail" src="{{bakery_detail.logo.url}}">
         <!-- 가게 이름, 정보, 평점 -->
         <div class="bakery_name_box">
             <div class="bakery_name_and_star">
@@ -66,7 +66,7 @@
                 <div class="bakery_review">리뷰</div>
                 <div class="bakery_review_count">{{bakery_detail.review_count}}</div>
             </div>
-            <div class="bakery_review_write">리뷰 작성하기</div>
+            <a href="{% url 'bakeries:review_write' bakery_detail.id %}" class="bakery_review_write">리뷰 작성하기</a>
         </div>
         <div class="bakery_review_smallbox">
             {% for review in bakery_detail.reviews.all %}

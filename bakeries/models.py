@@ -26,16 +26,14 @@ def logo_photo_path(instance, filename):
 
 class Bakery(models.Model):
     name = models.CharField(max_length=100)  # 빵집 이름
-    sub_name = models.CharField(
-        max_length=100, default="", null=True, blank=True
-    )  # 빵집 소제목(설명)
-    lat = models.FloatField(default=0, null=True, blank=True)  # 위도
-    lng = models.FloatField(default=0, null=True, blank=True)  # 경도
-    address = models.CharField(max_length=150, default="", null=True, blank=True)  # 주소
+    sub_name = models.CharField(max_length=100, default="", blank=True)  # 빵집 소제목(설명)
+    lat = models.FloatField(default=0, blank=True)  # 위도
+    lng = models.FloatField(default=0, blank=True)  # 경도
+    address = models.CharField(max_length=150, default="", blank=True)  # 주소
     phone_number = PhoneNumberField(default="", region="KR", blank=True)  # 전화번호
-    business_hour = models.CharField(max_length=100, default=True, blank=True)
-    temp_review_count = models.IntegerField(default=0, null=True, blank=True)
-    temp_total_rating = models.IntegerField(default=0, null=True, blank=True)
+    business_hour = models.CharField(max_length=100, default="", blank=True)
+    temp_review_count = models.IntegerField(default=0, blank=True)
+    temp_total_rating = models.IntegerField(default=0, blank=True)
     logo = models.ImageField(
         upload_to="logo_photo_path", default="bakery/image/logo_default.png"
     )
@@ -69,6 +67,9 @@ class Photo(models.Model):
         "Bakery", related_name="photos", on_delete=models.CASCADE
     )
     photo = models.ImageField(upload_to="bakery/bread_imgs")
+
+    def __str__(self):
+        return f"{self.bakery} | 사진"
 
 
 # Photo 객체 삭제시, 사진파일도 같이 삭제됨
