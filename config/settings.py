@@ -180,3 +180,5 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # User 모델 커스터마이징
 AUTH_USER_MODEL = "users.User"
 
+# KAKAO 소셜로그인 관련
+KAKAO_ID = "08a8e8a0fde8d36ad5c30df67d5d41f6"

@@ -1,9 +1,9 @@
+import requests
 from django.shortcuts import render, redirect, reverse
-from .models import User
-from .forms import UpdateProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from .forms import LoginForm
-from .forms import SignUpForm
+from django.conf import settings
+from .models import User
+from .forms import UpdateProfileForm, LoginForm, SignUpForm
 
 # Create your views here.
 
@@ -82,3 +82,52 @@ def profile_update(request):
     else:
         form = UpdateProfileForm(instance=user)
     return render(request, "users/profile_update.html", {"form": form})
+
+
+# 카카오 소셜로그인
+def kakao_login(request):
+    client_id = settings.KAKAO_ID
+    redirect_uri = "http://127.0.0.1:8000/user/login/kakao/callback"
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+    )
+
+
+class KakaoException(Exception):
+    pass
+
+
+def kakao_callback(request):
+    try:
+        code = request.GET.get("code")
+        client_id = settings.KAKAO_ID
+        redirect_uri = "http://127.0.0.1:8000/user/login/kakao/callback"
+        token_request = requests.get(
+            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
+        )
+        token_json = token_request.json()
+        error = token_json.get("error", None)
+        if error is not None:
+            raise KakaoException("접근할 수 없습니다.")
+        access_token = token_json.get("access_token")
+        profile_request = requests.get(
+            "https://kapi.kakao.com/v2/user/me",
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+        profile_json = profile_request.json()
+        kakao_account = profile_json.get("kakao_account")
+        properties = profile_json.get("properties")
+        nickname = properties.get("nickname")
+        email = f"{nickname}@KakaoLogin.com"
+        username = email
+        user = User.objects.create(
+            email=email, username=email, nickname=nickname, is_social_login=True
+        )
+        user.set_unusable_password()
+        user.save()
+        # messages.success(request, f"환영합니다, {user.nickname}님!")
+        auth_login(request, user)
+        return redirect(reverse("map:main_map"))
+    except KakaoException as e:
+        # messages.error(request, e)
+        return redirect(reverse("users:login"))

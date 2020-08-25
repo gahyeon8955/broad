@@ -24,4 +24,5 @@ class User(AbstractUser):
     avatar = models.ImageField(
         upload_to=photo_path, default="user/avatar/avatar_default.png"
     )
+    is_social_login = models.BooleanField(default=False, blank=True, null=True)
 
