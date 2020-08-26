@@ -60,7 +60,7 @@
         </div>
         <!-- 수정삭제 -->
         <div class="post_detail_ud_box">
-            {% if comment.author == user or request.user.is_staff %}
+            {% if post_detail.user == request.user %}
             <a href="{% url 'posts:update' post_detail.id %}">
                 <input class="post_detail_update_delete" type="button" value="수정">
             </a>
@@ -95,7 +95,7 @@
                         <div class="post_detail_comment_nickname_time">
                             <span class="post_detail_comment_nickname">{{comment.user.nickname}}</span>
                             <span class="post_detail_comment_time">{{comment.created_date|date:"Y.m.d f"}}</span>
-                            {% if comment.author == user or request.user.is_staff %}
+                            {% if comment.user == request.user %}
                             <a class="post_detail_comment_delete"
                                 href="{% url 'posts:comment_delete' post_detail.id comment.id %}"><img
                                     src="{% static 'posts/img/trash.png' %}"></a>
