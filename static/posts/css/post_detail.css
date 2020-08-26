@@ -33,6 +33,9 @@
 .post_detail_time{
     margin-right: 5px;
 }
+.views_count{
+    color: white;
+}
 
 /* 게시물 내용 박스 */
 .post_detail_contents_box{

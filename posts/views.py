@@ -27,7 +27,9 @@ def post_write(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('/post/')
 
     else:
@@ -40,7 +42,6 @@ def post_update(request, post_id):
 
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
             return redirect('/post/'+str(post_id))
 
     else:
@@ -59,7 +60,7 @@ def add_comment_to_post(request, post_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = request.user
+            comment.user = request.user
             comment.save()
             return redirect('/post/'+str(post_id))
     else:
