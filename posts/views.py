@@ -42,6 +42,7 @@ def post_update(request, post_id):
 
     if request.method == 'POST':
         if form.is_valid():
+            form.save()
             return redirect('/post/'+str(post_id))
     else:
         form = PostForm(instance=post)
