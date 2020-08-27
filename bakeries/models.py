@@ -9,6 +9,7 @@ import random
 # Create your models here.
 
 
+
 # Photo 모델의 사진경로 설정 함수
 def logo_photo_path(instance, filename):
     basefilename, file_extension = os.path.splitext(filename)
