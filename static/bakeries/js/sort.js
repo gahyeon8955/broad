@@ -21,7 +21,7 @@ const listInfoHTML = (
       <div class="detail_top">
           <span class="top_name">${name}</span>
       </div>
-      <div class="detail_explain">${subName}</div>
+      <div class="detail_explain">${subName.substr(0, 25)}</div>
       <div class="detail_address">${address}</div>
   </div>
   <div class="store_review">

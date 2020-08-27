@@ -43,6 +43,9 @@ class Bakery(models.Model):
         max_length=20, default="", blank=True, null=True
     )  # 도시(진주/울산/전주/의정부 등)
 
+    def short_sub_name(self):
+        return self.sub_name[:30] + "..."
+
     def review_count(self):
         return self.reviews.all().count()
 

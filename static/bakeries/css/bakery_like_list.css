@@ -10,6 +10,7 @@
   background: #fcfcfc;
   border-bottom: 1px solid #e9e9e9;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .list__left {
