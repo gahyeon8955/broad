@@ -10,43 +10,152 @@ let markers = [];
 let overlay;
 let overlayContent;
 let bakeryName = "";
-let positions = {
-  진주시: [
-    {
-      title: "수복빵집",
-      latlng: new kakao.maps.LatLng(35.1966287, 128.01815868),
+let address = "";
+let imgUrl = "";
+let mylat;
+let mylng;
+let myname;
+let myaddress;
+let myphoto = "";
+let positions = {};
+let local;
+// let positions = {
+//   진주시: [
+//     {
+//       title: "수복빵집",
+//       latlng: new kakao.maps.LatLng(35.1966287, 128.01815868),
+//     },
+//     {
+//       title: "베이커리925",
+//       latlng: new kakao.maps.LatLng(35.23564072, 128.1033207),
+//     },
+//     {
+//       title: "장동근과자점",
+//       latlng: new kakao.maps.LatLng(35.21796814, 128.2341212325),
+//     },
+//     {
+//       title: "양우연케익하우스",
+//       latlng: new kakao.maps.LatLng(35.1796763, 128.07333617),
+//     },
+//     {
+//       title: "뚜레쥬르 진주호탄점",
+//       latlng: new kakao.maps.LatLng(35.1631501, 128.213512432),
+//     },
+//     {
+//       title: "이용규베커라이",
+//       latlng: new kakao.maps.LatLng(35.1692635, 128.2734668392),
+//     },
+//   ],
+//   사천시: [
+//     {
+//       title: "사천 어딘가 빵집",
+//       latlng: new kakao.maps.LatLng(35.0624853, 128.0750658),
+//     },
+//     {
+//       title: "사천 최강빵집",
+//       latlng: new kakao.maps.LatLng(35.0306886, 128.0180409),
+//     },
+//   ],
+// };
+
+const addRegionSelect = (local) => {
+  for (const city of regionData[local]) {
+    regionSelect.insertAdjacentHTML(
+      "beforeend",
+      `
+        <option value="${city[0]}">${city[0]}</option>
+      `
+    );
+  }
+};
+
+const getRegionData = (region) => {
+  $.ajax({
+    type: "GET",
+    url: getRegionDataUrl,
+    data: { region },
+    dataType: "json",
+    success: (response) => {
+      positions = response;
+      setOverlayAndMarker();
     },
-    {
-      title: "베이커리925",
-      latlng: new kakao.maps.LatLng(35.23564072, 128.1033207),
-    },
-    {
-      title: "장동근과자점",
-      latlng: new kakao.maps.LatLng(35.21796814, 128.2341212325),
-    },
-    {
-      title: "양우연케익하우스",
-      latlng: new kakao.maps.LatLng(35.1796763, 128.07333617),
-    },
-    {
-      title: "뚜레쥬르 진주호탄점",
-      latlng: new kakao.maps.LatLng(35.1631501, 128.213512432),
-    },
-    {
-      title: "이용규베커라이",
-      latlng: new kakao.maps.LatLng(35.1692635, 128.2734668392),
-    },
-  ],
-  사천시: [
-    {
-      title: "사천 어딘가 빵집",
-      latlng: new kakao.maps.LatLng(35.0624853, 128.0750658),
-    },
-    {
-      title: "사천 최강빵집",
-      latlng: new kakao.maps.LatLng(35.0306886, 128.0180409),
-    },
-  ],
+  });
+};
+
+const setOverlayAndMarker = () => {
+  overlayContent = (name, address, imgUrl) => {
+    return `
+  <div class="wrap">
+        <div class="info">
+            <div class="title">
+                ${name}
+                <div class="close" onclick="closeOverlay()" title="닫기"></div>
+            </div>
+            <div class="body">
+                <div class="img">
+                    <img src="${imgUrl}" width="73" height="70">
+               </div>
+                <div class="desc">
+                    <div class="ellipsis">${address}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+  };
+
+  // 마커 위에 커스텀오버레이를 표시합니다
+  // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+
+  // 마커 이미지의 이미지 주소입니다
+  var imageSrc = "/static/map/img/maker.png";
+  for (const i in positions) {
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35);
+
+    // 마커 이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+    // 빵집 정보관련 데이터
+    let mylat = positions[i].bakery[0].fields.lat;
+    let mylng = positions[i].bakery[0].fields.lng;
+    let myname = positions[i].bakery[0].fields.name;
+    let myaddress = positions[i].bakery[0].fields.address;
+    try {
+      myphoto = `https://broadbucket.s3.amazonaws.com/${positions[i].photos[0].fields.photo}`;
+    } catch (error) {
+      myphoto = `https://broadbucket.s3.amazonaws.com/bakery/image/logo_default.png`;
+    }
+
+    // 마커를 생성합니다
+    marker = new kakao.maps.Marker({
+      map: map, // 마커를 표시할 지도
+      position: new kakao.maps.LatLng(mylat, mylng), // 마커를 표시할 위치
+      image: markerImage, // 마커 이미지
+      clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+    });
+    markers.push(marker);
+
+    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+    kakao.maps.event.addListener(
+      marker,
+      "click",
+      addClosureOverlay(marker, myname, myaddress, myphoto)
+    );
+
+    let mouseoverOption = {
+      fillColor: "#5D2C1D", // 채우기 색깔입니다
+      fillOpacity: 0.8, // 채우기 불투명도 입니다
+    };
+    // 마커에 마우스오버 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, "mouseover", function () {
+      // 다각형의 채우기 옵션을 변경합니다
+      polygon.setOptions(mouseoverOption);
+    });
+    myname = "";
+    myaddress = "";
+    myphoto = "";
+  }
 };
 
 const jsonAsync = async (region) => {
@@ -60,6 +169,7 @@ const jsonAsync = async (region) => {
     const v1 = await setPath(jinjuPolygon);
     const v2 = await setPolygonAndAdd();
     const v3 = await setMouseInOut();
+    const v4 = await getRegionData(region); // region에 해당되는 빵집데이터 갖고오기
   } catch (error) {
   } finally {
   }
@@ -72,82 +182,32 @@ let options = {
 };
 
 // 제일처음 시작되는 함수로, map_init에서 지역이 클릭되면 카카오맵이 호출됨
-const startMap = () => {
+const startMap = (event) => {
   mapInit.classList.add("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
+  local = event.target.alt;
+  addRegionSelect(event.target.alt); // select태그들이 추가되도록
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+  map.setCenter(
+    new kakao.maps.LatLng(
+      regionData[event.target.alt][0][1],
+      regionData[event.target.alt][0][2]
+    )
+  );
   jsonAsync(regionSelect.value);
-  overlayContent = (bakeryName) => {
-    return `
-  <div class="wrap">
-        <div class="info">
-            <div class="title">
-                ${bakeryName}
-                <div class="close" onclick="closeOverlay()" title="닫기"></div>
-            </div>
-            <div class="body">
-                <div class="img">
-                    <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">
-               </div>
-                <div class="desc">
-                    <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>
-                    <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>
-                    <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>
-                </div>
-            </div>
-        </div>
-    </div>";
-    `;
-  };
-
-  // 마커 위에 커스텀오버레이를 표시합니다
-  // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-  overlay = new kakao.maps.CustomOverlay({
-    content: overlayContent(bakeryName),
-    map: map,
-    position: null,
-  });
-
-  // 마커 이미지의 이미지 주소입니다
-  var imageSrc = "/static/map/img/maker.png";
-
-  for (var i = 0; i < positions[regionSelect.value].length; i++) {
-    // 마커 이미지의 이미지 크기 입니다
-    var imageSize = new kakao.maps.Size(24, 35);
-
-    // 마커 이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-    // 마커를 생성합니다
-    marker = new kakao.maps.Marker({
-      map: map, // 마커를 표시할 지도
-      position: positions[regionSelect.value][i].latlng, // 마커를 표시할 위치
-      image: markerImage, // 마커 이미지
-      clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    });
-    markers.push(marker);
-
-    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-    kakao.maps.event.addListener(marker, "click", addClosureOverlay(marker, i));
-
-    let mouseoverOption = {
-      fillColor: "#5D2C1D", // 채우기 색깔입니다
-      fillOpacity: 0.8, // 채우기 불투명도 입니다
-    };
-    // 마커에 마우스오버 이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, "mouseover", function () {
-      // 다각형의 채우기 옵션을 변경합니다
-      polygon.setOptions(mouseoverOption);
-    });
-  }
 };
 
 // 클릭시 커스텀 오버레이 화면에 표시
-const addClosureOverlay = (marker, i) => {
+const addClosureOverlay = (marker, myname, myaddress, myphoto) => {
+  overlay = new kakao.maps.CustomOverlay({
+    content: overlayContent(name, address, imgUrl),
+    map: map,
+    position: null,
+  });
   return () => {
     overlay.setPosition(marker.getPosition());
-    overlay.setContent(overlayContent(positions[regionSelect.value][i].title));
+    overlay.setContent(overlayContent(myname, myaddress, myphoto));
     overlay.setMap(map);
   };
 };
@@ -178,8 +238,8 @@ function setCenter(lat, lng) {
 const changeRegion = () => {
   let regionSelectedValue = regionSelect.value;
   setCenter(
-    regionCoordinate[regionSelectedValue][0],
-    regionCoordinate[regionSelectedValue][1]
+    regionData[local][regionSelect.selectedIndex][1],
+    regionData[local][regionSelect.selectedIndex][2]
   );
   polygonPath = [];
   polygon.setMap(null);
@@ -189,39 +249,6 @@ const changeRegion = () => {
 
   changePolygon(regionSelectedValue);
   overlay.setMap(null);
-
-  // 마커 이미지의 이미지 주소입니다
-  var imageSrc = "/static/map/img/maker.png";
-
-  for (var i = 0; i < positions[regionSelect.value].length; i++) {
-    // 마커 이미지의 이미지 크기 입니다
-    var imageSize = new kakao.maps.Size(24, 35);
-
-    // 마커 이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-    // 마커를 생성합니다
-    marker = new kakao.maps.Marker({
-      map: map, // 마커를 표시할 지도
-      position: positions[regionSelect.value][i].latlng, // 마커를 표시할 위치
-      image: markerImage, // 마커 이미지
-      clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    });
-    markers.push(marker);
-
-    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-    kakao.maps.event.addListener(marker, "click", addClosureOverlay(marker, i));
-
-    let mouseoverOption = {
-      fillColor: "#5D2C1D", // 채우기 색깔입니다
-      fillOpacity: 0.8, // 채우기 불투명도 입니다
-    };
-    // 마커에 마우스오버 이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, "mouseover", function () {
-      // 다각형의 채우기 옵션을 변경합니다
-      polygon.setOptions(mouseoverOption);
-    });
-  }
 };
 
 // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
@@ -262,6 +289,7 @@ const changePolygon = async (region) => {
     const v1 = await delete polygon;
     const v2 = await setPolygonAndAdd();
     const v3 = await setMouseInOut();
+    const v4 = await getRegionData(region); // region에 해당되는 빵집데이터 갖고오기
   } catch {
   } finally {
   }
@@ -303,6 +331,7 @@ const clickRegionBack = () => {
   regionSelectBox.classList.replace("set_flex", "set_none"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.remove("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
   container.remove(); // map셋팅 삭제를 위해 div map element 제거
+  regionSelect.innerHTML = "";
   content.insertAdjacentHTML(
     // div map 새로 element 추가
     "afterbegin",

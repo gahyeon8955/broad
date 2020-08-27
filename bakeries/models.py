@@ -39,8 +39,12 @@ class Bakery(models.Model):
         upload_to="logo_photo_path", default="bakery/image/logo_default.png"
     )
     like = models.ManyToManyField(user_models.User, blank=True, related_name="like")
-    # 지역(서울/부산/경남/경북/충남 등)
-    # 도시(진주/울산/전주/의정부 등)
+    local = models.CharField(
+        max_length=20, default="", blank=True, null=True
+    )  # 지역(서울/부산/경남/경북/충남 등)
+    city = models.CharField(
+        max_length=20, default="", blank=True, null=True
+    )  # 도시(진주/울산/전주/의정부 등)
 
     def review_count(self):
         return self.reviews.all().count()
