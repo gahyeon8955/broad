@@ -12,6 +12,7 @@ let overlayContent;
 let bakeryName = "";
 let address = "";
 let imgUrl = "";
+let pk = "";
 let mylat;
 let mylng;
 let myname;
@@ -19,44 +20,7 @@ let myaddress;
 let myphoto = "";
 let positions = {};
 let local;
-// let positions = {
-//   진주시: [
-//     {
-//       title: "수복빵집",
-//       latlng: new kakao.maps.LatLng(35.1966287, 128.01815868),
-//     },
-//     {
-//       title: "베이커리925",
-//       latlng: new kakao.maps.LatLng(35.23564072, 128.1033207),
-//     },
-//     {
-//       title: "장동근과자점",
-//       latlng: new kakao.maps.LatLng(35.21796814, 128.2341212325),
-//     },
-//     {
-//       title: "양우연케익하우스",
-//       latlng: new kakao.maps.LatLng(35.1796763, 128.07333617),
-//     },
-//     {
-//       title: "뚜레쥬르 진주호탄점",
-//       latlng: new kakao.maps.LatLng(35.1631501, 128.213512432),
-//     },
-//     {
-//       title: "이용규베커라이",
-//       latlng: new kakao.maps.LatLng(35.1692635, 128.2734668392),
-//     },
-//   ],
-//   사천시: [
-//     {
-//       title: "사천 어딘가 빵집",
-//       latlng: new kakao.maps.LatLng(35.0624853, 128.0750658),
-//     },
-//     {
-//       title: "사천 최강빵집",
-//       latlng: new kakao.maps.LatLng(35.0306886, 128.0180409),
-//     },
-//   ],
-// };
+let clusterer;
 
 const addRegionSelect = (local) => {
   for (const city of regionData[local]) {
@@ -76,6 +40,7 @@ const getRegionData = (region) => {
     data: { region },
     dataType: "json",
     success: (response) => {
+      console.log(response);
       positions = response;
       setOverlayAndMarker();
     },
@@ -83,12 +48,12 @@ const getRegionData = (region) => {
 };
 
 const setOverlayAndMarker = () => {
-  overlayContent = (name, address, imgUrl) => {
+  overlayContent = (pk, name, address, imgUrl) => {
     return `
   <div class="wrap">
         <div class="info">
             <div class="title">
-                ${name}
+                <a href="/bakery/${pk}/">${name}</a>
                 <div class="close" onclick="closeOverlay()" title="닫기"></div>
             </div>
             <div class="body">
@@ -103,6 +68,11 @@ const setOverlayAndMarker = () => {
     </div>
     `;
   };
+  clusterer = new kakao.maps.MarkerClusterer({
+    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+    minLevel: 10, // 클러스터 할 최소 지도 레벨
+  });
 
   // 마커 위에 커스텀오버레이를 표시합니다
   // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
@@ -119,6 +89,7 @@ const setOverlayAndMarker = () => {
     // 빵집 정보관련 데이터
     let mylat = positions[i].bakery[0].fields.lat;
     let mylng = positions[i].bakery[0].fields.lng;
+    let mypk = positions[i].bakery[0].pk;
     let myname = positions[i].bakery[0].fields.name;
     let myaddress = positions[i].bakery[0].fields.address;
     try {
@@ -140,7 +111,7 @@ const setOverlayAndMarker = () => {
     kakao.maps.event.addListener(
       marker,
       "click",
-      addClosureOverlay(marker, myname, myaddress, myphoto)
+      addClosureOverlay(marker, mypk, myname, myaddress, myphoto)
     );
 
     let mouseoverOption = {
@@ -156,16 +127,29 @@ const setOverlayAndMarker = () => {
     myaddress = "";
     myphoto = "";
   }
+  // 클러스터러에 마커들을 추가합니다
+  clusterer.addMarkers(markers);
 };
 
 const jsonAsync = async (region) => {
   try {
-    const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
-    $.getJSON("/static/map/js/regionPolygon.json", function (data) {
-      jinjuPolygon = data.features.find((n) => {
-        return n.properties.SIG_KOR_NM == region;
-      }).geometry.coordinates[0];
-    });
+    if (region.includes("광역시")) {
+      const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
+      $.getJSON("/static/map/js/sidoPolygon.json", function (data) {
+        datas = data;
+        jinjuPolygon = data.features.find((n) => {
+          return n.properties.CTP_KOR_NM == region;
+        }).geometry.coordinates[0];
+      });
+    } else {
+      const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
+      $.getJSON("/static/map/js/regionPolygon.json", function (data) {
+        datas = data;
+        jinjuPolygon = data.features.find((n) => {
+          return n.properties.SIG_KOR_NM == region;
+        }).geometry.coordinates[0];
+      });
+    }
     const v1 = await setPath(jinjuPolygon);
     const v2 = await setPolygonAndAdd();
     const v3 = await setMouseInOut();
@@ -199,15 +183,15 @@ const startMap = (event) => {
 };
 
 // 클릭시 커스텀 오버레이 화면에 표시
-const addClosureOverlay = (marker, myname, myaddress, myphoto) => {
+const addClosureOverlay = (marker, mypk, myname, myaddress, myphoto) => {
   overlay = new kakao.maps.CustomOverlay({
-    content: overlayContent(name, address, imgUrl),
+    content: overlayContent(pk, name, address, imgUrl),
     map: map,
     position: null,
   });
   return () => {
     overlay.setPosition(marker.getPosition());
-    overlay.setContent(overlayContent(myname, myaddress, myphoto));
+    overlay.setContent(overlayContent(mypk, myname, myaddress, myphoto));
     overlay.setMap(map);
   };
 };
@@ -236,6 +220,8 @@ function setCenter(lat, lng) {
 
 // select박스에서 지역이 변경될시 호출되는 함수
 const changeRegion = () => {
+  clusterer.removeMarkers(markers);
+  markers = [];
   let regionSelectedValue = regionSelect.value;
   setCenter(
     regionData[local][regionSelect.selectedIndex][1],
@@ -279,13 +265,24 @@ const setPolygonAndAdd = () => {
 
 const changePolygon = async (region) => {
   try {
-    const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
-    $.getJSON("/static/map/js/regionPolygon.json", function (data) {
-      jinjuPolygon = data.features.find((n) => {
-        return n.properties.SIG_KOR_NM == region;
-      }).geometry.coordinates[0];
-      setPath(jinjuPolygon);
-    });
+    if (region.includes("광역시")) {
+      const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
+      $.getJSON("/static/map/js/sidoPolygon.json", function (data) {
+        datas = data;
+        jinjuPolygon = data.features.find((n) => {
+          return n.properties.CTP_KOR_NM == region;
+        }).geometry.coordinates[0];
+      });
+    } else {
+      const getPolygonJson = await // 폴리곤 JSON 처리하는 부분
+      $.getJSON("/static/map/js/regionPolygon.json", function (data) {
+        datas = data;
+        jinjuPolygon = data.features.find((n) => {
+          return n.properties.SIG_KOR_NM == region;
+        }).geometry.coordinates[0];
+      });
+    }
+    setPath(jinjuPolygon);
     const v1 = await delete polygon;
     const v2 = await setPolygonAndAdd();
     const v3 = await setMouseInOut();
@@ -342,5 +339,7 @@ const clickRegionBack = () => {
   container = document.getElementById("map"); //새로생긴 div map의 DOM
   polygonPath = [];
   polygon.setMap(null);
+  clusterer.removeMarkers(markers);
+  markers = [];
   regionSelect.value = regionSelect.firstElementChild.innerText;
 };

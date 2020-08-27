@@ -210,20 +210,34 @@ def add_data(local):
             #     phone_text,
             #     menus_list,
             # )
-            models.Bakery.objects.create(
-                name=name_text,
-                sub_name=sub_name_text,
-                lat=lat_text,
-                lng=lng_text,
-                address=address_text,
-                phone_number=phone_text,
-                business_hour=business_hours_text,
-            )
-            for index, url in enumerate(urls):
-                img = models.Photo()
-                img.bakery = models.Bakery.objects.get(name=name_text)
-                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
-                img.save()
+            try:
+                bakery = models.Bakery.objects.get(name=name_text)
+            except:
+                models.Bakery.objects.create(
+                    name=name_text,
+                    sub_name=sub_name_text,
+                    lat=lat_text,
+                    lng=lng_text,
+                    address=address_text,
+                    phone_number=phone_text,
+                    business_hour=business_hours_text,
+                    city=local,
+                )
+                for index, url in enumerate(urls):
+                    img = models.Photo()
+                    img.bakery = models.Bakery.objects.get(name=name_text)
+                    img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
+                    img.save()
+
+                for index, menu in enumerate(menus_list):
+                    m = models.Menu()
+                    m.bakery = models.Bakery.objects.get(name=name_text)
+                    m.name = menu[0]
+                    try:
+                        m.row_price = menu[1]
+                    except:
+                        pass
+                    m.save()
 
             urls = []
             random_names = []
@@ -418,20 +432,34 @@ def add_data(local):
             #     phone_text,
             #     menus_list,
             # )
-            models.Bakery.objects.create(
-                name=name_text,
-                sub_name=sub_name_text,
-                lat=lat_text,
-                lng=lng_text,
-                address=address_text,
-                phone_number=phone_text,
-                business_hour=business_hours_text,
-            )
-            for index, url in enumerate(urls):
-                img = models.Photo()
-                img.bakery = models.Bakery.objects.get(name=name_text)
-                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
-                img.save()
+            try:
+                bakery = models.Bakery.objects.get(name=name_text)
+            except:
+                models.Bakery.objects.create(
+                    name=name_text,
+                    sub_name=sub_name_text,
+                    lat=lat_text,
+                    lng=lng_text,
+                    address=address_text,
+                    phone_number=phone_text,
+                    business_hour=business_hours_text,
+                    city=local,
+                )
+                for index, url in enumerate(urls):
+                    img = models.Photo()
+                    img.bakery = models.Bakery.objects.get(name=name_text)
+                    img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
+                    img.save()
+
+                for index, menu in enumerate(menus_list):
+                    m = models.Menu()
+                    m.bakery = models.Bakery.objects.get(name=name_text)
+                    m.name = menu[0]
+                    try:
+                        m.row_price = menu[1]
+                    except:
+                        pass
+                    m.save()
 
             urls = []
             random_names = []
@@ -442,6 +470,8 @@ def add_data(local):
             links = driver.find_elements_by_css_selector(
                 "#info\.search\.place\.list > li"
             )
+    # 2바퀴돌고 끝내기
+    return
 
     page_3 = driver.find_element_by_css_selector("#info\.search\.page\.no3")
     page_3.send_keys(Keys.ENTER)
@@ -626,20 +656,34 @@ def add_data(local):
             #     phone_text,
             #     menus_list,
             # )
-            models.Bakery.objects.create(
-                name=name_text,
-                sub_name=sub_name_text,
-                lat=lat_text,
-                lng=lng_text,
-                address=address_text,
-                phone_number=phone_text,
-                business_hour=business_hours_text,
-            )
-            for index, url in enumerate(urls):
-                img = models.Photo()
-                img.bakery = models.Bakery.objects.get(name=name_text)
-                img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
-                img.save()
+            try:
+                bakery = models.Bakery.objects.get(name=name_text)
+            except:
+                models.Bakery.objects.create(
+                    name=name_text,
+                    sub_name=sub_name_text,
+                    lat=lat_text,
+                    lng=lng_text,
+                    address=address_text,
+                    phone_number=phone_text,
+                    business_hour=business_hours_text,
+                    city=local,
+                )
+                for index, url in enumerate(urls):
+                    img = models.Photo()
+                    img.bakery = models.Bakery.objects.get(name=name_text)
+                    img.photo = f"bakery/bread_imgs/{random_names[index]}.jpg"
+                    img.save()
+
+                for index, menu in enumerate(menus_list):
+                    m = models.Menu()
+                    m.bakery = models.Bakery.objects.get(name=name_text)
+                    m.name = menu[0]
+                    try:
+                        m.row_price = menu[1]
+                    except:
+                        pass
+                    m.save()
 
             urls = []
             random_names = []

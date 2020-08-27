@@ -16,6 +16,21 @@
 
 
 
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+            alt="left_arrow icon">
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">{{bakery_detail.name}}</span>
+    </div>
+    <div class="header__rightbox">
+    </div>
+</div>
+{% endblock header %}
+
+
 {% block content %}
 <!-- 가게 대표 빵 이미지 사진들 -->
 <div class="bakery_bread_image_box">
@@ -63,7 +78,7 @@
             {% for menu in bakery_detail.menus.all %}
             <div class="bakery_menu_detail1">
                 <div class="bakery_menu_name">{{menu.name}}</div>
-                <div class="bakery_menu_price">{{menu.row_price}}</div>
+                <div class="bakery_menu_price">{{menu.price}}</div>
             </div>
             {% endfor %}
         </div>
