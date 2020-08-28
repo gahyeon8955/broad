@@ -8,7 +8,7 @@ urlpatterns = [
     path("", views.index),
     path("user/profile/", views.profile_view, name="profile"),
     path("user/profile-update/", views.profile_update, name="profile_update"),
-    path("map/", views.login, name="login"),
+    path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
     path("signup/", views.signup, name="signup"),
     path("user/login/kakao/", views.kakao_login, name="kakao-login"),

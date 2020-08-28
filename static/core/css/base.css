@@ -102,14 +102,18 @@ header {
 }
 
 .bottom_icons {
+  background-color: white;
   z-index: 10;
   position: fixed;
   bottom: 0;
-  background-color: #fbfbfb;
   width: 100vw;
   height: 70px;
   display: flex;
-  border-top: solid thin #e1e1e1;
+  border-top: solid 2px #ececec;
+}
+
+.bottom_icons > a:hover {
+  border-top: solid 2px black;
 }
 
 .buttom_icons__icon_wrap {
