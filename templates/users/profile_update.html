@@ -16,8 +16,8 @@
 {% block header %}
 <div class="header__wrapper">
     <div class="header__leftbox">
-        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
-            alt="left_arrow icon">
+        <a href="{% url 'users:profile' %}"><img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+                alt="left_arrow icon"></a>
     </div>
     <div class="header__midbox">
         <span class="header__title">내 정보 수정</span>
@@ -33,8 +33,8 @@
     {% csrf_token %}
     <div class="profile_update__top">
         <div style="background-image: url({{user.avatar.url}});" class="profile_update__image"></div>
-        <img class="profile_update__imageupdate"
-            src="https://www.vhv.rs/dpng/d/462-4623656_thumb-image-camera-icon-png-circle-transparent-png.png">
+        <a href="{% url 'users:imageupdate' %}"><img class="profile_update__imageupdate"
+                src="https://www.vhv.rs/dpng/d/462-4623656_thumb-image-camera-icon-png-circle-transparent-png.png"></a>
     </div>
     <div class="profile_update_midbox">
         <div class="profile_update_sectionbox">
@@ -72,3 +72,6 @@
     </div>
 </form>
 {% endblock content %}
+
+{% block bottom_icons %}
+{% endblock bottom_icons %}

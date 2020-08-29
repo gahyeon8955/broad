@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.conf import settings
 from .models import User
-from .forms import UpdateProfileForm, LoginForm, SignUpForm
+from .forms import UpdateProfileForm, UpdateProfileImageForm, LoginForm, SignUpForm
+
 
 # Create your views here.
 
@@ -140,3 +141,15 @@ def kakao_callback(request):
     except KakaoException as e:
         # messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+def profileimage_update(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        form = UpdateProfileImageForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user = form.save()
+            return redirect("users:profile_update")
+    else:
+        form = UpdateProfileImageForm(instance=user)
+        return render(request, "users/profileimage_form.html", {"form": form})
