@@ -327,6 +327,7 @@ const clickRegionBack = () => {
   for (let i in markers) {
     markers[i].setMap(null);
   }
+  goToList.classList.add("set_none"); // 빵집리스트로이동하기 제거
   mapInit.classList.remove("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_flex", "set_none"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.remove("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정

@@ -1,6 +1,9 @@
 const header = document.querySelector("header");
+const footer = document.querySelector("footer");
+let newContent;
 let currentRegion;
 let bakeryListData;
+let beforeHeader;
 const headerHTML = (cr) => {
   return `
 <div class="header__wrapper">
@@ -55,12 +58,6 @@ const setBakeryListData = () => {
   if (bakeryListData.result === "none") {
   } else {
     for (const i in bakeryListData.obj) {
-      console.log(bakeryListData.obj[i].pk);
-      console.log(bakeryListData.obj[i].fields.name);
-      console.log(bakeryListData.obj[i].fields.sub_name);
-      console.log(bakeryListData.obj[i].fields.address);
-      console.log(bakeryListData.counts.rating[i]);
-      console.log(bakeryListData.counts.review[i]);
       ListElement.insertAdjacentHTML(
         "beforeend",
         htmlTagSet(
@@ -91,12 +88,20 @@ const ajaxCallData = (currentRegion) => {
 };
 
 const clickGoToList = () => {
-  content.classList.add("set_block");
+  content.classList.add("set_none");
   currentRegion = regionSelect.value;
+  beforeHeader = header.innerHTML;
   header.innerHTML = headerHTML(currentRegion);
-  content.innerHTML = `
-<div class="list jsList"></div>
-  `;
+  content.insertAdjacentHTML(
+    "beforebegin",
+    `
+    <div style="display: block;" class="content newContent">
+      <div class="list jsList">
+      </div>
+    </div>
+    `
+  );
+  newContent = document.querySelector(".newContent");
   ListElement = document.querySelector(".jsList");
   ajaxCallData(currentRegion);
 };
