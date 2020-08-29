@@ -3,6 +3,7 @@ const mapInit = document.querySelector(".jsMapInit"); //첫 지도이미지 DOM
 const regionSelectBox = document.querySelector(".jsRegionSelectBox"); //지역선택박스 DOM
 const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 Select태그 DOM
 const content = document.querySelector(".content");
+const goToList = document.querySelector(".go_to_list");
 var map;
 let jinjuPolygon;
 let marker;
@@ -171,6 +172,7 @@ const startMap = (event) => {
   mapInit.classList.add("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
+  goToList.classList.remove("set_none");
   local = event.target.alt;
   addRegionSelect(event.target.alt); // select태그들이 추가되도록
   map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴

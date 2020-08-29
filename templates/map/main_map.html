@@ -10,6 +10,13 @@
 <!-- 개별적인 css/link태그 추가 -->
 {% block css %}
 <link rel="stylesheet" href="{% static 'map/css/map.css' %}">
+<link rel="stylesheet" href="{% static 'map/css/overlay.css' %}">
+<link rel="stylesheet" href="{% static 'bakeries/css/bakery_list.css' %}">
+<style>
+    .set_block {
+        display: block;
+    }
+</style>
 {% endblock css %}
 
 
@@ -20,117 +27,7 @@
 <!-- 제이쿼리 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-    .wrap {
-        position: absolute;
-        left: 0;
-        bottom: 40px;
-        width: 288px;
-        height: 132px;
-        margin-left: -144px;
-        text-align: left;
-        overflow: hidden;
-        font-size: 12px;
-        font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-        line-height: 1.5;
-    }
 
-    .wrap * {
-        padding: 0;
-        margin: 0;
-    }
-
-    .wrap .info {
-        width: 286px;
-        height: 120px;
-        border-radius: 5px;
-        border-bottom: 2px solid #ccc;
-        border-right: 1px solid #ccc;
-        overflow: hidden;
-        background: #fff;
-    }
-
-    .wrap .info:nth-child(1) {
-        border: 0;
-        box-shadow: 0px 1px 2px #888;
-    }
-
-    .info .title {
-        padding: 5px 10px;
-        height: 30px;
-        background: #5d2c1d;
-        color: #fff6ed;
-        font-size: 15px;
-        font-weight: bold;
-    }
-
-    .info .title a {
-        color: #fff6ed;
-        text-decoration-line: none;
-    }
-
-    .info .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #fff6ed;
-        width: 15px;
-        height: 15px;
-        background-position: center;
-        background-size: cover;
-    }
-
-    .info .close:hover {
-        cursor: pointer;
-    }
-
-    .info .body {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .info .desc {
-        position: relative;
-        margin: 13px 0 0 90px;
-        height: 75px;
-    }
-
-    .desc .ellipsis {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: pre-wrap;
-    }
-
-    .desc .jibun {
-        font-size: 11px;
-        color: #888;
-        margin-top: -2px;
-    }
-
-    .info .img {
-        position: absolute;
-        top: 6px;
-        left: 5px;
-        width: 73px;
-        height: 71px;
-        border: 1px solid #ddd;
-        color: #888;
-        overflow: hidden;
-    }
-
-    .info:after {
-        content: '';
-        position: absolute;
-        margin-left: -12px;
-        left: 50%;
-        bottom: 0;
-        width: 22px;
-        height: 12px;
-        background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-    }
-
-    .info .link {
-        color: #5085BB;
-    }
 </style>
 {% endblock head_script %}
 
@@ -182,6 +79,9 @@
     </select>
     <div class="region_right_box"></div>
 </div>
+<div onclick="clickGoToList()" class="go_to_list set_none">
+    <span>빵집 리스트로 이동하기</span>
+</div>
 {% endblock content %}
 
 
@@ -193,9 +93,13 @@
     });
 </script>
 <script>
-    const getRegionDataUrl = "{% url 'map:get_region_api' %}"
-    const closeUrl = "{% static 'map/img/close.png' %}"
+    const getRegionDataUrl = "{% url 'map:get_region_api' %}";
+    const closeUrl = "{% static 'map/img/close.png' %}";
+    const getBakeryListDataUrl = "{% url 'map:get_bakery_list_api' %}";
+    const arrowSrc = "{% static 'core/img/left_arrow.png' %}";
 </script>
 <script src="{% static 'map/js/regionData.js' %}"></script>
 <script src="{% static 'map/js/main_map.js' %}"></script>
+<script src="{% static 'map/js/clickGoToList.js' %}"></script>
+<script src="{% static 'map/js/backListToMap.js' %}"></script>
 {% endblock script %}
