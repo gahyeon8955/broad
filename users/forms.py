@@ -92,3 +92,7 @@ class SignUpForm(forms.ModelForm):
         else:
             return password
 
+class UpdateProfileImageForm(forms.ModelForm):
+     class Meta:
+        model = User
+        fields = ['avatar']

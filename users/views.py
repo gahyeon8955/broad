@@ -4,6 +4,8 @@ from .forms import UpdateProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .forms import LoginForm
 from .forms import SignUpForm
+from .forms import UpdateProfileImageForm
+
 
 # Create your views here.
 
@@ -82,3 +84,14 @@ def profile_update(request):
     else:
         form = UpdateProfileForm(instance=user)
     return render(request, "users/profile_update.html", {"form": form})
+
+def profileimage_update(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        form = UpdateProfileImageForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user = form.save()
+            return redirect('users:profile_update')
+    else:
+        form = UpdateProfileImageForm(instance=user)
+        return render(request, 'users/profileimage_form.html',{'form':form})
