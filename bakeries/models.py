@@ -117,7 +117,7 @@ class Review(models.Model):
     )
 
     body = models.TextField()  # 리뷰 내용
-    rating = models.IntegerField(choices=RATING, default=5)  # 평점
+    rating = models.FloatField(choices=RATING, default=5)  # 평점
     created_date = models.DateTimeField(auto_now=True)  # 작성 시간
     bakery = models.ForeignKey(
         "Bakery", on_delete=models.CASCADE, related_name="reviews"

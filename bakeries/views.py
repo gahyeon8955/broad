@@ -22,6 +22,7 @@ def bakery_list(request):
 
 def bakery_detail(request, bakery_id):
     bakery_detail = bakery_models.Bakery.objects.get(pk=bakery_id)
+    reviews = bakery_detail.reviews.all().order_by("-created_date")[:2]
     try:
         is_liked = request.user.like.filter(pk=bakery_id).exists()
     except:
@@ -29,7 +30,7 @@ def bakery_detail(request, bakery_id):
     return render(
         request,
         "bakeries/bakery_detail.html",
-        {"bakery_detail": bakery_detail, "is_liked": is_liked},
+        {"bakery_detail": bakery_detail, "reviews": reviews, "is_liked": is_liked},
     )
 
 
@@ -97,7 +98,12 @@ def bakery_like_list(request):
 
 def bakery_review_list(request, bakery_id):
     one_bakery = get_object_or_404(bakery_models.Bakery, pk=bakery_id)
-    return render(request, "bakeries/bakery_review_list.html", {"bakery": one_bakery})
+    reviews = one_bakery.reviews.all().order_by("-created_date")
+    return render(
+        request,
+        "bakeries/bakery_review_list.html",
+        {"bakery": one_bakery, "reviews": reviews},
+    )
 
 
 def user_review_list(request):

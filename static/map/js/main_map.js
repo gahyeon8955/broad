@@ -40,7 +40,6 @@ const getRegionData = (region) => {
     data: { region },
     dataType: "json",
     success: (response) => {
-      console.log(response);
       positions = response;
       setOverlayAndMarker();
     },
