@@ -21,8 +21,8 @@ def photo_path(instance, filename):
 class Post(models.Model):
     title = models.CharField(max_length=20)
     body = models.CharField(max_length=500)
-    created_date = models.DateTimeField(auto_now=True)
-    views = models.IntegerField(default=0)
+    created_date = models.DateTimeField(auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
     user = models.ForeignKey(
         user_models.User, related_name="posts", on_delete=models.CASCADE
     )
@@ -30,6 +30,11 @@ class Post(models.Model):
 
     def comments_count(self):
         pass
+
+    @property
+    def click(self):
+        self.views +=1
+        self.save()
 
     def __str__(self):
         return self.title

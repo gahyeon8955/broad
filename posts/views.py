@@ -20,14 +20,27 @@ def post_my(request):
   
 def post_detail(request, post_id):
     post_detail = get_object_or_404(post_models.Post, pk=post_id)
-    return render(request, "posts/post_detail.html", {"post_detail":post_detail})
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post_detail
+            comment.user = request.user
+            comment.save()
+            return redirect('/post/'+str(post_id))
+    else:
+        form = CommentForm()
+    return render(request, "posts/post_detail.html", {"post_detail":post_detail, 'form':form})
 
 def post_write(request):
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('/post/')
 
     else:
@@ -42,7 +55,6 @@ def post_update(request, post_id):
         if form.is_valid():
             form.save()
             return redirect('/post/'+str(post_id))
-
     else:
         form = PostForm(instance=post)
         return render(request, "posts/post_update.html", {'form':form})
@@ -59,7 +71,7 @@ def add_comment_to_post(request, post_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = request.user
+            comment.user = request.user
             comment.save()
             return redirect('/post/'+str(post_id))
     else:
@@ -76,3 +88,4 @@ def comment_delete(request, post_id, comment_id):
     else:
         comment.delete()
         return redirect('/post/'+ str(post_id))
+

@@ -11,6 +11,8 @@ import random
 
 # Create your models here.
 
+def photo_path():
+    pass
 
 # Photo 모델의 사진경로 설정 함수
 def logo_photo_path(instance, filename):
