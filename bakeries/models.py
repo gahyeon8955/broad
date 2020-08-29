@@ -11,9 +11,6 @@ import random
 
 # Create your models here.
 
-def photo_path():
-    pass
-
 
 # Photo 모델의 사진경로 설정 함수
 def logo_photo_path(instance, filename):
@@ -47,7 +44,7 @@ class Bakery(models.Model):
     )  # 도시(진주/울산/전주/의정부 등)
 
     def short_sub_name(self):
-        return self.sub_name[:30] + "..."
+        return self.sub_name[:30] + "..." if self.sub_name != "" else ""
 
     def review_count(self):
         return self.reviews.all().count()

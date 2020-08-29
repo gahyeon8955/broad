@@ -16,8 +16,8 @@
 {% block header %}
 <div class="header__wrapper">
     <div class="header__leftbox">
-        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
-            alt="left_arrow icon">
+        <a href="{% url 'bakeries:detail' bakery.id %}"><img class="left_arrow"
+                src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon"></a>
     </div>
     <div class="header__midbox">
         <span class="header__title">{{bakery.name}}</span>
@@ -34,7 +34,9 @@
         <div class="bakery_review">리뷰</div>
         <div class="bakery_review_count">{{bakery.review_count}}</div>
     </div>
-    <div class="bakery_review_write">리뷰 작성하기</div>
+    <a href="{% url 'bakeries:review_write' bakery.id %}">
+        <div class="bakery_review_write">리뷰 작성하기</div>
+    </a>
 </div>
 {% for review in bakery.reviews.all %}
 <div class="bakery_review_detail">

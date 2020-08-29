@@ -54,7 +54,7 @@ const setOverlayAndMarker = () => {
         <div class="info">
             <div class="title">
                 <a href="/bakery/${pk}/">${name}</a>
-                <div class="close" onclick="closeOverlay()" title="닫기"></div>
+                <div style="background-image:url(${closeUrl})" class="close" onclick="closeOverlay()" title="닫기"></div>
             </div>
             <div class="body">
                 <div class="img">
@@ -93,9 +93,11 @@ const setOverlayAndMarker = () => {
     let myname = positions[i].bakery[0].fields.name;
     let myaddress = positions[i].bakery[0].fields.address;
     try {
-      myphoto = `https://broadbucket.s3.amazonaws.com/${positions[i].photos[0].fields.photo}`;
+      // myphoto = `https://broadbucket.s3.amazonaws.com/${positions[i].photos[0].fields.photo}`;
+      myphoto = `/media/${positions[i].photos[0].fields.photo}`;
     } catch (error) {
-      myphoto = `https://broadbucket.s3.amazonaws.com/bakery/image/logo_default.png`;
+      // myphoto = `https://broadbucket.s3.amazonaws.com/bakery/image/logo_default.png`;
+      myphoto = `/media/bakery/image/logo_default.png`;
     }
 
     // 마커를 생성합니다

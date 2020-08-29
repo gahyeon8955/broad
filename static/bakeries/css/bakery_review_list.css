@@ -9,6 +9,11 @@
   margin-bottom: 25px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .review_left_box {
   display: flex;
   align-items: center;

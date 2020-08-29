@@ -115,7 +115,7 @@ def review_write(request, bakery_id):
             review.bakery = bakery_models.Bakery.objects.get(id=bakery_id)
             review.user = request.user
             review.save()
-            return redirect("bakeries:user_review_list")
+            return redirect(f"/bakery/{bakery_id}/reviews/")
     else:
         form = WriteReviewForm()
     return render(request, "bakeries/review_write.html", {"form": form})

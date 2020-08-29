@@ -122,8 +122,8 @@ footer {
 }
 
 /* 반응형 CSS */
-@media (min-width: 350px) {
+@media (min-width: 400px) {
   .map_init {
-    width: 350px;
+    width: 400px;
   }
 }

@@ -5,7 +5,7 @@
 <head>
     <!-- meta 태그 모음 -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 
     <!-- 타이틀 -->
@@ -64,6 +64,7 @@
     </div>
     {% endblock bottom_icons %}
 
+    <script src="{% static 'core/js/enlarge.js' %}"></script>
     {% block script %}
     <!-- JS/JQuery 스크립트 추가하는 부분 -->
     {% endblock script %}
