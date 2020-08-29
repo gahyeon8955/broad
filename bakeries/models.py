@@ -52,10 +52,10 @@ class Bakery(models.Model):
     def total_rating(self):
         all_reviews_rating_list = list(map(lambda x: x.rating, self.reviews.all()))
         rating_sum = sum(all_reviews_rating_list)
-        if rating_sum == 0:
-            return mark_safe("&nbsp;&nbsp;-")
-        else:
+        try:
             return round(rating_sum / len(all_reviews_rating_list), 1)
+        except:
+            return 0
 
     def __str__(self):
         return self.name

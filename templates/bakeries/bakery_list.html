@@ -35,7 +35,7 @@
         <div class="store_review">
             <div class="review_score">
                 <span class="score_star">★</span>
-                <span class="score_number">{{bakery.total_rating}}</span>
+                <span class="score_number"><span class="jsCount">{{bakery.total_rating}}</span></span>
             </div>
             <div class="review_number">
                 <span class="review_count">리뷰 {{bakery.review_count}}</span>
@@ -46,3 +46,14 @@
 </div>
 
 {% endblock content %}
+
+{% block script %}
+<script>
+    const count = document.querySelectorAll(".jsCount")
+    for (const i of count) {
+        if (i.innerText == "0") {
+            i.innerHTML = `&nbsp;&nbsp;-`
+        }
+    }
+</script>
+{% endblock script %}

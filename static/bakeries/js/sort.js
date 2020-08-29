@@ -28,7 +28,7 @@ const listInfoHTML = (
       <div class="review_score">
           <span class="score_star">★</span>
           <span class="score_number">${
-            totalRating != 0 ? totalRating.toFixed(1) : totalRating
+            totalRating != 0 ? totalRating.toFixed(1) : "&nbsp;&nbsp;-"
           }</span>
       </div>
       <div class="review_number">
