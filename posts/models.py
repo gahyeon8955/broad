@@ -27,13 +27,16 @@ class Post(models.Model):
         user_models.User, related_name="posts", on_delete=models.CASCADE
     )
     photo = models.ImageField(upload_to=photo_path, blank=True)
+    scraped = models.ManyToManyField(
+        user_models.User, blank=True, related_name="scraped"
+    )
 
     def comments_count(self):
         pass
 
     @property
     def click(self):
-        self.views +=1
+        self.views += 1
         self.save()
 
     def __str__(self):

@@ -10,6 +10,7 @@
 <!-- 개별적인 css/link태그 추가 -->
 {% block css %}
 <link rel="stylesheet" href="{% static 'posts/css/post_detail.css' %}">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 {% endblock css %}
 
 
@@ -48,10 +49,17 @@
     <div class="post_detail_contents_box">
         <div class="post_detail_title_scrap">
             <span class="post_detail_title">{{post_detail.title}}</span>
-            <span class="post_detail_scrap">
-                <img src="{% static 'posts/img/star.png' %}">
-                <span class="post_detail_scrap_text">스크랩</span>
+            {% if is_scraped %}
+            <span class="post_detail_scrap jsScrap border-color-gold" onclick="clickScrap()">
+                <img class="jsScrapImg" src="{% static 'posts/img/star.png' %}">
+                <span class="post_detail_scrap_text jsScraptext text-color-gold">스크랩</span>
             </span>
+            {% else %}
+            <span class="post_detail_scrap jsScrap" onclick="clickScrap()">
+                <img class="jsScrapImg" src="{% static 'posts/img/white_star.png' %}">
+                <span class="post_detail_scrap_text jsScraptext">스크랩</span>
+            </span>
+            {% endif %}
         </div>
         <div class="post_detail_contents">{{post_detail.body}}</div>
         <div class="post_detail_photo">
@@ -124,3 +132,12 @@
 
 </div>
 {% endblock content %}
+
+{% block script %}
+<script>
+    const csrf = "{{ csrf_token }}";
+    const ajaxScrapUrl = "{% url 'posts:ajax_scrap' %}";
+    const postPK = "{{ post_detail.pk }}"
+</script>
+<script src="{% static 'posts/js/scrap.js' %}"></script>
+{% endblock script %}
