@@ -97,7 +97,7 @@ const clickGoToList = () => {
   content.insertAdjacentHTML(
     "beforebegin",
     `
-    <div class="content newContent">
+    <div class="content newContent set_base_content_padding">
       <div class="list jsList">
       </div>
     </div>

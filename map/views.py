@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
 from bakeries import models as bakery_models
@@ -58,7 +58,7 @@ def get_bakery_detail_api(request):
     bakery = bakery_models.Bakery.objects.get(pk=pk)
     photos = bakery.photos.all()
     menus = bakery.menus.all()
-    reviews = bakery.reviews.all()[:2]
+    reviews = bakery.reviews.all().order_by("-created_date")[:2]
     reviews_list = []
     for review in reviews:
         created_d = review.created_date.strftime("%y.%m.%d")
@@ -84,3 +84,39 @@ def get_bakery_detail_api(request):
     result["review_count"] = bakery.review_count()
     data = json.dumps(result)
     return HttpResponse(data, content_type="application/json")
+
+
+def get_bakery_detail_reviews_api(request):
+    pk = request.GET.get("pk")
+    reviews = (
+        bakery_models.Bakery.objects.get(pk=pk).reviews.all().order_by("-created_date")
+    )
+    reviews_dict = json.loads(serializers.serialize("json", reviews))
+    created_date_list = []
+    photos_list = []
+    nicknames_list = []
+    is_equal_writer_and_login_list = []
+    for review in reviews:
+        created_date_list.append(review.created_date.strftime("%y.%m.%d"))
+        photos_list.append(review.user.avatar.url)
+        nicknames_list.append(review.user.nickname)
+        is_equal_writer_and_login_list.append(review.user == request.user)
+    result = {}
+
+    result["reviews"] = reviews_dict
+    result["created_date"] = created_date_list
+    result["photos"] = photos_list
+    result["nicknames"] = nicknames_list
+    result["is_equal_writer_and_login"] = is_equal_writer_and_login_list
+    data = json.dumps(result)
+    return HttpResponse(data, content_type="application/json")
+
+
+def ajax_delete_review(request):
+    pk = request.POST.get("pk")
+    review = get_object_or_404(bakery_models.Review, pk=pk)
+    if review.user == request.user:
+        review.delete()
+        return HttpResponse({"success": "success"}, content_type="application/json")
+    else:
+        raise Http404("접근할 수 없습니다.")

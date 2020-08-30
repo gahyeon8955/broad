@@ -107,11 +107,14 @@ header {
   width: 100vw;
   height: 70px;
   display: flex;
-  border-top: solid 2px #ececec;
 }
 
 .bottom_icons > a:hover {
   border-top: solid 2px black;
+}
+
+.bottom_icons > a {
+  border-top: solid 2px #ececec;
 }
 
 .buttom_icons__icon_wrap {

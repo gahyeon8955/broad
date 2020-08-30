@@ -148,6 +148,10 @@ footer {
   overflow: auto;
 }
 
+.set_base_content_padding {
+  padding: 10px 0 !important;
+}
+
 /* 반응형 CSS */
 @media (min-width: 400px) {
   .map_init {

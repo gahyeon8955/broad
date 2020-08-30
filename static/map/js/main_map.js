@@ -4,6 +4,8 @@ const regionSelectBox = document.querySelector(".jsRegionSelectBox"); //지역�
 const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 Select태그 DOM
 const content = document.querySelector(".content");
 const goToList = document.querySelector(".go_to_list");
+let detailHeader;
+let reviewBakeryName;
 let bakeryPK;
 var map;
 let jinjuPolygon;

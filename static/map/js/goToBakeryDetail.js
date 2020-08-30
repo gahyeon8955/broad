@@ -78,7 +78,7 @@ const setDetailHeader = () => {
 
 const setDetailHTML = () => {
   return `
-<div class="content detailContent set_block">
+<div class="content detailContent set_block set_base_content_padding">
     <!-- 가게 대표 빵 이미지 사진들 -->
     <div class="bakery_bread_image_box">
     </div>
@@ -140,7 +140,9 @@ const setDetailHTML = () => {
                       detailData.review_count
                     }</div>
                 </div>
-                <a href="/bakery/${detailData.bakery.pk}/reviews/">
+                <a onclick="goDetailToReviews(
+                  ${detailData.bakery.pk},
+                  ${detailData.review_count})">
                     <div class="bakery_review_write">리뷰 더보기</div>
                 </a>
             </div>
@@ -162,10 +164,12 @@ const ajaxCallDetailData = (pk) => {
     dataType: "json",
     success: (response) => {
       detailData = response;
+      reviewBakeryName = detailData.bakery.fields.name;
       newContent.insertAdjacentHTML("beforebegin", setDetailHTML());
       listHeader = document.querySelector("header").innerHTML;
       detailContent = document.querySelector(".detailContent");
       setDetailHeader();
+      detailHeader = document.querySelector("header").innerHTML;
       setBakeryImages();
       setBakeryMenus();
       setBakeryReviews();
@@ -174,6 +178,7 @@ const ajaxCallDetailData = (pk) => {
 };
 
 const goToBakeryDetail = (pk) => {
+  overlay.setMap(null);
   newContent.classList.replace("set_block", "set_none");
   ajaxCallDetailData(pk);
 };
