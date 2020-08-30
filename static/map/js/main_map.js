@@ -172,6 +172,7 @@ let options = {
 
 // 제일처음 시작되는 함수로, map_init에서 지역이 클릭되면 카카오맵이 호출됨
 const startMap = (event) => {
+  content.classList.add("set_base_content_padding");
   mapInit.classList.add("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
   regionSelectBox.classList.add("set_z-index_6"); //지역선택박스 Kakao map 위로 오게 설정
