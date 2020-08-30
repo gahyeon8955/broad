@@ -172,6 +172,7 @@ let options = {
 
 // 제일처음 시작되는 함수로, map_init에서 지역이 클릭되면 카카오맵이 호출됨
 const startMap = (event) => {
+  body.classList.remove("set_fixed");
   content.classList.add("set_base_content_padding");
   mapInit.classList.add("set_none"); //첫 지도이미지 display:none 추가
   regionSelectBox.classList.replace("set_none", "set_flex"); //지역선택박스 none -> block으로 변경
@@ -326,6 +327,7 @@ const setMouseInOut = () => {
 
 // 지역선택으로 돌아가는 뒤로가기버튼 눌렀을때 실행됨
 const clickRegionBack = () => {
+  body.classList.add("set_fixed");
   delete map;
   delete polygon;
   for (let i in markers) {

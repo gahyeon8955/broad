@@ -3,6 +3,7 @@
 }
 
 /* 모바일 기본 제거 */
+
 body {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -91,6 +92,7 @@ header {
 }
 
 .content {
+  width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
 }

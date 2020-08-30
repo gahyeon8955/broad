@@ -100,6 +100,11 @@
     });
 </script>
 <script>
+    const body = document.querySelector("body");
+    body.classList.add("set_fixed");
+
+</script>
+<script>
     const getRegionDataUrl = "{% url 'map:get_region_api' %}";
     const closeUrl = "{% static 'map/img/close.png' %}";
     const getBakeryListDataUrl = "{% url 'map:get_bakery_list_api' %}";

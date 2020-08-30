@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BROAD | 로그인</title>
     <link rel="stylesheet" href="{% static 'core/css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'users/css/login.css' %}">
@@ -53,6 +53,8 @@
             <a href="{% url 'users:signup' %}"><span class="signup_link">회원가입</span></a>
         </div>
     </div>
+
+    <script src="{% static 'core/js/enlarge.js' %}"></script>
 </body>
 
 </html>

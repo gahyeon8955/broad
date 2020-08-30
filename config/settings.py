@@ -25,7 +25,7 @@ SECRET_KEY = "rn49+8-k!e5aj6=$-qa7w5++a1o8=57%dx8vu$6eyq(12=)4+q"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Django에서 기본으로 제공해주는 App들

@@ -1,4 +1,3 @@
-const body = document.querySelector("body");
 let detailContent;
 let mapHeader;
 let detailData2;
