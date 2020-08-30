@@ -36,12 +36,21 @@ const setBakeryReviews = () => {
 const setBakeryMenus = () => {
   const menuBox = document.querySelector(".bakery_menu_detail_box");
   for (const i in detailData.menus) {
+    let price = detailData.menus[i].fields.row_price;
+    let strPrice = String(price);
+    if (price >= 100000) {
+      price = `${strPrice.substring(0, 3)},${strPrice.substring(3, 6)}`;
+    } else if (price >= 10000) {
+      price = `${strPrice.substring(0, 2)},${strPrice.substring(2, 5)}`;
+    } else if (price >= 1000) {
+      price = `${strPrice.substring(0, 1)},${strPrice.substring(1, 4)}`;
+    }
     menuBox.insertAdjacentHTML(
       "beforeend",
       `
       <div class="bakery_menu_detail1">
         <div class="bakery_menu_name">${detailData.menus[i].fields.name}</div>
-        <div class="bakery_menu_price">${detailData.menus[i].fields.row_price}</div>
+        <div class="bakery_menu_price">${price}</div>
       </div>
       `
     );
