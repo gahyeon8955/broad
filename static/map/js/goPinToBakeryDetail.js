@@ -128,8 +128,8 @@ const setDetailHTML2 = () => {
         </div>
 
         <!-- 가게 위치 박스 -->
-        <div class="bakery_location_box">
-            <img class="bakery_location" src=${tempLocalSrc}>
+        <div id="detailMap" class="bakery_location_box">
+            <div class="bakery_location"></div>
             <div class="bakery_location_address">${
               detailData2.bakery.fields.address
             }</div>
@@ -184,6 +184,9 @@ const ajaxCallDetailData2 = (pk) => {
       setBakeryImages2();
       setBakeryMenus2();
       setBakeryReviews2();
+      mapLat = detailData2.bakery.fields.lat;
+      mapLng = detailData2.bakery.fields.lng;
+      bakeryDetailMap();
     },
   });
 };

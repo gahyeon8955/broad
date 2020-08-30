@@ -30,7 +30,7 @@
 {% block head_script %}
 <!-- 기본 카카오맵 API -->
 <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08a8e8a0fde8d36ad5c30df67d5d41f6&libraries=services,clusterer,drawing"></script>
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08a8e8a0fde8d36ad5c30df67d5d41f6&libraries=clusterer"></script>
 <!-- 제이쿼리 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
@@ -115,6 +115,7 @@
     const deleteReviewUrl = "{% url 'map:ajax_delete_review' %}";
 
 </script>
+<script src="{% static 'bakeries/js/bakeryDetailMap.js' %}"></script>
 <script src="{% static 'map/js/regionData.js' %}"></script>
 <script src="{% static 'map/js/main_map.js' %}"></script>
 <script src="{% static 'bakeries/js/like.js' %}"></script>

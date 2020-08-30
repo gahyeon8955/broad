@@ -11,7 +11,11 @@
 <!-- 개별적인 css/link태그 추가 -->
 {% block css %}
 <link rel="stylesheet" href="{% static 'bakeries/css/bakery_detail.css' %}">
+<!-- JQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 기본 카카오맵 API -->
+<script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08a8e8a0fde8d36ad5c30df67d5d41f6&libraries=clusterer"></script>
 {% endblock css %}
 
 
@@ -121,6 +125,12 @@
     const csrf = "{{ csrf_token }}";
     const ajaxLikeUrl = "{% url 'bakeries:ajax_like' %}";
     const bakeryPK = "{{bakery_detail.pk}}"
+    const mapLat = "{{bakery_detail.lat}}"
+    const mapLng = "{{bakery_detail.lng}}"
 </script>
 <script src="{% static 'bakeries/js/like.js' %}"></script>
+<script src="{% static 'bakeries/js/bakeryDetailMap.js' %}"></script>
+<script>
+    bakeryDetailMap();
+</script>
 {% endblock script %}

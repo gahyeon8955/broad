@@ -127,7 +127,7 @@ const setDetailHTML = () => {
 
         <!-- 가게 위치 박스 -->
         <div class="bakery_location_box">
-            <img class="bakery_location" src=${tempLocalSrc}>
+            <div id="detailMap" class="bakery_location"></div>
             <div class="bakery_location_address">${
               detailData.bakery.fields.address
             }</div>
@@ -182,6 +182,9 @@ const ajaxCallDetailData = (pk) => {
       setBakeryImages();
       setBakeryMenus();
       setBakeryReviews();
+      mapLat = detailData.bakery.fields.lat;
+      mapLng = detailData.bakery.fields.lng;
+      bakeryDetailMap();
     },
   });
 };
