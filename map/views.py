@@ -47,3 +47,40 @@ def get_bakery_list_api(request):
         return HttpResponse(
             json.dumps({"result": "none"}), content_type="application/json"
         )
+
+
+def get_bakery_detail_api(request):
+    pk = request.GET.get("pk")
+    try:
+        is_liked = request.user.like.filter(pk=pk).exists()
+    except:
+        is_liked = ""
+    bakery = bakery_models.Bakery.objects.get(pk=pk)
+    photos = bakery.photos.all()
+    menus = bakery.menus.all()
+    reviews = bakery.reviews.all()[:2]
+    reviews_list = []
+    for review in reviews:
+        created_d = review.created_date.strftime("%y.%m.%d")
+        reviews_list.append(
+            {
+                "user_img": review.user.avatar.url,
+                "user_nickname": review.user.nickname,
+                "created_date": created_d,
+                "user_rating": review.rating,
+                "body": review.body,
+            }
+        )
+    bakery_dict = json.loads(serializers.serialize("json", [bakery,]))
+    photos_dict = json.loads(serializers.serialize("json", photos))
+    menus_dict = json.loads(serializers.serialize("json", menus))
+    result = {}
+    result["bakery"] = bakery_dict[0]
+    result["photos"] = photos_dict
+    result["menus"] = menus_dict
+    result["reviews"] = reviews_list
+    result["is_liked"] = is_liked
+    result["total_rating"] = bakery.total_rating()
+    result["review_count"] = bakery.review_count()
+    data = json.dumps(result)
+    return HttpResponse(data, content_type="application/json")

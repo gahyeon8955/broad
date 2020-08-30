@@ -99,10 +99,10 @@ header {
   width: 35px;
 }
 
-.bottom_blank,
+/* .bottom_blank,
 footer {
   display: none;
-}
+} */
 
 .go_to_list {
   z-index: 10;
@@ -138,6 +138,14 @@ footer {
 
 .set_z-index_6 {
   z-index: 6;
+}
+
+.height_auto {
+  height: auto;
+}
+
+.overflow_none {
+  overflow: auto;
 }
 
 /* 반응형 CSS */

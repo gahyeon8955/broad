@@ -4,6 +4,7 @@ let newContent;
 let currentRegion;
 let bakeryListData;
 let beforeHeader;
+
 const headerHTML = (cr) => {
   return `
 <div class="header__wrapper">
@@ -30,7 +31,7 @@ const htmlTagSet = (
   review_count
 ) => {
   return `
-<a href="/bakery/${pk}/" class="list_store">
+<div onclick="goToBakeryDetail(${pk})" class="list_store">
     <div class="store_rank">${parseInt(index) + 1} </div>
     <div class="store_detail">
         <div class="detail_top">
@@ -50,7 +51,7 @@ const htmlTagSet = (
             <span class="review_count">리뷰 ${review_count}</span>
         </div>
     </div>
-</a>
+</div>
 `;
 };
 
@@ -88,6 +89,7 @@ const ajaxCallData = (currentRegion) => {
 };
 
 const clickGoToList = () => {
+  body.classList.add("height_auto", "overflow_none");
   content.classList.add("set_none");
   currentRegion = regionSelect.value;
   beforeHeader = header.innerHTML;
@@ -95,13 +97,14 @@ const clickGoToList = () => {
   content.insertAdjacentHTML(
     "beforebegin",
     `
-    <div style="display: block;" class="content newContent">
+    <div class="content newContent">
       <div class="list jsList">
       </div>
     </div>
     `
   );
   newContent = document.querySelector(".newContent");
+  newContent.classList.add("set_block");
   ListElement = document.querySelector(".jsList");
   ajaxCallData(currentRegion);
 };

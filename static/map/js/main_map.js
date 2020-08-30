@@ -4,6 +4,7 @@ const regionSelectBox = document.querySelector(".jsRegionSelectBox"); //지역�
 const regionSelect = document.querySelector(".jsRegionSelect"); //지역선택 Select태그 DOM
 const content = document.querySelector(".content");
 const goToList = document.querySelector(".go_to_list");
+let bakeryPK;
 var map;
 let jinjuPolygon;
 let marker;
@@ -53,10 +54,10 @@ const setOverlayAndMarker = () => {
   <div class="wrap">
         <div class="info">
             <div class="title">
-                <a href="/bakery/${pk}/">${name}</a>
+                <div onclick="goPinToBakeryDetail(${pk})">${name}</div>
                 <div style="background-image:url(${closeUrl})" class="close" onclick="closeOverlay()" title="닫기"></div>
             </div>
-            <div class="body">
+            <div onclick="goPinToBakeryDetail(${pk})" class="body">
                 <div class="img">
                     <img src="${imgUrl}" width="73" height="70">
                </div>

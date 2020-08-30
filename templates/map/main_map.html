@@ -12,9 +12,10 @@
 <link rel="stylesheet" href="{% static 'map/css/map.css' %}">
 <link rel="stylesheet" href="{% static 'map/css/overlay.css' %}">
 <link rel="stylesheet" href="{% static 'bakeries/css/bakery_list.css' %}">
+<link rel="stylesheet" href="{% static 'bakeries/css/bakery_detail.css' %}">
 <style>
-    .set_block {
-        display: block;
+    .list_store:hover {
+        cursor: pointer;
     }
 </style>
 {% endblock css %}
@@ -97,9 +98,21 @@
     const closeUrl = "{% static 'map/img/close.png' %}";
     const getBakeryListDataUrl = "{% url 'map:get_bakery_list_api' %}";
     const arrowSrc = "{% static 'core/img/left_arrow.png' %}";
+    const getBakeryDetailDataUrl = "{% url 'map:get_bakery_detail_api' %}"
+    const csrf = "{{ csrf_token }}";
+    const ajaxLikeUrl = "{% url 'bakeries:ajax_like' %}";
+    const heartSrc = "{% static 'bakeries/img/heart.png' %}"
+    const whiteHeartSrc = "{% static 'bakeries/img/white_heart.png' %}"
+    const tempLocalSrc = "{% static 'bakeries/img/location.png' %}"
 </script>
 <script src="{% static 'map/js/regionData.js' %}"></script>
 <script src="{% static 'map/js/main_map.js' %}"></script>
+<script src="{% static 'bakeries/js/like.js' %}"></script>
+<script src="{% static 'map/js/goPinToBakeryDetail.js' %}"></script>
+<script src="{% static 'map/js/backDetailToMap.js' %}"></script>
 <script src="{% static 'map/js/clickGoToList.js' %}"></script>
 <script src="{% static 'map/js/backListToMap.js' %}"></script>
+<script src="{% static 'map/js/goToBakeryDetail.js' %}"></script>
+<script src="{% static 'map/js/backDetailToList.js' %}"></script>
+
 {% endblock script %}
