@@ -187,6 +187,9 @@ const startMap = (event) => {
       regionData[event.target.alt][0][2]
     )
   );
+  if (needSetLevelUpLocals.includes(local)) {
+    map.setLevel(9);
+  }
   jsonAsync(regionSelect.value);
 };
 

@@ -149,3 +149,5 @@ const regionData = {
     ["서귀포시", 33.2502176, 126.5587452],
   ],
 };
+
+const needSetLevelUpLocals = ["경기/인천", "서울"];
