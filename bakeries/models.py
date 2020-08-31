@@ -33,8 +33,8 @@ class Bakery(models.Model):
     address = models.CharField(max_length=150, default="", blank=True)  # 주소
     phone_number = models.CharField(max_length=30, default="", blank=True)  # 전화번호
     business_hour = models.CharField(max_length=100, default="", blank=True)
-    temp_review_count = models.IntegerField(default=0, blank=True)
-    temp_total_rating = models.IntegerField(default=0, blank=True)
+    temp_review_count = models.IntegerField(default=0, blank=True, null=True)
+    temp_total_rating = models.IntegerField(default=0, blank=True, null=True)
     logo = models.ImageField(
         upload_to="logo_photo_path", default="bakery/image/logo_default.png"
     )
