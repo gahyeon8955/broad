@@ -4,9 +4,9 @@
 
 
 ## Github Repositories
-1. https://github.com/eunche/broad
-2. https://github.com/eunche/broad-deploy
-3. https://github.com/eunche/broad-deploy-0906
+1. https://github.com/eunche/broad{: target="_blank"}
+2. https://github.com/eunche/broad-deploy{: target="_blank"}
+3. https://github.com/eunche/broad-deploy-0906{: target="_blank"}
 
 
 ## 저장소가 여러개로 나뉜 이유
