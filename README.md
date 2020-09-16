@@ -3,7 +3,7 @@
 * https://broad-2020.herokuapp.com/
 
 
-## Github Repositorries
+## Github Repositories
 1. https://github.com/eunche/broad
 2. https://github.com/eunche/broad-deploy
 3. https://github.com/eunche/broad-deploy-0906
