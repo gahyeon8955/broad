@@ -1,5 +1,5 @@
 # broad
-(2020.09) 빵집 추천 지도&amp;커뮤니티(1)
+(2020.09) 빵집 추천 지도&amp;커뮤니티
 * https://broad-2020.herokuapp.com/
 
 
