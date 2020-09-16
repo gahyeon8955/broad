@@ -18,13 +18,12 @@
 * Javascripts/ES6
 * Ajax
 * JQuery
-* AWS Elastic Beanstalk
-* AWS S3
-* AWS RDS(use PostgreSQL)
 * Selenium
 * BeautifulSoup4
 * Kakao Login/Map API
-
+* AWS Elastic Beanstalk
+* AWS S3
+* AWS RDS(use PostgreSQL)
 
 ## 맡은 역할
 * 프로젝트 총괄 및 역할분담
