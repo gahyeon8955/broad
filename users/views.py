@@ -93,7 +93,7 @@ def profile_update(request):
 # 카카오 소셜로그인
 def kakao_login(request):
     client_id = settings.KAKAO_ID
-    redirect_uri = "http://127.0.0.1:8000/user/login/kakao/callback"
+    redirect_uri = "https://broad-2020.herokuapp.com/user/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -107,7 +107,7 @@ def kakao_callback(request):
     try:
         code = request.GET.get("code")
         client_id = settings.KAKAO_ID
-        redirect_uri = "http://127.0.0.1:8000/user/login/kakao/callback"
+        redirect_uri = "https://broad-2020.herokuapp.com/user/login/kakao/callback"
         token_request = requests.get(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
         )
