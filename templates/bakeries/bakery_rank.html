@@ -10,13 +10,14 @@
 <!-- 개별적인 css/link태그 추가 -->
 {% block css %}
 <link rel="stylesheet" href="{% static 'bakeries/css/bakery_rank.css' %}">
+<!-- 제이쿼리 -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 {% endblock css %}
 
 
 {% block header %}
 <div class="header__wrapper">
     <div class="header__leftbox">
-        <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
     </div>
     <div class="header__midbox">
         <span class="header__title">랭킹</span>
@@ -29,183 +30,36 @@
 
 {% block content %}
 <div class="menu">
-    <div class="menu_1">
-        <div class="menu_1__photo"></div>
-        <div class="menu_1__name">소보루빵</div>
+    <div onclick="clickCategory('소보로빵')" class="menu_1">
+        <div style="background-image: url(/static/bakeries/img/soboro.jpg);"
+            class="menu__img menu_1__photo jsSoboro opacity_1">
+        </div>
+        <div class="menu_1__name">소보로빵</div>
     </div>
 
-    <div class="menu_2">
-        <div class="menu_2__photo"></div>
+    <div onclick="clickCategory('롤케이크')" class="menu_2">
+        <div style="background-image: url(/static/bakeries/img/rollcake.jpg);"
+            class="menu__img menu_2__photo jsRollcake"></div>
         <div class="menu_2__name">롤케이크</div>
     </div>
 
-    <div class="menu_3">
-        <div class="menu_3__photo"></div>
+    <div onclick="clickCategory('마카롱')" class="menu_3">
+        <div style="background-image: url(/static/bakeries/img/makarong.jpg);"
+            class="menu__img menu_3__photo jsMakarong"></div>
         <div class="menu_3__name">마카롱</div>
     </div>
 
-    <div class="menu_4">
-        <div class="menu_4__photo"></div>
+    <div onclick="clickCategory('쿠키')" class="menu_4">
+        <div style="background-image: url(/static/bakeries/img/cookie.jpg);" class="menu__img menu_4__photo jsCookie">
+        </div>
         <div class="menu_4__name">쿠키</div>
     </div>
 </div>
-<hr>
-<div class="list">
-    <div class="list_store">
-        <div class="store_rank">1</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">수복빵집</span>
-                <span class="top_collect">찜 100+</span>
-            </div>
-            <div class="detail_explain">같은 단팥소스를 뿌려먹는 진주 명물 찐빵</div>
-            <div class="detail_address">경남 진주시 촉석로 201번길 12-1</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.5</span>
-            </div>
-            <div class="review_number">
-                <span class="review_count">리뷰 138</span>
-            </div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">2</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">통영 오미사꿀빵</span>
-            </div>
-            <div class="detail_explain">통영에서 유명한 꿀빵</div>
-            <div class="detail_address">경남 통영시 오남로 110</div>
-        </div>
-        <div class="store_review">
-            <span class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.49</span>
-            </span>
-            <span class="review_count">리뷰 346</span>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">3</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">카페 헤이브</span>
-            </div>
-            <div class="detail_explain">갬성사진 찍기 좋은 내동 루프탑 카페</div>
-            <div class="detail_address">경남 김해시 내외로 77번길 12 경보스포렉스 17, 18층</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.27</span>
-            </div>
-            <div class="review_count">리뷰 210</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">4</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">커피홀베이커리 삼천포점</span>
-            </div>
-            <div class="detail_explain">천국의 계단 있는 사진 명소 카페</div>
-            <div class="detail_address">경남 사천시 남양광포1길 16</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.3</span>
-            </div>
-            <div class="review_count">리뷰 103</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">5</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">그린하우스제과</span>
-            </div>
-            <div class="detail_explain">창원 도계동 아주미들 사이 핫한 빵집</div>
-            <div class="detail_address">경남 창원시 의창구 원이대로 81번길 10</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.43</span>
-            </div>
-            <div class="review_count">리뷰 798</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">2</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">통영 오미사꿀빵</span>
-            </div>
-            <div class="detail_explain">통영에서 유명한 꿀빵</div>
-            <div class="detail_address">경남 통영시 오남로 110</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.49</span>
-            </div>
-            <div class="review_count">리뷰 346</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">3</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">카페 헤이브</span>
-            </div>
-            <div class="detail_explain">갬성사진 찍기 좋은 내동 루프탑 카페</div>
-            <div class="detail_address">경남 김해시 내외로 77번길 12 경보스포렉스 17, 18층</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.27</span>
-            </div>
-            <div class="review_count">리뷰 210</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">4</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">커피홀베이커리 삼천포점</span>
-            </div>
-            <div class="detail_explain">천국의 계단 있는 사진 명소 카페</div>
-            <div class="detail_address">경남 사천시 남양광포1길 16</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.3</span>
-            </div>
-            <div class="review_count">리뷰 103</div>
-        </div>
-    </div>
-    <div class="list_store">
-        <div class="store_rank">5</div>
-        <div class="store_detail">
-            <div class="detail_top">
-                <span class="top_name">그린하우스제과</span>
-            </div>
-            <div class="detail_explain">창원 도계동 아주미들 사이 핫한 빵집</div>
-            <div class="detail_address">경남 창원시 의창구 원이대로 81번길 10</div>
-        </div>
-        <div class="store_review">
-            <div class="review_score">
-                <span class="score_star">★</span>
-                <span class="score_number">4.43</span>
-            </div>
-            <div class="review_count">리뷰 798</div>
-        </div>
-    </div>
+<hr class="sort_hr">
+<div class="list jsList">
 </div>
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'bakeries/js/sort.js' %}"></script>
+{% endblock script %}

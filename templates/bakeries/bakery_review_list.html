@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+성심당
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'bakeries/css/bakery_review_list.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <a href="{% url 'bakeries:detail' bakery.id %}"><img class="left_arrow"
+                src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon"></a>
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">{{bakery.name}}</span>
+    </div>
+    <div class="header__rightbox">
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+<div class="review_write_box">
+    <div class="review_left_box">
+        <div class="bakery_review">리뷰</div>
+        <div class="bakery_review_count">{{bakery.review_count}}</div>
+    </div>
+    <a href="{% url 'bakeries:review_write' bakery.id %}">
+        <div class="bakery_review_write">리뷰 작성하기</div>
+    </a>
+</div>
+{% for review in reviews %}
+<div class="bakery_review_detail">
+    <div class="bakery_review_detail_topbox">
+        <div class="bakery_review_left">
+            <div class="bakery_review_profileimg"><img src="{% static 'bakeries/img/user.png' %}"></div>
+            <div class="bakery_review_id_box">
+                <div class="bakery_review_id">{{review.user}}</div>
+                <div class="bakery_review_time">{{review.created_date|date:"y.m.d"}}</div>
+            </div>
+            <div class="bakery_review_star">{{review.rating}}</div>
+        </div>
+        <img class="delete_trash_icon" src="{% static 'bakeries/img/trash.png' %}" alt="쓰레기통 아이콘">
+    </div>
+    <div class="bakery_review_comment">{{review.body}}</div>
+</div>
+{% endfor %}
+{% endblock content %}

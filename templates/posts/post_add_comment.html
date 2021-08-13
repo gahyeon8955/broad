@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+게시글
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'posts/css/post_write.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">댓글쓰기</span>
+    </div>
+    <div class="header__rightbox"></div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+<form method="POST" class="post-form" enctype="multipart/form-data">
+    
+{% csrf_token %}
+<div class="post_write_contents_box">{{ form.body }}</div>
+<!-- 글쓰기 이미지추가&등록 박스 -->
+<div class="post_write_submit_img_box">
+    <span class="post_write_img_box">
+        {{ form.photo }}
+        <!-- <img src="{% static 'posts/img/cameraimg.png' %}" class="post_write_camera"> -->
+    </span>
+    <input class="post_write_submit" type="submit" value="등록">
+</div>
+
+</form>
+{% endblock content %}

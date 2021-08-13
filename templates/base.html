@@ -5,11 +5,11 @@
 <head>
     <!-- meta 태그 모음 -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 
     <!-- 타이틀 -->
-    <title>Broad | {% block title %}{% endblock title %}</title>
+    <title>BROAD | {% block title %}{% endblock title %}</title>
 
 
     <!-- font 링크태그 모음 -->
@@ -30,7 +30,8 @@
 <body>
     <header class="header_height">
         {% block header %}
-        <img class="logo_img" src="{% static 'core/img/logo.png' %}" alt="logo image">
+        <a href="{% url 'map:main_map' %}"><img class="logo_img" src="{% static 'core/img/logo.png' %}"
+                alt="logo image"></a>
         <input class="header__searchbar" type="search" placeholder="검색어를 입력하세요">
         {% endblock header %}
     </header>
@@ -45,24 +46,26 @@
     </footer>
     <div class="bottom_blank bottom_height"></div>
     <div class="bottom_icons bottom_height">
-        <div class="buttom_icons__icon_wrap">
+        <a href="{% url 'map:main_map' %}" class="buttom_icons__icon_wrap">
             <img src="{% static 'core/img/home.png' %}" alt="home icon">
-        </div>
-        <div class="buttom_icons__icon_wrap">
+        </a>
+        <a href="{% url 'posts:list' %}" class="buttom_icons__icon_wrap">
             <img src="{% static 'core/img/community.png' %}" alt="community icon">
-        </div>
-        <div class="buttom_icons__icon_wrap">
+        </a>
+        <a href="{% url 'bakeries:rank' %}" class="buttom_icons__icon_wrap">
             <img src="{% static 'core/img/rank.png' %}" alt="rank icon">
-        </div>
-        <div class="buttom_icons__icon_wrap">
+        </a>
+        <a href="{% url 'bakeries:like_list' %}" class="buttom_icons__icon_wrap">
             <img src="{% static 'core/img/like.png' %}" alt="heart icon">
-        </div>
-        <div class="buttom_icons__icon_wrap">
-            <img src="{% static 'core/img/user.png' %}" alt="user icon">
-        </div>
+        </a>
+        <a href="{% url 'users:profile' %}" class="buttom_icons__icon_wrap">
+            <img style="width: 22px;" src="{% static 'core/img/blank_user.png' %}" alt="user icon">
+        </a>
     </div>
     {% endblock bottom_icons %}
 
+
+    <script src="{% static 'core/js/enlarge.js' %}"></script>
     {% block script %}
     <!-- JS/JQuery 스크립트 추가하는 부분 -->
     {% endblock script %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+리뷰 작성
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'bakeries/css/review_write.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+            alt="left_arrow icon">
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">리뷰 작성</span>
+    </div>
+    <div class="header__rightbox">
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <!-- 글쓰기 제목 박스 -->
+    <div class="post_write_title_box">
+        <span>별점 : </span>{{form.rating}}
+        {% if form.rating.errors %}
+        {% for error in form.rating.errors  %}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- 글쓰기 내용 박스 -->
+    <div class="post_write_contents_box">
+        {{form.body}}
+        {% if form.body.errors %}
+        {% for error in form.body.errors  %}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- 글쓰기 이미지추가&등록 박스 -->
+    <div class="post_write_submit_img_box">
+        <button class="post_write_submit" type="submit">등록</button>
+    </div>
+</form>
+
+
+{% endblock content %}

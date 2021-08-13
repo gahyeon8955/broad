@@ -16,7 +16,6 @@
 {% block header %}
 <div class="header__wrapper">
     <div class="header__leftbox">
-        <img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}" alt="left_arrow icon">
     </div>
     <div class="header__midbox">
         <span class="header__title">마이페이지</span>
@@ -28,25 +27,26 @@
 
 
 {% block content %}
-    <div class="profile__top">
-        <div class="myprofile">
-            <div class="profile__image"></div>
-            <div class="profile__nickname">닉네임</div>
-        </div>
-        <div class="profile__edit">프로필 수정</div>
-    </div>    
-    <div class=line></div>
-    <div class="profile__middle">
-        <div class="profile__review">작성한 리뷰</div>
-        <div class="profile__post">
-            <h1>게시판</h1>
-            <h2>내가 쓴 글</h2>
-            <h2>내가 쓴 댓글</h2>
-            <h2>찜한 게시글</h2>
-        </div>
+<div class="profile__top">
+    <div class="myprofile">
+        <div style="background-image: url({{user.avatar.url}});" class="profile__image"></div>
+        <div class="profile__nickname">{{user.nickname}}</div>
     </div>
-    <div class="profile__bottom">
-        <hr style="width:80%; color:gray">
-        <div class="profile__logout">로그아웃</div>
+    <a class="profile__edit" href="{% url 'users:profile_update' %}"><span>프로필 수정</span></a>
+</div>
+<div class=line></div>
+<div class="profile__middle">
+    <a href="{% url 'bakeries:user_review_list' %}" class="profile__review"><img
+            src="{% static 'users/img/write.png' %}">작성한 리뷰</a>
+    <div class="profile__post">
+        <h1>게시판</h1>
+        <h2><a href="{% url 'posts:my' %}">내가 쓴 글</a></h2>
+        <h2><a href="#">댓글 단 글</a></h2>
+        <h2><a href="{% url 'posts:scrap' %}">찜한 게시글</a></h2>
     </div>
+</div>
+<div class="profile__bottom">
+    <hr style="width:80%; height: 1px; border:none;border-top: 1px solid #cfcfcf;">
+    <div class="profile__logout"><a href="{% url 'users:logout' %}">로그아웃</a></div>
+</div>
 {% endblock content %}

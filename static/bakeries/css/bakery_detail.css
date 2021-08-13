@@ -1,216 +1,219 @@
-/* 가게 빵 이미지 사진 박스 */
-.bakery_bread_image_box{
-    width: 100%;
-    height: 120px;
-    display: flex;
+a {
+  text-decoration-line: none;
+  color: black;
 }
-.bakery_bread_image{
-    width: 33.33%;
-    overflow: hidden;
+
+/* 가게 빵 이미지 사진 박스 */
+.bakery_bread_image_box {
+  width: 100%;
+  display: flex;
+}
+.bakery_bread_image {
+  width: 33.33vw;
+  height: 33.33vw;
+  overflow: hidden;
 }
 
 /* 가게 정보(로고,위치,메뉴,리뷰) 박스 */
-.bakery_information_box{
-    width: 100%;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
+.bakery_information_box {
+  width: 100%;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
-.bakery_box{
-    display: flex;
-    width: 100%;
-    padding: 0px 7px;
-    margin-bottom: 15px;
+.bakery_box {
+  display: flex;
+  width: 100%;
+  padding: 0px 7px;
+  margin-bottom: 15px;
 }
-.bakery_trademark_detail{
-        width: 70px;
-        height: 70px;
-        border-radius: 40px;
-        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+.bakery_trademark_detail {
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  box-shadow: inset 0px 4px 4px rgb(156 156 156 / 25%);
 }
-.bakery_name_box{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px 12px;
+.bakery_name_box {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 12px;
 }
 
-.bakery_name_and_star{
-    display: flex;
-    align-items: center;
-    margin-bottom: 7px;
+.bakery_name_and_star {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
 }
-.bakery_name{
-    font-size: 21px;
-    font-weight: bold;
+.bakery_name {
+  font-size: 21px;
+  font-weight: bold;
 }
-.bakery_star{
-    color: #AC815A;
-    margin-left: 3px;
+.bakery_star {
+  color: #ac815a;
+  margin-left: 3px;
 }
-.bakery_number{
-    font-size: 12px;
+.bakery_number {
+  font-size: 12px;
 }
-.bakery_business_hours{
-    font-size: 10px;
+.bakery_business_hours {
+  font-size: 10px;
 }
-.bakery_like{
-    width: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.bakery_like {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.bakery_like_img{
-    width: 26px;
+.bakery_like_img {
+  width: 26px;
+}
+.bakery_like_img:hover {
+  cursor: pointer;
 }
 /* 가게 위치 박스 */
-.bakery_location_box{
-    margin-bottom: 17px;
-    border-top: 1px solid #F1EDED;
+.bakery_location_box {
+  margin-bottom: 17px;
+  border-top: 1px solid #f1eded;
 }
-.bakery_location{
-    width: 100%;
-    height: 110px;
-    margin-top: 17px;
-    border-radius: 5px;
+.bakery_location {
+  width: 100%;
+  height: 110px;
+  margin-top: 17px;
+  border-radius: 5px;
 }
-.bakery_location_address{
-    padding-top: 7px;
-    color: #524949;
-    font-size: 15px;
+.bakery_location_address {
+  padding-top: 7px;
+  color: #524949;
+  font-size: 15px;
 }
 /* 가게 메뉴 박스 */
-.bakery_menu_box{
-    border-top: 1px solid #F1EDED;
+.bakery_menu_box {
+  border-top: 1px solid #f1eded;
 }
-.bakery_menu{
-    padding-top: 17px;
-    font-weight: bold;
-    font-size: 16.5px;
+.bakery_menu {
+  padding-top: 17px;
+  font-weight: bold;
+  font-size: 16.5px;
 }
-.bakery_menu_detail_box{
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 12px;
-    margin-bottom: 17px;
+.bakery_menu_detail_box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-bottom: 17px;
 }
-.bakery_menu_detail1{
-    width: 50%;
-    color: #383232;
-    font-size: 13px;
-    padding-right: 7px;
-    display: flex;
-    justify-content: space-between;
+.bakery_menu_detail1 {
+  width: 50%;
+  color: #383232;
+  font-size: 13px;
+  padding-right: 7px;
+  display: flex;
+  justify-content: space-between;
+}
 
+.bakery_menu_name {
+  min-width: 60px;
 }
-.bakery_menu_detail2{
-    width: 50%;
-    color: #383232;
-    font-size: 13px;
-    padding-left: 7px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-.bakery_menu_name{
-    min-width: 60px;
-}
-.bakery_menu_price{
-    min-width: 50px;
+.bakery_menu_price {
+  min-width: 50px;
 }
 /* 가게 리뷰 박스 */
-.bakery_review_bigbox{
-    border-top: 1px solid #F1EDED;
-    padding-top: 17px;
+.bakery_review_bigbox {
+  border-top: 1px solid #f1eded;
+  padding-top: 17px;
 }
-.review_write_box{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+.review_write_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
-.review_left_box{
-    display: flex;
-    align-items: center;
+.review_left_box {
+  display: flex;
+  align-items: center;
 }
-.bakery_review{
-    font-size: 16.5px;
-    font-weight: bold;
+.bakery_review {
+  font-size: 16.5px;
+  font-weight: bold;
 }
-.bakery_review_count{
-    font-size: 13px;
-    margin-left: 5px;
-    color: #AC815A;
+.bakery_review_count {
+  font-size: 13px;
+  margin-left: 5px;
+  color: #ac815a;
 }
-.bakery_review_write{
-    font-size: 13px;
-}
-.bakery_review_smallbox{
-    display: flex;
-    justify-content: space-between;
-}
-.bakery_review_detail{
-    width: 47.5%;
-    height: 139px;
 
-    background: #FCFCFC;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
+a {
+  text-decoration: none;
+  color: black;
 }
-.bakery_review_detail_topbox{
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 8px;
-    align-items: center;
+
+.bakery_review_write {
+  font-size: 13px;
 }
-.bakery_review_profileimg{
-    width:30px;
-    height: 30px;
-    border-radius: 30px;
-    text-align: center;
-    overflow: hidden;
+.bakery_review_smallbox {
+  display: flex;
+  justify-content: space-between;
 }
-.bakery_review_profileimg img{
-    max-width: 30px;
-    margin: 0px auto;
+.bakery_review_detail {
+  width: 47.5%;
+  height: 139px;
+  background: #fcfcfc;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 }
-.bakery_review_id_box{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+.bakery_review_detail_topbox {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 8px;
+  align-items: center;
 }
-.bakery_review_id{
-    font-size: 13px;
+.bakery_review_profileimg {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  text-align: center;
 }
-.bakery_review_star{
-    width: 20%;
-    height: 23px;
-    background-color: #717171;
-    color: white;
-    font-size: 13px;
-    padding: 5px 0px;
-    text-align: center;
-    border-radius: 5px;
+.bakery_review_profileimg img {
+  max-width: 30px;
+  margin: 0px auto;
 }
-.bakery_review_time{
-    font-size: 10px;
+.bakery_review_id_box {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
-.bakery_review_comment{
-    border-top: 1px solid #F1EDED;
-    margin: 0px 14px;
-    padding-top: 8px;
-    font-size: 13px;
-    color: #383232;
+.bakery_review_id {
+  font-size: 13px;
 }
-.hand{
-    position: absolute;
-    left: 100px;
-    top: 50px;
+.bakery_review_star {
+  width: 20%;
+  height: 23px;
+  background-color: #717171;
+  color: white;
+  font-size: 13px;
+  padding: 5px 0px;
+  text-align: center;
+  border-radius: 5px;
 }
-.hand img{
-    width: 30px;
-    left: 100px;
-    top: 200px;
+.bakery_review_time {
+  font-size: 10px;
+}
+.bakery_review_comment {
+  border-top: 1px solid #f1eded;
+  margin: 0px 14px;
+  padding-top: 8px;
+  font-size: 13px;
+  color: #383232;
+}
+.hand {
+  position: absolute;
+  left: 100px;
+  top: 50px;
+}
+.hand img {
+  width: 30px;
+  left: 100px;
+  top: 200px;
 }

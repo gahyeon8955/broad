@@ -2,6 +2,44 @@
   box-sizing: border-box;
 }
 
+/* 모바일 기본 제거 */
+
+body {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input[type="text"],
+input[type="password"] {
+  -webkit-appearance: none;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+input:checked[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+input[type="radio"] {
+  border: none;
+  -webkit-appearance: none;
+}
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"] {
+  -webkit-appearance: button;
+  border-radius: 0;
+}
+textarea {
+  -webkit-appearance: none;
+}
+select {
+  -webkit-appearance: menulist-text;
+}
+/* 모바일 초기화 끝 */
+
 body {
   font-family: "NanumSquare", sans-serif;
 }
@@ -12,13 +50,18 @@ button:focus {
 }
 
 header {
+  z-index: 10;
   position: fixed;
   display: flex;
   align-items: center;
   background-color: white;
-  width: 100vw;
+  width: 100%;
   height: 85px;
   padding: 0 15px;
+}
+
+.left_arrow:hover {
+  cursor: pointer;
 }
 
 .header_blank {
@@ -32,12 +75,10 @@ header {
 
 .header__searchbar {
   position: relative;
-  bottom: 5px;
-  width: 200px;
+  width: 250px;
   height: 30px;
   border: none;
   border: 1px solid #e1e1e1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 150px;
   padding: 5px 10px;
 }
@@ -51,6 +92,7 @@ header {
 }
 
 .content {
+  width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -60,14 +102,21 @@ header {
 }
 
 .bottom_icons {
+  background-color: white;
   z-index: 10;
   position: fixed;
   bottom: 0;
-  background-color: #fbfbfb;
   width: 100vw;
   height: 70px;
   display: flex;
-  border-top: solid thin #e1e1e1;
+}
+
+.bottom_icons > a:hover {
+  border-top: solid 2px black;
+}
+
+.bottom_icons > a {
+  border-top: solid 2px #ececec;
 }
 
 .buttom_icons__icon_wrap {
@@ -130,6 +179,19 @@ header {
   height: 18px;
 }
 
-.header__save {
-  font-weight: bold;
+.no_exist {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no_exist > span {
+  position: relative;
+  bottom: 20px;
+  color: #5d2c1d;
 }

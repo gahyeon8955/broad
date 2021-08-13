@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+내가 쓴 글
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'posts/css/post_list.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <a href="{% url 'users:profile' %}"><img class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+                alt="left_arrow icon"></a>
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">내가 쓴 글</span>
+    </div>
+    <div class="header__rightbox">
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+{% if user.posts.all %}
+<div class="post_list_bigbox">
+    <div class="post_list_box">
+        {% for post in user.posts.all %}
+        <a href="{% url 'posts:detail' post.id %}">
+            <div class="user_post_box">
+                <span class="user_post_information">
+                    <div class="user_post_title">{{post.title}}</div>
+                    <div class="user_post_title_underbox">
+                        <span>{{post.user.nickname}}</span>
+                        <span>{{post.created_date|date:"Y.m.d f"}}</span>
+                        <span>{{post.views}}</span>
+                    </div>
+                </span>
+                <span class="user_post_comment">
+                    <img src="{% static 'posts/img/comment.png' %}">
+                    <div>{{post.comments.count}}</div>
+                </span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="no_exist">
+    <span>작성한 게시글이 없습니다!</span>
+</div>
+{% endif %}
+{% endblock content %}

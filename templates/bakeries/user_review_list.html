@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 홈페이지 타이틀 -->
+{% block title %}
+작성한 리뷰
+{% endblock title %}
+
+
+<!-- 개별적인 css/link태그 추가 -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'bakeries/css/user_review_list.css' %}">
+{% endblock css %}
+
+
+{% block header %}
+<div class="header__wrapper">
+    <div class="header__leftbox">
+        <img onclick="history.go(-1);" class="left_arrow" src="{% static 'core/img/left_arrow.png' %}"
+            alt="left_arrow icon">
+    </div>
+    <div class="header__midbox">
+        <span class="header__title">작성한 리뷰</span>
+    </div>
+    <div class="header__rightbox">
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+{% for review in user.reviews.all %}
+<div class="bakery_review_detail">
+    <div class="bakery_review_detail_topbox">
+        <div class="bakery_review_id_box">
+            <div class="bakery_review_id">{{review.bakery}}</div>
+            <div class="bakery_review_time">{{review.date}}</div>
+        </div>
+        <img class="delete_trash_icon" src="{% static 'bakeries/img/trash.png' %}" alt="쓰레기통 아이콘">
+    </div>
+    <div class="bakery_review_comment"><span class="bakery_review_star">{{review.rating}}</span>{{review.body}}</div>
+</div>
+{% endfor %}
+{% endblock content %}
